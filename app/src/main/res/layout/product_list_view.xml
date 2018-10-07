@@ -1,5 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-</TextView>
+    <TextView
+        android:id="@+id/productNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/productImageView"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/productImageView"
+        android:text="Product Name"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/productImageView"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/cooking1ImageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/heartImageView"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-70dp"
+        android:layout_marginTop="8dp"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/cooking2ImageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/cooking1ImageView"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/cooking1ImageView"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/cooking3ImageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/cooking1ImageView"
+        android:layout_alignStart="@+id/cooking1ImageView"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="4dp"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/cooking4ImageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/cooking2ImageView"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@+id/cooking3ImageView"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/heartImageView"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignBottom="@+id/productImageView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <ProgressBar
+        android:id="@+id/productRatingBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/productNameTextView"
+        android:layout_alignTop="@+id/productRating"
+        android:layout_alignBottom="@+id/productImageView"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/productRating"
+        android:max="100"
+        android:progress="90" />
+
+    <TextView
+        android:id="@+id/productRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/productImageView"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toStartOf="@+id/cooking3ImageView"
+        android:text="4.5"
+        android:textSize="18sp" />
+
+</RelativeLayout>

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ProductList extends AppCompatActivity {
 
     ListView listView;
-    ArrayList<JSONObject> jsons = new ArrayList<JSONObject>();
+    ArrayList<JSONObject> jsons = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class ProductList extends AppCompatActivity {
     }
 
     ArrayList<JSONObject> JSONTest(){
-        ArrayList<JSONObject> jsons = new ArrayList<JSONObject>();
+        ArrayList<JSONObject> jsons = new ArrayList<>();
 
         for(int i = 0; i < 13; i++){
             JSONObject json = new JSONObject();
@@ -40,6 +40,13 @@ public class ProductList extends AppCompatActivity {
 
                 DecimalFormat df1 = new DecimalFormat(".#");
                 json.put("rating", df1.format(1.3+i*0.1));
+
+                if(i % 2 == 0){
+                    json.put("inFavorite", true);
+                } else{
+                    json.put("inFavorite", false);
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

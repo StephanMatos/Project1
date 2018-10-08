@@ -1,7 +1,6 @@
 package com.example.matos.project1;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,11 @@ import java.util.ArrayList;
 
 public class ItemAdapter extends BaseAdapter {
 
-    LayoutInflater mInflater;
-    ArrayList<JSONObject> jsons;
-    Context c;
+    private LayoutInflater mInflater;
+    private ArrayList<JSONObject> jsons;
+    private Context c;
 
-    public ItemAdapter(Context c, ArrayList<JSONObject> jsons){
+    ItemAdapter(Context c, ArrayList<JSONObject> jsons){
         this.c = c;
         this.jsons = jsons;
         System.out.println("Size: " + jsons.size());
@@ -50,8 +49,9 @@ public class ItemAdapter extends BaseAdapter {
 
         View v = mInflater.inflate(R.layout.product_list_view, null);
         TextView productNameTextView = v.findViewById(R.id.productNameTextView);
-        final TextView productRating = v.findViewById(R.id.productRating);
+        TextView productRating = v.findViewById(R.id.productRating);
         ProgressBar productRatingBar = v.findViewById(R.id.productRatingBar);
+        ImageView heartImageView = v.findViewById(R.id.heartImageView);
 
         try {
             productNameTextView.setText(json.getString("name"));
@@ -60,13 +60,18 @@ public class ItemAdapter extends BaseAdapter {
             productRating.setText(ratingStr);
             double rating = Double.parseDouble(ratingStr);
             productRatingBar.setProgress((int) (rating*20));
+            if(json.getBoolean("inFavorite")){
+                heartImageView.setImageResource(R.drawable.filledheart);
+            } else{
+                heartImageView.setImageResource(R.drawable.emptyheart);
+            }
+
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         //OnClickListeners
-        ImageView heartImageView = v.findViewById(R.id.heartImageView);
         heartImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

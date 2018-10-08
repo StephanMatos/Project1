@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -40,13 +41,13 @@ public class ItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
 
         JSONObject json = jsons.get(i);
 
         View v = mInflater.inflate(R.layout.product_list_view, null);
         TextView productNameTextView = v.findViewById(R.id.productNameTextView);
-        TextView productRating = v.findViewById(R.id.productRating);
+        final TextView productRating = v.findViewById(R.id.productRating);
         ProgressBar productRatingBar = v.findViewById(R.id.productRatingBar);
 
         try {
@@ -60,6 +61,29 @@ public class ItemAdapter extends BaseAdapter {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        //OnClickListeners
+        ImageView heartImageView = v.findViewById(R.id.heartImageView);
+        heartImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    System.out.println("Heart has been pressed for " + jsons.get(i).getString("name"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("I have been clicked :D");
+                //Open Productscreen for below id
+                //String id = jsons.get(i).getString("id");
+
+            }
+        });
 
         return v;
     }

@@ -1,6 +1,7 @@
 package com.example.matos.project1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,10 @@ public class ItemAdapter extends BaseAdapter {
 
     LayoutInflater mInflater;
     ArrayList<JSONObject> jsons;
+    Context c;
 
     public ItemAdapter(Context c, ArrayList<JSONObject> jsons){
+        this.c = c;
         this.jsons = jsons;
         System.out.println("Size: " + jsons.size());
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -81,7 +84,8 @@ public class ItemAdapter extends BaseAdapter {
                 System.out.println("I have been clicked :D");
                 //Open Productscreen for below id
                 //String id = jsons.get(i).getString("id");
-
+                //Intent productIntent = new Intent(c, Product.class);
+                //productIntent.putExtra("id", id);
             }
         });
 

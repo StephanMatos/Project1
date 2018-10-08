@@ -8,6 +8,7 @@ import android.widget.ListView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ProductList extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class ProductList extends AppCompatActivity {
         listView = findViewById(R.id.listView);
 
         jsons = JSONTest();
+        System.out.println("JSONS size: " + jsons.size());
         ItemAdapter itemAdapter = new ItemAdapter(this, jsons);
         listView.setAdapter(itemAdapter);
 
@@ -31,16 +33,18 @@ public class ProductList extends AppCompatActivity {
     ArrayList<JSONObject> JSONTest(){
         ArrayList<JSONObject> jsons = new ArrayList<JSONObject>();
 
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 13; i++){
             JSONObject json = new JSONObject();
             try {
-                json.put("name", "Matos Speciale" + i+1);
-                json.put("rating", 1.3+i);
+                json.put("name", "Matos Speciale" + (i+1));
+
+                DecimalFormat df1 = new DecimalFormat(".#");
+                json.put("rating", df1.format(1.3+i*0.1));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            jsons.add(json);
         }
-
         return jsons;
     }
 

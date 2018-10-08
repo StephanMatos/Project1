@@ -20,6 +20,7 @@ public class ItemAdapter extends BaseAdapter {
 
     public ItemAdapter(Context c, ArrayList<JSONObject> jsons){
         this.jsons = jsons;
+        System.out.println("Size: " + jsons.size());
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -53,8 +54,8 @@ public class ItemAdapter extends BaseAdapter {
 
             String ratingStr = json.getString("rating");
             productRating.setText(ratingStr);
-            int rating = Integer.parseInt(ratingStr);
-            productRatingBar.setProgress(rating*50);
+            double rating = Double.parseDouble(ratingStr);
+            productRatingBar.setProgress((int) (rating*20));
 
         } catch (JSONException e) {
             e.printStackTrace();

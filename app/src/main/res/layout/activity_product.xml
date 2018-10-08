@@ -28,7 +28,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:srcCompat="@drawable/testpic" />
 
             <TextView
                 android:id="@+id/Name"
@@ -58,14 +58,14 @@
                 android:layout_marginTop="2dp"
                 android:isIndicator="false"
                 android:numStars="5"
-                android:rating="3.5"
+                android:rating="0.0"
                 android:stepSize="0.1"
                 app:layout_constraintBottom_toBottomOf="@+id/picture"
                 app:layout_constraintStart_toEndOf="@+id/picture"
                 app:layout_constraintTop_toBottomOf="@+id/state" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/emptyheart"
                 android:layout_width="66dp"
                 android:layout_height="77dp"
                 android:layout_marginTop="8dp"
@@ -74,6 +74,39 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/emptyheart" />
+
+            <ImageView
+                android:id="@+id/filledheart"
+                android:layout_width="66dp"
+                android:layout_height="77dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/state"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/filledheart" />
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="0.0"
+                android:textSize="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filledheart" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Description"
+                android:textSize="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/picture" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 

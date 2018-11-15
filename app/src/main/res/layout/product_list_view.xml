@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/productNameTextView"
@@ -9,11 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/productImageView"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/productImageView"
         android:text="Product Name"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/productImageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/productImageView"
@@ -23,6 +28,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
@@ -31,8 +38,9 @@
         android:layout_height="30dp"
         android:layout_alignStart="@+id/heartImageView"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-70dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/cooking2ImageView"
+        app:layout_constraintTop_toTopOf="@+id/cooking2ImageView"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
@@ -40,9 +48,11 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignTop="@+id/cooking1ImageView"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:layout_toEndOf="@+id/cooking1ImageView"
+        app:layout_constraintEnd_toStartOf="@+id/heartImageView"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
@@ -51,8 +61,10 @@
         android:layout_height="30dp"
         android:layout_below="@+id/cooking1ImageView"
         android:layout_alignStart="@+id/cooking1ImageView"
-        android:layout_marginStart="0dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/cooking4ImageView"
+        app:layout_constraintTop_toBottomOf="@+id/cooking1ImageView"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
@@ -60,9 +72,10 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_below="@+id/cooking2ImageView"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:layout_toEndOf="@+id/cooking3ImageView"
+        app:layout_constraintEnd_toEndOf="@+id/cooking2ImageView"
+        app:layout_constraintTop_toBottomOf="@+id/cooking2ImageView"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
@@ -74,33 +87,40 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/productImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <ProgressBar
         android:id="@+id/productRatingBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/productNameTextView"
         android:layout_alignTop="@+id/productRating"
         android:layout_alignBottom="@+id/productImageView"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="0dp"
         android:layout_toStartOf="@+id/productRating"
         android:max="100"
-        android:progress="90" />
+        android:progress="90"
+        app:layout_constraintBottom_toBottomOf="@+id/productRating"
+        app:layout_constraintEnd_toStartOf="@+id/productRating"
+        app:layout_constraintStart_toEndOf="@+id/productImageView"
+        app:layout_constraintTop_toTopOf="@+id/productRating" />
 
     <TextView
         android:id="@+id/productRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/productImageView"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="4dp"
         android:layout_toStartOf="@+id/cooking3ImageView"
         android:text="4.5"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cooking3ImageView"
+        app:layout_constraintEnd_toStartOf="@+id/cooking3ImageView" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

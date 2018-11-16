@@ -1,35 +1,37 @@
 package com.example.matos.project1;
 
 import android.content.Context;
-import android.util.Log;
-
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 public class Services {
 
 
     public static void saveAppendTo(Context context, String str, String filename){
 
+
+
+        ArrayList<String> ids = loadIdsFrom(context, filename);
+
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename+".txt", Context.MODE_PRIVATE));
 
-            outputStreamWriter.append("#" + str);
+            for (String i : ids){
+                outputStreamWriter.write("#" + i);
+            }
+            outputStreamWriter.write("#" + str);
 
             outputStreamWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public static ArrayList<String> loadIdsFrom(Context context, String filename) {
@@ -88,8 +90,6 @@ public class Services {
             e.printStackTrace();
         }
 
-
     }
-
 
 }

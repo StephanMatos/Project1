@@ -9,7 +9,6 @@ import android.widget.ListView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -37,8 +36,7 @@ public class ProductList extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = ProgressDialog.show(ProductList.this, "","Loading. Please wait...", true);
-            dialog.show();
+            dialog = ProgressDialog.show(ProductList.this, "Product List","Loading. Please wait...");
         }
 
         @Override
@@ -55,7 +53,7 @@ public class ProductList extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            dialog.cancel();
+            dialog.dismiss();
         }
     }
 

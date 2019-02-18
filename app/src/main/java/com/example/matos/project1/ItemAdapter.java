@@ -23,7 +23,7 @@ public class ItemAdapter extends BaseAdapter {
     ItemAdapter(Context c, ArrayList<JSONObject> jsons){
         this.c = c;
         this.jsons = jsons;
-        System.out.println("Size: " + jsons.size());
+
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -59,6 +59,7 @@ public class ItemAdapter extends BaseAdapter {
             String ratingStr = json.getString("rating");
             productRating.setText(ratingStr);
             double rating = Double.parseDouble(ratingStr);
+            //double rating = 2;
             productRatingBar.setProgress((int) (rating*20));
             if(json.getBoolean("inFavorite")){
                 heartImageView.setImageResource(R.drawable.filledheart);

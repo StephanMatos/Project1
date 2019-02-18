@@ -1,5 +1,7 @@
 package com.example.matos.project1;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -23,17 +25,42 @@ public class ProductList extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
 
-        jsons = JSONTest();
-        System.out.println("JSONS size: " + jsons.size());
-        ItemAdapter itemAdapter = new ItemAdapter(this, jsons);
-        listView.setAdapter(itemAdapter);
+        new setupList().execute();
 
+    }
+
+    private class setupList extends AsyncTask<Void, Void, Void> {
+
+        ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = ProgressDialog.show(ProductList.this, "Product List","Loading. Please wait...");
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            jsons = JSONTest();
+
+            ItemAdapter itemAdapter = new ItemAdapter(ProductList.this, jsons);
+            listView.setAdapter(itemAdapter);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            dialog.dismiss();
+        }
     }
 
     ArrayList<JSONObject> JSONTest(){
         ArrayList<JSONObject> jsons = new ArrayList<>();
 
-        for(int i = 0; i < 13; i++){
+        for(int i = 0; i < 23; i++){
             JSONObject json = new JSONObject();
             try {
                 json.put("name", "Matos Speciale" + (i+1));

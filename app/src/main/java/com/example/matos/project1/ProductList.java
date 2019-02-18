@@ -1,5 +1,5 @@
 package com.example.matos.project1;
-//
+
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +43,7 @@ public class ProductList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                new callAPI().execute();
+                new callAPI().execute("Hejsa");
 
             }
         });
@@ -103,7 +103,7 @@ public class ProductList extends AppCompatActivity {
         return jsons;
     }
 
-    private class callAPI extends AsyncTask<Void, Void, String> {
+    private class callAPI extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute(){
@@ -111,7 +111,10 @@ public class ProductList extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(Void... voids) {
+        protected String doInBackground(String... strings) {
+
+            String query = getString(0);
+            System.out.println("query is: " + query);
             try {
 
                 URL url = new URL("http://easyeats.dk/test.php");

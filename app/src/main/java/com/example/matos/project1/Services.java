@@ -7,22 +7,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Services {
 
 
-    public static void saveAppendTo(Context context, String str, String filename){
-
+    public static void saveAppendTo(Context context, String str, String filename) {
 
 
         ArrayList<String> ids = loadIdsFrom(context, filename);
 
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename+".txt", Context.MODE_PRIVATE));
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename + ".txt", Context.MODE_PRIVATE));
 
-            for (String i : ids){
+            for (String i : ids) {
                 outputStreamWriter.write("#" + i);
             }
             outputStreamWriter.write("#" + str);
@@ -39,29 +41,28 @@ public class Services {
         String str = "";
 
         try {
-            InputStream inputStream = context.openFileInput(filename+".txt");
+            InputStream inputStream = context.openFileInput(filename + ".txt");
 
-            if ( inputStream != null ) {
+            if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                while ((receiveString = bufferedReader.readLine()) != null) {
                     stringBuilder.append(receiveString);
                 }
 
                 inputStream.close();
                 str = stringBuilder.toString();
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         String[] strs = {};
 
-        if(str.equals(""))
+        if (str.equals(""))
             return new ArrayList<String>();
 
         strs = str.split("#");
@@ -72,16 +73,16 @@ public class Services {
         return result;
     }
 
-    public static void deleteIdFrom(Context context, String id, String filename){
+    public static void deleteIdFrom(Context context, String id, String filename) {
 
         ArrayList<String> ids = loadIdsFrom(context, filename);
 
         ids.remove(id);
 
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename+".txt", Context.MODE_PRIVATE));
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename + ".txt", Context.MODE_PRIVATE));
 
-            for (String i : ids){
+            for (String i : ids) {
                 outputStreamWriter.write("#" + i);
             }
 
@@ -91,5 +92,37 @@ public class Services {
         }
 
     }
+
+    public static String callAPI(String query) {
+
+        System.out.println("API query is: " + query);
+        try {
+
+            URL url = new URL("http://easyeats.dk/test.php?query=" + query);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line).append("\n");
+            }
+
+            bufferedReader.close();
+            urlConnection.disconnect();
+
+            return stringBuilder.toString();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
 
 }

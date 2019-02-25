@@ -43,7 +43,7 @@ public class ProductList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                new callAPI().execute("Hejsa");
+                new APITest().execute();
 
             }
         });
@@ -103,7 +103,7 @@ public class ProductList extends AppCompatActivity {
         return jsons;
     }
 
-    private class callAPI extends AsyncTask<String, Void, String> {
+    private class APITest extends AsyncTask<Void, Void, String> {
 
         @Override
         protected void onPreExecute(){
@@ -111,35 +111,10 @@ public class ProductList extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected String doInBackground(Void... voids) {
 
-            String query = getString(0);
-            System.out.println("query is: " + query);
-            try {
+            return Services.callAPI("SELECT * FROM 'users'");
 
-                URL url = new URL("http://easyeats.dk/test.php");
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line).append("\n");
-                }
-
-                bufferedReader.close();
-                urlConnection.disconnect();
-
-                return stringBuilder.toString();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
         }
 
         @Override

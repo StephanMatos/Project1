@@ -1,5 +1,6 @@
 package com.example.matos.project1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,26 +13,28 @@ import android.widget.LinearLayout;
 
 public class FragmentProfile extends Fragment{
 
-    //Sut mig Mikkel idiot
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        LinearLayout linearLayout = view.findViewById(R.id.favoriteLayout);
 
-        System.out.println(1123456789);
-        linearLayout.setOnClickListener(new View.OnClickListener() {
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        LinearLayout favoriteLayout = view.findViewById(R.id.favoriteLayout);
+        favoriteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Hello mother fucking world");
+                Intent intent = new Intent(getActivity(), ProductList.class);
+                intent.putExtra("type", "favorites");
+                startActivity(intent);
             }
         });
-
-        return inflater.inflate(R.layout.fragment_profile, container, false);
-
     }
 
 

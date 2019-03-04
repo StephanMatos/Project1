@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 public class FragmentProfile extends Fragment{
 
-    //Sut mig Mikkel
+    //Sut mig Mikkel idiot
 
 
     @Nullable

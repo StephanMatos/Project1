@@ -31,8 +31,8 @@ public class HomeActivity extends AppCompatActivity {
 
                         switch (item.getItemId()) {
                             case R.id.nav_home:
-                                    selectedFragment = new FragmentHome();
-                            break;
+                                selectedFragment = new FragmentHome();
+                                break;
                             case R.id.nav_search:
                                 selectedFragment = new FragmentHome();
                                 break;

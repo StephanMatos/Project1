@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
                                 break;
                             case R.id.nav_camera:
                                 // Din prut
-                                selectedFragment = new FragmentHome();
+                                selectedFragment = new FragmentCamera();
                                 break;
                         }
 

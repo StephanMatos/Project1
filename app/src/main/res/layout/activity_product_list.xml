@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/testBtn2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/testBtn2"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="4dp"

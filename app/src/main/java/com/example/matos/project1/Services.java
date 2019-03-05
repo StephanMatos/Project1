@@ -98,7 +98,10 @@ public class Services {
         System.out.println("API query is: " + query);
         try {
 
-            URL url = new URL("http://easyeats.dk/test.php?query=" + query);
+            query = query.replaceAll(" ", "%20");
+            //https://schmidt13.azurewebsites.net/test.php?query=
+            URL url = new URL("https://schmidt13.azurewebsites.net/test.php?query=" + query);
+            //URL url = new URL("http://easyeats.dk/test.php?query=" + query);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));

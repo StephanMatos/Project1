@@ -21,11 +21,14 @@ public class Product extends AppCompatActivity {
 
         final RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         final TextView score = (TextView) findViewById(R.id.score);
+        
+        String barcode = getIntent().getExtras().getString("Barcode");
 
-        DecimalFormat df1 = new DecimalFormat(".#");
-        score.setText("" + df1.format(4.0));
+        //DecimalFormat df1 = new DecimalFormat(".#");
+        //score.setText("" + df1.format(4.0));
+        score.setText("4.0");
 
-        ratingBar.setRating(Float.parseFloat(df1.format(4.0)));
+        //ratingBar.setRating(Float.parseFloat(df1.format(4.0)));
 
     }
 

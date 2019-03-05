@@ -40,7 +40,7 @@ public class FragmentProfile extends Fragment{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ProductList.class);
-                intent.putExtra("type", "favorites");
+                intent.putExtra("type", "Favorites");
                 startActivity(intent);
             }
         });
@@ -49,7 +49,7 @@ public class FragmentProfile extends Fragment{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ProductList.class);
-                intent.putExtra("type", "recents");
+                intent.putExtra("type", "Recents");
                 startActivity(intent);
             }
         });

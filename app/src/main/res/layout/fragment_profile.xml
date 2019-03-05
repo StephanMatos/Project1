@@ -23,11 +23,30 @@
             android:gravity="fill_horizontal"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/profile_picture"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_account1" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_account1" />
+
+                <ImageView
+                    android:id="@+id/changePicture"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="bottom"
+                    app:srcCompat="@android:drawable/ic_input_add"
+                    tools:layout_editor_absoluteX="217dp" />
+
+            </RelativeLayout>
+
+
         </LinearLayout>
 
         <TextView
@@ -44,6 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
+
     </LinearLayout>
 
     <android.support.v7.widget.CardView

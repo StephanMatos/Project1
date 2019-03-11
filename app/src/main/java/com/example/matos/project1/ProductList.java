@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +26,7 @@ public class ProductList extends AppCompatActivity {
 
     ImageView testBtn, testBtn2;
     ListView listView;
+    TextView titleTextView;
     ArrayList<JSONObject> jsons = new ArrayList<>();
 
     String type = "";
@@ -35,9 +38,15 @@ public class ProductList extends AppCompatActivity {
         setContentView(R.layout.activity_product_list);
 
         listView = findViewById(R.id.listView);
+        titleTextView = findViewById(R.id.titleTextView);
 
         type = getIntent().getExtras().getString("type");
-        System.out.println("Type is ---------------- " + type);
+
+        titleTextView.setText(type);
+
+
+
+
 
         new setupList().execute();
 

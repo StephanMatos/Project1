@@ -34,13 +34,13 @@ public class HomeActivity extends AppCompatActivity {
                                 selectedFragment = new FragmentHome();
                                 break;
                             case R.id.nav_search:
-                                selectedFragment = new FragmentHome();
+                                selectedFragment = new FragmentSearch();
                                 break;
                             case R.id.nav_profile:
                                 selectedFragment = new FragmentProfile();
                                 break;
                             case R.id.nav_camera:
-                                selectedFragment = new FragmentHome();
+                                selectedFragment = new FragmentCamera();
                                 break;
                         }
 

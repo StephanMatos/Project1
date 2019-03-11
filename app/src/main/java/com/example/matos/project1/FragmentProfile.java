@@ -79,7 +79,7 @@ public class FragmentProfile extends Fragment  {
                 GridView gridView = dialog.findViewById(R.id.gridView);
                 CostumGridAdapter itemAdapter = new CostumGridAdapter(context, icons);
                 gridView.setAdapter(itemAdapter);
-
+                // clickevent on gridview
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                         int imageId;

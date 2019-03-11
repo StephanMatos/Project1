@@ -23,7 +23,8 @@ public class FragmentProfile extends Fragment  {
 
 
 
-    int[] icons = {R.drawable.ic_account1, R.drawable.ic_account2,R.drawable.ic_account3, R.drawable.ic_account4};
+    int[] icons = {R.drawable.ic_account1, R.drawable.ic_account2,R.drawable.ic_account3, R.drawable.ic_account4,R.drawable.ic_account5,R.drawable.ic_account6,R.drawable.ic_account7,
+            R.drawable.ic_account8, R.drawable.ic_account9};
 
     @Nullable
     @Override

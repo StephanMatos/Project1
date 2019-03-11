@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="20dp"
+        android:paddingRight="15dp">
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundedcorner"
+            android:iconifiedByDefault="false"
+            android:queryHint="Type, barcode, cooking method">
+
+        </SearchView>
+
+        <TextView
+            android:id="@+id/advancedsearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            android:paddingTop="8dp"
+            android:paddingEnd="30dp"
+            android:text="Advanced"
+            tools:layout_editor_absoluteX="360dp" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.matos.project1;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,10 @@ public class ItemAdapter extends BaseAdapter {
         TextView productRating = v.findViewById(R.id.productRating);
         ProgressBar productRatingBar = v.findViewById(R.id.productRatingBar);
         ImageView heartImageView = v.findViewById(R.id.heartImageView);
+        ImageView ovenImageView = v.findViewById(R.id.ovenImageView);
+        ImageView microwaveImageView = v.findViewById(R.id.microwaveImageView);
+        ImageView stoveImageView = v.findViewById(R.id.stoveImageView);
+        ImageView hotwaterImageView = v.findViewById(R.id.hotwaterImageView);
 
         try {
             productNameTextView.setText(json.getString("name"));
@@ -67,6 +72,20 @@ public class ItemAdapter extends BaseAdapter {
                 heartImageView.setImageResource(R.drawable.emptyheart);
             }
 
+            //TEST
+            ovenImageView.setImageResource(R.drawable.ic_oven);
+            microwaveImageView.setImageResource(R.drawable.ic_microwave);
+            stoveImageView.setImageResource(R.drawable.ic_stove);
+            hotwaterImageView.setImageResource(R.drawable.ic_hotwater);
+
+            if(i % 2 == 0){
+                ovenImageView.setBackgroundResource(R.drawable.custom_round);
+                hotwaterImageView.setBackgroundResource(R.drawable.custom_round);
+            }
+            if(i % 3 == 0){
+                microwaveImageView.setBackgroundResource(R.drawable.custom_round);
+                stoveImageView.setBackgroundResource(R.drawable.custom_round);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();

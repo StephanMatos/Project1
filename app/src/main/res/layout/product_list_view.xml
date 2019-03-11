@@ -34,47 +34,51 @@
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
-        android:id="@+id/cooking1ImageView"
+        android:id="@+id/ovenImageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignStart="@+id/heartImageView"
         android:layout_alignParentTop="true"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="2dp"
-        app:layout_constraintEnd_toStartOf="@+id/cooking2ImageView"
+        android:padding="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/microwaveImageView"
         app:layout_constraintTop_toTopOf="@+id/productImageView"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
-        android:id="@+id/cooking2ImageView"
+        android:id="@+id/microwaveImageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignTop="@+id/cooking1ImageView"
+        android:layout_alignTop="@+id/ovenImageView"
         android:layout_marginEnd="4dp"
-        android:layout_toEndOf="@+id/cooking1ImageView"
+        android:layout_toEndOf="@+id/ovenImageView"
+        android:padding="4dp"
         app:layout_constraintEnd_toStartOf="@+id/heartImageView"
-        app:layout_constraintTop_toTopOf="@+id/cooking1ImageView"
+        app:layout_constraintTop_toTopOf="@+id/ovenImageView"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
-        android:id="@+id/cooking3ImageView"
+        android:id="@+id/stoveImageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/cooking1ImageView"
-        android:layout_alignStart="@+id/cooking1ImageView"
-        app:layout_constraintEnd_toEndOf="@+id/cooking1ImageView"
-        app:layout_constraintTop_toTopOf="@+id/cooking4ImageView"
+        android:layout_below="@+id/ovenImageView"
+        android:layout_alignStart="@+id/ovenImageView"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/ovenImageView"
+        app:layout_constraintTop_toTopOf="@+id/hotwaterImageView"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
-        android:id="@+id/cooking4ImageView"
+        android:id="@+id/hotwaterImageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/cooking2ImageView"
+        android:layout_below="@+id/microwaveImageView"
         android:layout_marginTop="2dp"
-        android:layout_toEndOf="@+id/cooking3ImageView"
-        app:layout_constraintEnd_toEndOf="@+id/cooking2ImageView"
-        app:layout_constraintTop_toBottomOf="@+id/cooking2ImageView"
+        android:layout_toEndOf="@+id/stoveImageView"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/microwaveImageView"
+        app:layout_constraintTop_toBottomOf="@+id/microwaveImageView"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
@@ -89,7 +93,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/productImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cooking2ImageView"
+        app:layout_constraintTop_toTopOf="@+id/microwaveImageView"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <ProgressBar
@@ -115,10 +119,10 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/productImageView"
         android:layout_marginEnd="4dp"
-        android:layout_toStartOf="@+id/cooking3ImageView"
+        android:layout_toStartOf="@+id/stoveImageView"
         android:text="4.5"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cooking3ImageView"
-        app:layout_constraintEnd_toStartOf="@+id/cooking3ImageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/stoveImageView"
+        app:layout_constraintEnd_toStartOf="@+id/stoveImageView" />
 
 </android.support.constraint.ConstraintLayout>

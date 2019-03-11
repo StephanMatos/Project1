@@ -1,25 +1,15 @@
 package com.example.matos.project1;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ProductList extends AppCompatActivity {
@@ -44,33 +34,7 @@ public class ProductList extends AppCompatActivity {
 
         titleTextView.setText(type);
 
-
-
-
-
         new setupList().execute();
-
-        //TestAPI
-        testBtn = findViewById(R.id.testBtn);
-        testBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                new APITest().execute();
-
-            }
-        });
-
-        testBtn2 = findViewById(R.id.testBtn2);
-        testBtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(ProductList.this, ScanActivity.class);
-                startActivity(intent);
-
-            }
-        });
 
     }
 
@@ -87,6 +51,7 @@ public class ProductList extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
+            //Get itemfromAPI
             jsons = JSONTest();
 
             return null;

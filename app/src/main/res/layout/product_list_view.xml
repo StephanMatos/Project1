@@ -16,6 +16,7 @@
         android:text="Product Name"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:transitionName="productNameTransition"
         app:layout_constraintStart_toEndOf="@+id/productImageView"
         app:layout_constraintTop_toTopOf="@+id/productImageView" />
 
@@ -122,6 +123,7 @@
         android:layout_toStartOf="@+id/stoveImageView"
         android:text="4.5"
         android:textSize="18sp"
+        android:transitionName="productRatingTransition"
         app:layout_constraintBottom_toBottomOf="@+id/stoveImageView"
         app:layout_constraintEnd_toStartOf="@+id/stoveImageView" />
 

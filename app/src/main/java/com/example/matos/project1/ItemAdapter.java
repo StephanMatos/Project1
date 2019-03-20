@@ -1,7 +1,13 @@
 package com.example.matos.project1;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +55,12 @@ public class ItemAdapter extends BaseAdapter {
         JSONObject json = jsons.get(i);
 
         View v = mInflater.inflate(R.layout.product_list_view, null);
-        TextView productNameTextView = v.findViewById(R.id.productNameTextView);
-        TextView productRating = v.findViewById(R.id.productRating);
+
+
+
+
+        final TextView productNameTextView = v.findViewById(R.id.productNameTextView);
+        final TextView productRating = v.findViewById(R.id.productRating);
         ProgressBar productRatingBar = v.findViewById(R.id.productRatingBar);
         ImageView heartImageView = v.findViewById(R.id.heartImageView);
         ImageView ovenImageView = v.findViewById(R.id.ovenImageView);
@@ -107,10 +117,22 @@ public class ItemAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 System.out.println("I have been clicked :D");
+
                 //Open Productscreen for below id
+
                 //String id = jsons.get(i).getString("id");
-                //Intent productIntent = new Intent(c, Product.class);
+
+
+                Intent productIntent = new Intent(c, Product.class);
                 //productIntent.putExtra("id", id);
+                //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) c, productNameTextView, ViewCompat.getTransitionName(productNameTextView));
+
+                Pair p1 = Pair.create(productNameTextView, ViewCompat.getTransitionName(productNameTextView));
+                Pair p2 = Pair.create(productRating, ViewCompat.getTransitionName(productRating));
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) c, p1, p2);
+
+                c.startActivity(productIntent, options.toBundle());
+                //c.startActivity(productIntent);
             }
         });
 

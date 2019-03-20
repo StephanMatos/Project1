@@ -69,7 +69,7 @@ public class ProductList extends AppCompatActivity {
     ArrayList<JSONObject> JSONTest(){
         ArrayList<JSONObject> jsons = new ArrayList<>();
 
-        for(int i = 0; i < 7; i++){
+        for(int i = 0; i < 14; i++){
             JSONObject json = new JSONObject();
             try {
                 json.put("name", "Matos Speciale" + (i+1));

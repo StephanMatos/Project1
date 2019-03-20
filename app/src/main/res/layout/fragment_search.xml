@@ -8,6 +8,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -20,12 +21,13 @@
             android:layout_height="wrap_content"
             android:background="@drawable/roundedcorner"
             android:iconifiedByDefault="false"
-            android:queryHint="Type, barcode, cooking method">
+            android:queryHint="Type, barcode, cooking method"
+            app:queryBackground="@android:color/transparent">
 
         </SearchView>
 
         <TextView
-            android:id="@+id/advancedsearch"
+            android:id="@+id/advancedsearchTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -35,6 +37,207 @@
             android:text="Advanced"
             tools:layout_editor_absoluteX="360dp" />
 
+
     </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/advancedSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="8">
+
+                <TextView
+                    android:id="@+id/methodTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="4"
+                    android:text="Cooking method"
+                    android:textSize="17dp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4" />
+
+                <ImageView
+                    android:id="@+id/ovenImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/custom_round"
+                    android:padding="3dp"
+                    app:srcCompat="@drawable/ic_oven" />
+
+                <ImageView
+                    android:id="@+id/microwaveImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/custom_round"
+                    android:padding="3dp"
+                    app:srcCompat="@drawable/ic_microwave" />
+
+                <ImageView
+                    android:id="@+id/stoveImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/custom_round"
+                    android:padding="2dp"
+                    app:srcCompat="@drawable/ic_stove" />
+
+                <ImageView
+                    android:id="@+id/hotwaterImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/custom_round"
+                    android:padding="3dp"
+                    app:srcCompat="@drawable/ic_hotwater" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:orientation="horizontal"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:id="@+id/minratingTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="4"
+                    android:text="Min. rating"
+                    android:textSize="17dp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4" />
+
+                <SeekBar
+                    android:id="@+id/minRatingseekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="6"
+                    android:paddingEnd="12dp"
+                    android:progressTint="@color/enableColor"
+                    android:thumbTint="@color/enableColor" />
+
+                <TextView
+                    android:id="@+id/ratingNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0"
+                    android:text="0" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:weightSum="8">
+
+
+                <TextView
+                    android:id="@+id/sortingTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="Sorting"
+                    android:textSize="17dp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4" />
+
+                <SeekBar
+                    android:id="@+id/sortingseekBar"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="4"
+                    android:paddingEnd="12dp"
+                    android:progressBackgroundTint="@color/transparentWhite"
+                    android:progressTint="@color/transparentWhite"
+                    android:thumbTint="@color/enableColor" />
+
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/sortingtypeTextView"
+                    android:layout_width="56dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Random" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6" />
+
+                <SeekBar
+                    android:id="@+id/minmaxseekBar"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:progressBackgroundTint="@color/transparentWhite"
+                    android:progressTint="@color/transparentWhite"
+                    android:thumbTint="@color/enableColor" />
+
+                <Space
+                    android:layout_width="19dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/minmaxTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="Min/max" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+
+
 
 </android.support.constraint.ConstraintLayout>

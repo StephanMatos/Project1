@@ -64,7 +64,7 @@
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <ImageView
-                android:id="@+id/oven"
+                android:id="@+id/ovenImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -215,10 +215,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/oven"
+                app:layout_constraintBottom_toBottomOf="@+id/ovenImageView"
                 app:layout_constraintEnd_toStartOf="@+id/ovenScoreText"
-                app:layout_constraintStart_toEndOf="@+id/oven"
-                app:layout_constraintTop_toTopOf="@+id/oven" />
+                app:layout_constraintStart_toEndOf="@+id/ovenImageView"
+                app:layout_constraintTop_toTopOf="@+id/ovenImageView" />
 
             <TextView
                 android:id="@+id/grillScoreText"
@@ -261,9 +261,9 @@
                 android:layout_marginBottom="8dp"
                 android:text="0.0"
                 android:textSize="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/oven"
+                app:layout_constraintBottom_toBottomOf="@+id/ovenImageView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/oven" />
+                app:layout_constraintTop_toTopOf="@+id/ovenImageView" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

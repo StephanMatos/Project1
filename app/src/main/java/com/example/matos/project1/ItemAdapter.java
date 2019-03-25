@@ -1,10 +1,8 @@
 package com.example.matos.project1;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.util.Pair;
@@ -59,8 +57,10 @@ public class ItemAdapter extends BaseAdapter {
 
 
 
-        final TextView productNameTextView = v.findViewById(R.id.productNameTextView);
+        final TextView productNameTextView = v.findViewById(R.id.productName);
         final TextView productRating = v.findViewById(R.id.productRating);
+        final ImageView heartImage = v.findViewById(R.id.heartImageView);
+        final ImageView productImage = v.findViewById(R.id.productImageView);
         ProgressBar productRatingBar = v.findViewById(R.id.productRatingBar);
         ImageView heartImageView = v.findViewById(R.id.heartImageView);
         ImageView ovenImageView = v.findViewById(R.id.ovenImageView);
@@ -71,11 +71,10 @@ public class ItemAdapter extends BaseAdapter {
         try {
             productNameTextView.setText(json.getString("name"));
 
-            String ratingStr = json.getString("rating");
-            productRating.setText(ratingStr);
-            double rating = Double.parseDouble(ratingStr);
-            //double rating = 2;
+            double rating = json.getDouble("rating");
+            productRating.setText(String.format("%.2f", rating));
             productRatingBar.setProgress((int) (rating*20));
+
             if(json.getBoolean("inFavorite")){
                 heartImageView.setImageResource(R.drawable.filledheart);
             } else{
@@ -120,19 +119,23 @@ public class ItemAdapter extends BaseAdapter {
 
                 //Open Productscreen for below id
 
-                //String id = jsons.get(i).getString("id");
-
+                String barcode = "";
+                try {
+                    barcode = jsons.get(i).getString("barcode");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 Intent productIntent = new Intent(c, Product.class);
-                //productIntent.putExtra("id", id);
-                //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) c, productNameTextView, ViewCompat.getTransitionName(productNameTextView));
+                productIntent.putExtra("barcode", barcode);
 
                 Pair p1 = Pair.create(productNameTextView, ViewCompat.getTransitionName(productNameTextView));
                 Pair p2 = Pair.create(productRating, ViewCompat.getTransitionName(productRating));
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) c, p1, p2);
+                Pair p3 = Pair.create(heartImage, ViewCompat.getTransitionName(heartImage));
+                Pair p4 = Pair.create(productImage, ViewCompat.getTransitionName(productImage));
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) c, p1, p2, p3, p4);
 
                 c.startActivity(productIntent, options.toBundle());
-                //c.startActivity(productIntent);
             }
         });
 

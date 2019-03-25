@@ -35,10 +35,10 @@
 
             <ImageView
                 android:id="@+id/heart"
-                android:layout_width="74dp"
-                android:layout_height="81dp"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/state"
+                android:transitionName="heartTransition"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/picture"
                 app:srcCompat="@mipmap/ic_launcher" />
@@ -75,30 +75,30 @@
 
             <TextView
                 android:id="@+id/descriptionText"
-                android:layout_width="237dp"
-                android:layout_height="126dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:maxLength="150"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-                app:layout_constraintEnd_toEndOf="@+id/description"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
 
             <ImageView
                 android:id="@+id/picture"
-                android:layout_width="130dp"
-                android:layout_height="120dp"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@mipmap/ic_launcher"
-
+                android:transitionName="pictureTransition"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/productNameTextView"
+                android:id="@+id/productName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -110,7 +110,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/state"
+                android:id="@+id/productState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -118,7 +118,7 @@
                 android:text="State"
                 android:textSize="24dp"
                 app:layout_constraintStart_toEndOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/productName" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -127,28 +127,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
                 android:isIndicator="false"
                 android:numStars="5"
                 android:rating="0.0"
-                android:stepSize="0.1"
-                app:layout_constraintBottom_toBottomOf="@+id/picture"
-                app:layout_constraintEnd_toStartOf="@+id/productRating"
+                android:stepSize="1"
                 app:layout_constraintStart_toEndOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/state" />
+                app:layout_constraintTop_toBottomOf="@+id/productState" />
 
             <TextView
                 android:id="@+id/productRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:layout_marginEnd="8dp"
                 android:text="0.0"
                 android:textSize="24dp"
                 android:transitionName="productRatingTransition"
                 app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ratingBar"
                 app:layout_constraintTop_toTopOf="@+id/ratingBar" />
 
             <TextView

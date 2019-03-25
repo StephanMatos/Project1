@@ -51,8 +51,14 @@ public class ProductList extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
+            //network delay
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             //Get itemfromAPI
-            jsons = JSONTest();
+            jsons = Services.testJSONS();
 
             return null;
         }
@@ -64,32 +70,6 @@ public class ProductList extends AppCompatActivity {
             listView.setAdapter(itemAdapter);
             dialog.dismiss();
         }
-    }
-
-    ArrayList<JSONObject> JSONTest(){
-        ArrayList<JSONObject> jsons = new ArrayList<>();
-
-        for(int i = 0; i < 14; i++){
-            JSONObject json = new JSONObject();
-            try {
-                json.put("name", "Matos Speciale" + (i+1));
-
-                //DecimalFormat df1 = new DecimalFormat(".#");
-                //json.put("rating", df1.format(1.3+i*0.1));
-                json.put("rating", 1+i);
-
-                if(i % 2 == 0){
-                    json.put("inFavorite", true);
-                } else{
-                    json.put("inFavorite", false);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            jsons.add(json);
-        }
-        return jsons;
     }
 
     private class APITest extends AsyncTask<Void, Void, String> {

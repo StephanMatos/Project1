@@ -2,6 +2,9 @@ package com.example.matos.project1;
 
 import android.content.Context;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -127,5 +130,50 @@ public class Services {
 
     }
 
+    public static ArrayList<JSONObject> testJSONS(){
+
+        ArrayList<JSONObject> jsons = new ArrayList<JSONObject>();
+
+        for(int i = 1; i < 20; i++){
+            JSONObject json = new JSONObject();
+            try {
+                json.put("barcode", "" + i);
+                json.put("name", "Test product " + (i));
+                json.put("state", "frozen");
+
+                double r = Math.random()*5;
+                json.put("rating", r);
+
+                if(r > 3.5){
+                    json.put("inFavorite", true);
+                } else{
+                    json.put("inFavorite", false);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            jsons.add(json);
+        }
+
+        return jsons;
+
+    }
+
+    public static JSONObject testProductJSON(String barcode){
+
+        ArrayList<JSONObject> jsons = testJSONS();
+
+        for(JSONObject json : jsons){
+            try {
+                if(json.getString("barcode").equals(barcode)){
+                    return json;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
 }

@@ -1,10 +1,5 @@
 package com.example.matos.project1;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,16 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.rm.rmswitch.RMTristateSwitch;
 
 public class FragmentSearch extends Fragment {
+
+
 
     @Nullable
     @Override
@@ -32,13 +23,11 @@ public class FragmentSearch extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-
-
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
 
         final ConstraintLayout advancedLayoutView = view.findViewById(R.id.advancedSearchView);
 
@@ -51,9 +40,6 @@ public class FragmentSearch extends Fragment {
         final SeekBar sortingseekBar = view.findViewById(R.id.sortingseekBar);
         final SeekBar minmaxseekBar = view.findViewById(R.id.minmaxseekBar);
 
-        final Animation slideDownAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down);
-
-
 
 
         // dummy method
@@ -62,8 +48,11 @@ public class FragmentSearch extends Fragment {
         advancedTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                advancedLayoutView.setVisibility(View.VISIBLE);
+                if(advancedLayoutView.isShown()){
+                    advancedLayoutView.setVisibility(View.GONE);
+                }else {
+                    advancedLayoutView.setVisibility(View.VISIBLE);
+                }
 
             }
         });
@@ -161,7 +150,6 @@ public class FragmentSearch extends Fragment {
 
             }
         });
-
 
 
     }

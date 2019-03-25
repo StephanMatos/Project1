@@ -65,7 +65,7 @@ public class Product extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void avoid) {
-
+            //test
             try {
                 productName.setText(json.getString("name"));
                 productRating.setText(String.format("%.2f", json.getDouble("rating")));
@@ -75,6 +75,7 @@ public class Product extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            
             startPostponedEnterTransition();
         }
     }

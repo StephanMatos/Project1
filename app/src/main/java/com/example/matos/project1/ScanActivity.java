@@ -46,7 +46,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         System.out.println("Scanned text is : " + barcode);
         Toast.makeText(ScanActivity.this, barcode,Toast.LENGTH_LONG).show();
         Intent intent = new Intent(ScanActivity.this, Product.class);
-        intent.putExtra("Barcode", barcode);
+        intent.putExtra("barcode", barcode);
         onBackPressed();
         startActivity(intent);
 

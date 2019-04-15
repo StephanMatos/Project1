@@ -102,9 +102,9 @@ public class Services {
         try {
 
             query = query.replaceAll(" ", "%20");
-            //https://schmidt13.azurewebsites.net/test.php?query=
-            URL url = new URL("https://schmidt13.azurewebsites.net/test.php?query=" + query);
-            //URL url = new URL("http://easyeats.dk/test.php?query=" + query);
+            URL url = new URL("https://easyeats.dk/" + query);
+            System.out.println("Query is");
+            System.out.println("https://easyeats.dk/" + query);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));

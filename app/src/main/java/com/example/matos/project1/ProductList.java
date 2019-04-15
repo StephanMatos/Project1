@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class ProductList extends AppCompatActivity {
     private class setupList extends AsyncTask<Void, Void, Void> {
 
         ProgressDialog dialog;
-        ArrayList<JSONObject> jsons = new ArrayList<>();
+        JSONArray jsons;
 
         @Override
         protected void onPreExecute() {
@@ -51,14 +52,20 @@ public class ProductList extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            //network delay
+            String username = "schmidt13@live.dk";
+
+            String data;
+            if(type.equals("Favorites")){
+                data = Services.callAPI("products.php?username=" + username + "&favorites=1");
+            } else {
+                data = Services.callAPI("products.php?username=" + username + "&recents=1");
+            }
+
             try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
+                jsons = new JSONArray(data);
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //Get itemfromAPI
-            jsons = Services.testJSONS();
 
             return null;
         }

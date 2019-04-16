@@ -110,7 +110,7 @@ public class ItemAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 //heart pressed
-                String username = "schmidt13@live.dk";
+                String username = SavedValues.getInstance().getEmail();
                 try {
                     JSONObject json = jsons.getJSONObject(i);
                     if(json.getInt("inFavorites") == 0){

@@ -50,7 +50,7 @@ public class Product extends AppCompatActivity {
         heartImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //heart pressed
+                
                 String username = "schmidt13@live.dk";
                 try {
                     if(json.getInt("inFavorites") == 0){

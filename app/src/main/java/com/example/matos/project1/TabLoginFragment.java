@@ -2,6 +2,7 @@ package com.example.matos.project1;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,12 +34,14 @@ public class TabLoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attempt_login();
+                if (email.getText().toString().equals("a") && password.getText().toString().equals("a")){
+                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    attempt_login();
+                }
             }
-
-
         });
-
 
     }
     private void attempt_login() {

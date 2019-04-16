@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreenActivity">
+    tools:context=".SplashScreenActivity"
+    android:background="@color/colorPrimary">
+
 
     <TextView
         android:id="@+id/EasyEats"
@@ -14,6 +16,7 @@
         android:layout_marginTop="160dp"
         android:layout_marginEnd="8dp"
         android:text="EasyEats"
+        android:textColor="@color/white"
         android:textSize="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,8 +30,24 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:text="- For you"
+        android:textColor="@color/white"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EasyEats" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ForYou"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="loading_spinner.json"
+        app:lottie_loop="true" />
 </android.support.constraint.ConstraintLayout>

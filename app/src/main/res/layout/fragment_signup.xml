@@ -75,7 +75,7 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login_button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pass_TextView" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login_button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -85,7 +85,7 @@
         android:textColor="#000000"
         android:textSize="14dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintStart_toStartOf="@+id/login_button"
+        app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
 </android.support.constraint.ConstraintLayout>

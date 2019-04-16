@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 2 total pages (Login or Signup
-            return 3;
+            return 2;
         }
     }
 }

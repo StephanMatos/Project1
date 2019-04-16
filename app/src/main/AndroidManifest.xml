@@ -27,10 +27,11 @@
         <activity android:name=".Product" />
         <activity android:name=".ProductList" />
         <activity android:name=".HomeActivity" />
+        <activity android:name=".ScanActivity" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".ScanActivity" />
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

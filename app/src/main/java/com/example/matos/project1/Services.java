@@ -130,6 +130,28 @@ public class Services {
 
     }
 
+    public static void postAPI(String address) {
+
+        try {
+
+            address = address.replaceAll(" ", "%20");
+            URL url = new URL("https://easyeats.dk/" + address);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestProperty("Accept-Charset", "UTF-8");
+            urlConnection.setDoOutput(true);
+
+            int responseCode = urlConnection.getResponseCode();
+            System.out.println("Response code is------------------ " + responseCode);
+            urlConnection.disconnect();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static ArrayList<JSONObject> testJSONS(){
 
         ArrayList<JSONObject> jsons = new ArrayList<JSONObject>();

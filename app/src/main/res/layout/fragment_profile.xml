@@ -18,7 +18,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/roundbutton"
+            android:background="@drawable/roundbutton_primarycolor"
             android:backgroundTint="@color/colorPrimary"
             android:gravity="fill_horizontal"
             android:orientation="vertical">

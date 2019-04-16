@@ -2,6 +2,7 @@ package com.example.matos.project1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -18,6 +19,8 @@ import javax.net.ssl.HttpsURLConnection;
 public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
 
     private Context context;
+    private String email,password;
+
 
     public AsyncNewUser(Context context){
         this.context = context;
@@ -27,6 +30,8 @@ public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
     protected Boolean doInBackground(String... Strings) {
         boolean success = false;
         String data;
+        email = Strings[0];
+        password = Strings[1];
 
         try {
             String LoginUrl = "https://easyeats.dk/users.php?email="+Strings[0]+"&password="+Strings[1]+"&username"+Strings[2];
@@ -55,22 +60,25 @@ public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
 
     @Override
     protected void onPostExecute(Boolean success){
-        /*
+
         if(success){
-            LoginActivity.progressDialog.dismiss();
-            Intent intent = new Intent(context,HomeActivity.class);
-            context.startActivity(intent);
-            ((Activity)context).finish();
+        TabSignupFragment.progressDialog.dismiss();
+        TabLoginFragment.progressDialog = new ProgressDialog(context);
+        TabLoginFragment.progressDialog.setMessage("Loading...");
+        TabLoginFragment.progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        TabLoginFragment.progressDialog.show();
+        new AsyncLogin(context).execute(email,password);
+
         } else{
             //publish faulty dialog
-            LoginActivity.progressDialog.dismiss();
+
             new AlertDialog.Builder(context)
-                    .setTitle("Wrong Email or Password")
-                    .setMessage("Username can not be used to login")
+                    .setTitle("User Already exist")
+                    .setMessage("Try logging in")
                     .setNeutralButton("OK",null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-        }*/
+        }
     }
 }
 

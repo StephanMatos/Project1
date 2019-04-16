@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,10 +23,10 @@ import java.util.ArrayList;
 public class ItemAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private ArrayList<JSONObject> jsons;
+    private JSONArray jsons;
     private Context c;
 
-    ItemAdapter(Context c, ArrayList<JSONObject> jsons){
+    ItemAdapter(Context c, JSONArray jsons){
         this.c = c;
         this.jsons = jsons;
 
@@ -34,12 +35,17 @@ public class ItemAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return jsons.size();
+        return jsons.length();
     }
 
     @Override
     public Object getItem(int i) {
-        return jsons.get(i);
+        try {
+            return jsons.getJSONObject(i);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -50,12 +56,14 @@ public class ItemAdapter extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
 
-        JSONObject json = jsons.get(i);
+        JSONObject json = null;
+        try {
+            json = jsons.getJSONObject(i);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         View v = mInflater.inflate(R.layout.product_list_view, null);
-
-
-
 
         final TextView productNameTextView = v.findViewById(R.id.productName);
         final TextView productRating = v.findViewById(R.id.productRating);
@@ -69,13 +77,13 @@ public class ItemAdapter extends BaseAdapter {
         ImageView hotwaterImageView = v.findViewById(R.id.hotwaterImageView);
 
         try {
-            productNameTextView.setText(json.getString("name"));
+            productNameTextView.setText(json.getString("productname"));
 
-            double rating = json.getDouble("rating");
+            double rating = json.getDouble("avgrating");
             productRating.setText(String.format("%.2f", rating));
             productRatingBar.setProgress((int) (rating*20));
 
-            if(json.getBoolean("inFavorite")){
+            if(json.getInt("inFavorites") == 1){
                 heartImageView.setImageResource(R.drawable.filledheart);
             } else{
                 heartImageView.setImageResource(R.drawable.emptyheart);
@@ -87,14 +95,12 @@ public class ItemAdapter extends BaseAdapter {
             stoveImageView.setImageResource(R.drawable.ic_stove);
             hotwaterImageView.setImageResource(R.drawable.ic_hotwater);
 
-            if(i % 2 == 0){
-                ovenImageView.setBackgroundResource(R.drawable.custom_round);
-                hotwaterImageView.setBackgroundResource(R.drawable.custom_round);
-            }
-            if(i % 3 == 0){
-                microwaveImageView.setBackgroundResource(R.drawable.custom_round);
-                stoveImageView.setBackgroundResource(R.drawable.custom_round);
-            }
+
+            if(json.getInt("ovn") == 1) {ovenImageView.setBackgroundResource(R.drawable.custom_round);}
+            if(json.getInt("grill") == 1) {hotwaterImageView.setBackgroundResource(R.drawable.custom_round);}
+            if(json.getInt("komfur") == 1) {stoveImageView.setBackgroundResource(R.drawable.custom_round);}
+            if(json.getInt("mikroovn") == 1) {microwaveImageView.setBackgroundResource(R.drawable.custom_round);}
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -104,11 +110,7 @@ public class ItemAdapter extends BaseAdapter {
         heartImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    System.out.println("Heart has been pressed for " + jsons.get(i).getString("name"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                //heart pressed
             }
         });
 
@@ -117,11 +119,17 @@ public class ItemAdapter extends BaseAdapter {
             public void onClick(View view) {
                 System.out.println("I have been clicked :D");
 
+                try {
+                    System.out.println(jsons.getJSONObject(i).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 //Open Productscreen for below id
 
                 String barcode = "";
                 try {
-                    barcode = jsons.get(i).getString("barcode");
+                    barcode = jsons.getJSONObject(i).getString("barcode");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

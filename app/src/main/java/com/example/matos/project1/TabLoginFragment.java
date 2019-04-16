@@ -14,7 +14,7 @@ import android.widget.EditText;
 public class TabLoginFragment extends Fragment {
     EditText email, password;
     Button login;
-    ProgressDialog progressDialog;
+    public static ProgressDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

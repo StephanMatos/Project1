@@ -55,6 +55,7 @@ public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
 
     @Override
     protected void onPostExecute(Boolean success){
+        /*
         if(success){
             LoginActivity.progressDialog.dismiss();
             Intent intent = new Intent(context,HomeActivity.class);
@@ -69,7 +70,7 @@ public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
                     .setNeutralButton("OK",null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-        }
+        }*/
     }
 }
 

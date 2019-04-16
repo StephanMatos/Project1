@@ -56,13 +56,13 @@ public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
     @Override
     protected void onPostExecute(Boolean success){
         if(success){
-            LoginActivity.progressDialog.dismiss();
+            TabLoginFragment.progressDialog.dismiss();
             Intent intent = new Intent(context,HomeActivity.class);
             context.startActivity(intent);
             ((Activity)context).finish();
         } else{
             //publish faulty dialog
-            LoginActivity.progressDialog.dismiss();
+            TabLoginFragment.progressDialog.dismiss();
             new AlertDialog.Builder(context)
                     .setTitle("Wrong Email or Password")
                     .setMessage("Username can not be used to login")

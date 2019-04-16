@@ -25,7 +25,7 @@
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="@string/prompt_name"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords|textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/user_imageView"
         app:layout_constraintTop_toTopOf="parent" />

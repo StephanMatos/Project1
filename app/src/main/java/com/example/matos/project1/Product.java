@@ -80,7 +80,7 @@ public class Product extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            String username = "schmidt13@live.dk";
+            String username = SavedValues.getInstance().getEmail();
             String data = Services.callAPI("products.php?barcode=" + barcode + "&username=" + username);
             System.out.println("data is");
             System.out.println(data);

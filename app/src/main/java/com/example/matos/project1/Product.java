@@ -50,8 +50,8 @@ public class Product extends AppCompatActivity {
         heartImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
-                String username = "schmidt13@live.dk";
+
+                String username = SavedValues.getInstance().getEmail();
                 try {
                     if(json.getInt("inFavorites") == 0){
                         new sendPostAPI().execute("favorites.php?username=" + username + "&barcode=" + json.getString("barcode"));

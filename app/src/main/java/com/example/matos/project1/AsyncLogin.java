@@ -19,18 +19,26 @@ import javax.net.ssl.HttpsURLConnection;
 public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
     private Context context;
 
+    private String email,password;
+    SavedValues savedValues = SavedValues.getInstance();
+
+
     public AsyncLogin(Context context){
         this.context = context;
     }
+
 
     @Override
     protected Boolean doInBackground(String... Strings) {
         boolean success = false;
         String data;
+        email = Strings[0];
+        password = Strings[1];
 
         try {
             String LoginUrl = "https://easyeats.dk/users.php?email="+Strings[0]+"&password="+Strings[1];
-            System.out.println(" This is strings : "+Strings[0] +  "   "  + Strings[1]);
+            System.out.println(" This is strings : "+email +  "   "  + password);
+
             URL url = new URL(LoginUrl);
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             InputStream inputStream = connection.getInputStream();
@@ -60,6 +68,10 @@ public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
             Intent intent = new Intent(context,HomeActivity.class);
             context.startActivity(intent);
             ((Activity)context).finish();
+            savedValues.saveEmail(email);
+            savedValues.savePassword(password);
+
+
         } else{
             //publish faulty dialog
             TabLoginFragment.progressDialog.dismiss();

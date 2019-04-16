@@ -3,6 +3,7 @@ package com.example.matos.project1;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.util.Pair;
@@ -17,8 +18,6 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class ItemAdapter extends BaseAdapter {
 
@@ -70,8 +69,8 @@ public class ItemAdapter extends BaseAdapter {
         final ImageView heartImage = v.findViewById(R.id.heartImageView);
         final ImageView productImage = v.findViewById(R.id.productImageView);
         ProgressBar productRatingBar = v.findViewById(R.id.productRatingBar);
-        ImageView heartImageView = v.findViewById(R.id.heartImageView);
-        ImageView ovenImageView = v.findViewById(R.id.ovenImageView);
+        final ImageView heartImageView = v.findViewById(R.id.heartImageView);
+        ImageView ovenImageView = v.findViewById(R.id.hotwater);
         ImageView microwaveImageView = v.findViewById(R.id.microwaveImageView);
         ImageView stoveImageView = v.findViewById(R.id.stoveImageView);
         ImageView hotwaterImageView = v.findViewById(R.id.hotwaterImageView);
@@ -111,6 +110,19 @@ public class ItemAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 //heart pressed
+                String username = SavedValues.getInstance().getEmail();
+                try {
+                    JSONObject json = jsons.getJSONObject(i);
+                    if(json.getInt("inFavorites") == 0){
+                        new sendPostAPI().execute("favorites.php?username=" + username + "&barcode=" + json.getString("barcode"));
+                        heartImageView.setImageResource(R.drawable.filledheart);
+                    } else {
+                        new sendPostAPI().execute("favorites.php?delete=1&username=" + username + "&barcode=" + json.getString("barcode"));
+                        heartImageView.setImageResource(R.drawable.emptyheart);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -149,4 +161,16 @@ public class ItemAdapter extends BaseAdapter {
 
         return v;
     }
+
+    private class sendPostAPI extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            String address = strings[0];
+            Services.postAPI(address);
+            return null;
+        }
+
+    }
+
 }

@@ -4,21 +4,16 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.ArrayList;
 
 public class ProductList extends AppCompatActivity {
 
-    ImageView testBtn, testBtn2;
     ListView listView;
     TextView titleTextView;
-    ArrayList<JSONObject> jsons = new ArrayList<>();
 
     String type = "";
 
@@ -52,7 +47,7 @@ public class ProductList extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            String username = "schmidt13@live.dk";
+            String username = SavedValues.getInstance().getEmail();
 
             String data;
             if(type.equals("Favorites")){
@@ -77,31 +72,6 @@ public class ProductList extends AppCompatActivity {
             listView.setAdapter(itemAdapter);
             dialog.dismiss();
         }
-    }
-
-    private class APITest extends AsyncTask<Void, Void, String> {
-
-        @Override
-        protected void onPreExecute(){
-
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-
-            String q = "select ScannerDeviceID, ProductName, count(ProductName) as Quantity from scanner_has_product natural join product where ProductName = \"nameA\" group by ProductName";
-            System.out.println(q);
-            return Services.callAPI(q);
-
-        }
-
-        @Override
-        protected void onPostExecute(String response){
-
-            System.out.println("Response from API is: " + response);
-
-        }
-
     }
 
 }

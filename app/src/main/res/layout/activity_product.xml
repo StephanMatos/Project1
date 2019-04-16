@@ -24,9 +24,9 @@
 
 
             <ImageView
-                android:id="@+id/grill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/oven"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -45,18 +45,18 @@
 
             <ImageView
                 android:id="@+id/stove"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/grill"
+                app:layout_constraintTop_toBottomOf="@+id/oven"
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <ImageView
                 android:id="@+id/microwave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,9 +64,9 @@
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <ImageView
-                android:id="@+id/ovenImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/hotwater"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:maxLength="150"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Product Name"
-                android:textSize="32dp"
+                android:textSize="30sp"
                 android:transitionName="productNameTransition"
                 app:layout_constraintEnd_toStartOf="@+id/heart"
                 app:layout_constraintStart_toEndOf="@+id/picture"
@@ -152,10 +152,10 @@
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
                 android:text="Description"
-                android:textSize="48dp"
+                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/picture" />
 
@@ -164,9 +164,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="32dp"
                 android:text="Cooking"
-                android:textSize="48dp"
+                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
 
@@ -180,7 +180,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/grillScoreText"
                 app:layout_constraintEnd_toStartOf="@+id/grillScoreText"
                 app:layout_constraintHorizontal_bias="0.028"
-                app:layout_constraintStart_toEndOf="@+id/grill"
+                app:layout_constraintStart_toEndOf="@+id/oven"
                 app:layout_constraintTop_toTopOf="@+id/grillScoreText" />
 
             <ProgressBar
@@ -214,10 +214,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/ovenImageView"
+                app:layout_constraintBottom_toBottomOf="@+id/hotwater"
                 app:layout_constraintEnd_toStartOf="@+id/ovenScoreText"
-                app:layout_constraintStart_toEndOf="@+id/ovenImageView"
-                app:layout_constraintTop_toTopOf="@+id/ovenImageView" />
+                app:layout_constraintStart_toEndOf="@+id/hotwater"
+                app:layout_constraintTop_toTopOf="@+id/hotwater" />
 
             <TextView
                 android:id="@+id/grillScoreText"
@@ -226,9 +226,9 @@
                 android:layout_marginEnd="8dp"
                 android:text="0.0"
                 android:textSize="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/grill"
+                app:layout_constraintBottom_toBottomOf="@+id/oven"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/grill" />
+                app:layout_constraintTop_toTopOf="@+id/oven" />
 
             <TextView
                 android:id="@+id/stoveScoreText"
@@ -260,9 +260,9 @@
                 android:layout_marginBottom="8dp"
                 android:text="0.0"
                 android:textSize="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/ovenImageView"
+                app:layout_constraintBottom_toBottomOf="@+id/hotwater"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ovenImageView" />
+                app:layout_constraintTop_toTopOf="@+id/hotwater" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

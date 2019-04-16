@@ -36,7 +36,7 @@
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
-        android:id="@+id/ovenImageView"
+        android:id="@+id/hotwater"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignStart="@+id/heartImageView"
@@ -52,22 +52,22 @@
         android:id="@+id/microwaveImageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignTop="@+id/ovenImageView"
+        android:layout_alignTop="@+id/hotwater"
         android:layout_marginEnd="4dp"
-        android:layout_toEndOf="@+id/ovenImageView"
+        android:layout_toEndOf="@+id/hotwater"
         android:padding="4dp"
         app:layout_constraintEnd_toStartOf="@+id/heartImageView"
-        app:layout_constraintTop_toTopOf="@+id/ovenImageView"
+        app:layout_constraintTop_toTopOf="@+id/hotwater"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/stoveImageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@+id/ovenImageView"
-        android:layout_alignStart="@+id/ovenImageView"
+        android:layout_below="@+id/hotwater"
+        android:layout_alignStart="@+id/hotwater"
         android:padding="4dp"
-        app:layout_constraintEnd_toEndOf="@+id/ovenImageView"
+        app:layout_constraintEnd_toEndOf="@+id/hotwater"
         app:layout_constraintTop_toTopOf="@+id/hotwaterImageView"
         app:srcCompat="@mipmap/ic_launcher" />
 

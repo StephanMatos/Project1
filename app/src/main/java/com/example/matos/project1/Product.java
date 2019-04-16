@@ -1,6 +1,5 @@
 package com.example.matos.project1;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,15 +12,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 public class Product extends AppCompatActivity {
 
 
     RatingBar ratingBar;
     TextView productRating, productName, productState, descriptionText;
-    ImageView heartImageView;
+    ImageView heartImageView, ovenImageView, microwaveImageView, stoveImageView, hotwaterImageView;
     String barcode;
+    JSONObject json;
 
 
     @Override
@@ -30,23 +28,49 @@ public class Product extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         postponeEnterTransition();
 
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        productRating = (TextView) findViewById(R.id.productRating);
-        productName = (TextView) findViewById(R.id.productName);
-        descriptionText = (TextView) findViewById(R.id.descriptionText);
-        productState = (TextView) findViewById(R.id.productState);
-        heartImageView = (ImageView) findViewById(R.id.heart);
+
+        ovenImageView = findViewById(R.id.oven);
+        microwaveImageView = findViewById(R.id.microwave);
+        stoveImageView = findViewById(R.id.stove);
+        hotwaterImageView = findViewById(R.id.hotwater);
+        ovenImageView.setImageResource(R.drawable.ic_oven);
+        microwaveImageView.setImageResource(R.drawable.ic_microwave);
+        stoveImageView.setImageResource(R.drawable.ic_stove);
+        hotwaterImageView.setImageResource(R.drawable.ic_hotwater);
+
+        ratingBar = findViewById(R.id.ratingBar);
+        productRating = findViewById(R.id.productRating);
+        productName = findViewById(R.id.productName);
+        descriptionText =  findViewById(R.id.descriptionText);
+        productState = findViewById(R.id.productState);
+        heartImageView =  findViewById(R.id.heart);
         
         barcode = getIntent().getExtras().getString("barcode");
 
+        heartImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        new testWait().execute();
+                String username = SavedValues.getInstance().getEmail();
+                try {
+                    if(json.getInt("inFavorites") == 0){
+                        new sendPostAPI().execute("favorites.php?username=" + username + "&barcode=" + json.getString("barcode"));
+                        heartImageView.setImageResource(R.drawable.filledheart);
+                    } else {
+                        new sendPostAPI().execute("favorites.php?delete=1&username=" + username + "&barcode=" + json.getString("barcode"));
+                        heartImageView.setImageResource(R.drawable.emptyheart);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        new getProduct().execute();
 
     }
 
-    private class testWait extends AsyncTask<Void, Void, Void> {
-
-        JSONObject json;
+    private class getProduct extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -56,7 +80,7 @@ public class Product extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            String username = "schmidt13@live.dk";
+            String username = SavedValues.getInstance().getEmail();
             String data = Services.callAPI("products.php?barcode=" + barcode + "&username=" + username);
             System.out.println("data is");
             System.out.println(data);
@@ -81,6 +105,11 @@ public class Product extends AppCompatActivity {
                 productState.setText(json.getString("state"));
                 ratingBar.setProgress((int) (json.getDouble("avgrating")));
 
+                if(json.getInt("ovn") == 1) {ovenImageView.setBackgroundResource(R.drawable.custom_round);}
+                if(json.getInt("grill") == 1) {hotwaterImageView.setBackgroundResource(R.drawable.custom_round);}
+                if(json.getInt("komfur") == 1) {stoveImageView.setBackgroundResource(R.drawable.custom_round);}
+                if(json.getInt("mikroovn") == 1) {microwaveImageView.setBackgroundResource(R.drawable.custom_round);}
+
                 if(json.getInt("inFavorites") == 1){
                     heartImageView.setImageResource(R.drawable.filledheart);
                 } else{
@@ -94,6 +123,17 @@ public class Product extends AppCompatActivity {
 
             startPostponedEnterTransition();
         }
+    }
+
+    private class sendPostAPI extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            String address = strings[0];
+            Services.postAPI(address);
+            return null;
+        }
+
     }
 
 }

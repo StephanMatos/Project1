@@ -1,6 +1,7 @@
 package com.example.matos.project1;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,13 +46,39 @@ public class TabLoginFragment extends Fragment {
 
     }
     private void attempt_login() {
+        boolean check = true;
 
-        new AsyncLogin(getContext()).execute(email.getText().toString(),password.getText().toString());
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
+        boolean validEmail = CheckValues.checkEmail(email.getText().toString());
+
+        if(!validEmail){
+            progressDialog.dismiss();
+            buildAlert("Email is not valid","Login with username is not possible");
+        }
+
+        if(email.getText().toString().length() == 0 || password.getText().toString().length() == 0){
+            progressDialog.dismiss();
+            buildAlert("Email and/or Password field can not be empty", "");
+            check = false;
+        }
+
+        if(check && validEmail){
+            new AsyncLogin(getContext()).execute(email.getText().toString(),password.getText().toString());
+        }
+
+
     }
 
+    private void buildAlert(String title, String text){
+        new AlertDialog.Builder(getContext())
+                .setTitle(title)
+                .setMessage(text)
+                .setNeutralButton("OK",null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 
 }

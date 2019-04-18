@@ -20,6 +20,7 @@ public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
 
     private Context context;
     private String email,password;
+    boolean success = false;
 
 
     public AsyncNewUser(Context context){
@@ -28,28 +29,30 @@ public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
 
     @Override
     protected Boolean doInBackground(String... Strings) {
-        boolean success = false;
+
         String data;
         email = Strings[0];
         password = Strings[1];
 
         try {
-            String LoginUrl = "https://easyeats.dk/users.php?email="+Strings[0]+"&password="+Strings[1]+"&username"+Strings[2];
-            System.out.println(" This is strings : "+Strings[0] +  "   "  + Strings[1]);
+
+            String LoginUrl = "https://easyeats.dk/signup.php?email="+Strings[0]+"&password="+Strings[1]+"&username="+Strings[2];
+            System.out.println(LoginUrl);
+            System.out.println(" This is strings : "+Strings[0] +  "   "  + Strings[1] + "    "  + Strings[2]);
             URL url = new URL(LoginUrl);
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setDoOutput(true);
-            connection.setDoInput(true);
             InputStream inputStream = connection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             data = bufferedReader.readLine();
             String response = connection.getResponseMessage();
             System.out.println("Message is :" + data);
             System.out.println("Response is : "+ response);
-            connection.disconnect();
 
-
+            if(data.equals("success")){
+                success = true;
+            }else{
+                success = false;
+            }
 
         }catch (IOException e){
             e.printStackTrace();

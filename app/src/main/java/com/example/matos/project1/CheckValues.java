@@ -13,16 +13,19 @@ public class CheckValues {
 
     public static boolean checkUsername(String username){
         int length = username.length();
+
         if(length < 21 && length > 3){
             checkUsername = true;
         }else {
-            return false;
+            checkUsername =  false;
+            return checkUsername;
         }
         boolean isValid = isSpecialCharacter(username);
-        if(isValid){
+        if(!isValid){
             checkUsername = true;
         }else{
-            return false;
+            checkUsername =  false;
+            return checkUsername;
         }
 
         return checkUsername;
@@ -45,24 +48,29 @@ public class CheckValues {
         if(length > 7 && length < 21){
             checkPassword = true;
         }else{
-            return false;
+            checkPassword = false;
+            return checkPassword;
         }
 
         boolean isValid = isSpecialCharacter(password);
-        if(isValid){
+
+        if(!isValid){
             checkPassword = true;
         } else{
-            return false;
+            checkPassword = false;
+            return checkPassword;
         }
 
         return checkPassword;
     }
 
     private static boolean isSpecialCharacter(String string){
-        boolean legal = true;
+        boolean legal = false;
         for(int i = 0; i < string.length(); i++){
-           legal = string.substring(i).matches("[^a-zA-Z0-9<>,;.:_!#¤%&/()=?+*£$€{}]");
-           if(!legal){
+            System.out.println("run number : " + i);
+            legal = string.substring(i,i+1).matches("[^a-zA-Z0-9<>,;.:_!#¤%&/()=?+*£$€{}]");
+            System.out.println(" This is substring letter : "+string.substring(i,i+1) +"This is Legal status : " +legal);
+           if(legal){
                return legal;
            }
 

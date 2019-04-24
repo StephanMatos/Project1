@@ -15,6 +15,8 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import dmax.dialog.SpotsDialog;
+
 
 public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
 
@@ -66,9 +68,8 @@ public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
 
         if(success){
         TabSignupFragment.progressDialog.dismiss();
-        TabLoginFragment.progressDialog = new ProgressDialog(context);
+        TabLoginFragment.progressDialog = new SpotsDialog.Builder().setContext(context).build();
         TabLoginFragment.progressDialog.setMessage("Loading...");
-        TabLoginFragment.progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         TabLoginFragment.progressDialog.show();
         new AsyncLogin(context).execute(email,password);
 

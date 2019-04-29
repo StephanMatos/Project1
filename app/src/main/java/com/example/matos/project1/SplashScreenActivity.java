@@ -12,8 +12,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private int SPLASH_TIMEOUT = 3000;
 
-    LottieAnimationView lottieAnimnationsView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

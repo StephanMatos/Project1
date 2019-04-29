@@ -49,7 +49,7 @@ public class TabSignupFragment extends Fragment {
 
     private void create_user() {
         System.out.println("create user");
-        progressDialog = new SpotsDialog.Builder().setContext(getContext()).build();
+        progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 

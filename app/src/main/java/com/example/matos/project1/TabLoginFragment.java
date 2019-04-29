@@ -53,7 +53,7 @@ public class TabLoginFragment extends Fragment {
     private void attempt_login() {
         boolean check = true;
 
-        progressDialog = new SpotsDialog.Builder().setContext(getContext()).build();
+        progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
 
         progressDialog.setMessage("Loading...");
         progressDialog.show();

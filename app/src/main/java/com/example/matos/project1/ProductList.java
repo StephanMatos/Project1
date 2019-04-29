@@ -1,5 +1,6 @@
 package com.example.matos.project1;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import dmax.dialog.SpotsDialog;
 
 public class ProductList extends AppCompatActivity {
 
@@ -36,12 +39,14 @@ public class ProductList extends AppCompatActivity {
 
     private class setupList extends AsyncTask<Void, Void, Void> {
 
-        ProgressDialog dialog;
+        AlertDialog dialog;
         JSONArray jsons;
 
         @Override
         protected void onPreExecute() {
-            dialog = ProgressDialog.show(ProductList.this, "Product List","Loading. Please wait...");
+            dialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(ProductList.this).build();
+            dialog.setMessage("Loading...");
+            dialog.show();
         }
 
         @Override

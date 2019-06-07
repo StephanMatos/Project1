@@ -1,5 +1,7 @@
 package com.example.matos.project1;
 
+import android.app.Dialog;
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,12 +13,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.BulletSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
@@ -30,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     // The ViewPager will host the section contents.
     private ViewPager mViewPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the two
         // primary sections of the activity (Login and Signup)
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = findViewById(R.id.container);
@@ -48,6 +60,35 @@ public class LoginActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+
+
+        ImageView help = findViewById(R.id.help_button);
+
+        help.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                final Dialog dialog = new Dialog(LoginActivity.this);
+
+                dialog.setContentView(R.layout.dialogview_help_login);
+                dialog.setTitle("help login");
+
+                Button ok_button = dialog.findViewById(R.id.ok_button);
+
+                ok_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+
+                dialog.show();
+
+            }
+        });
 
     }
 
@@ -85,4 +126,6 @@ public class LoginActivity extends AppCompatActivity {
             return 2;
         }
     }
+
+
 }

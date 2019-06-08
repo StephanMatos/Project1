@@ -1,4 +1,4 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Menu;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -6,6 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.example.matos.project1.Menu.FragmentHome;
+import com.example.matos.project1.Menu.FragmentProfile;
+import com.example.matos.project1.Menu.FragmentSearch;
+import com.example.matos.project1.R;
+import com.example.matos.project1.Scan.FragmentCamera;
 
 
 public class HomeActivity extends AppCompatActivity {

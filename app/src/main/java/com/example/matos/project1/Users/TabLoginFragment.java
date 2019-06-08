@@ -2,8 +2,6 @@ package com.example.matos.project1.Users;
 
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,11 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.airbnb.lottie.LottieAnimationView;
-
 import dmax.dialog.SpotsDialog;
 
+import com.example.matos.project1.ForgotPasswordActivity;
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 

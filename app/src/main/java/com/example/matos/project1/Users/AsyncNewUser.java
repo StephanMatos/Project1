@@ -1,9 +1,11 @@
 package com.example.matos.project1.Users;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.example.matos.project1.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;

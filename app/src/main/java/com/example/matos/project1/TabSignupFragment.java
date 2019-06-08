@@ -2,7 +2,6 @@ package com.example.matos.project1;
 
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.matos.project1.Users.AsyncNewUser;
+import com.example.matos.project1.Users.CheckValues;
 
 import dmax.dialog.SpotsDialog;
 

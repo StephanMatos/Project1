@@ -79,6 +79,16 @@ public class CheckValues {
         return legal;
     }
 
+    private static boolean emailExist(String email){
+        if(checkEmail(email)){
+
+        } else{
+            return false;
+        }
+
+        return true;
+    }
+
 
 
 

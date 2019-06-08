@@ -1,12 +1,14 @@
 package com.example.matos.project1.Users;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,7 +20,7 @@ import dmax.dialog.SpotsDialog;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
-    private EditText email_EditText;
+    private EditText email_EditText, editTextCode1, editTextCode2, editTextCode3, editTextCode4, editTextCode5;
     private Button send_Button;
     private Context context;
     public static AlertDialog progressDialog;
@@ -70,10 +72,21 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             running = false;
 
-                            /*
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            intent.putExtra("Value1", "Success");
-                            startActivity(intent);*/
+                            final Dialog dialog = new Dialog(ForgotPasswordActivity.this);
+
+                            dialog.setContentView(R.layout.dialogview_passreset);
+                            dialog.setTitle("verification code");
+
+
+                            editTextCode1 = dialog.findViewById(R.id.editTextCode1);
+
+                            editTextCode1.requestFocus();
+                            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+
+
+
+                            dialog.show();
 
                         } else if (failure){
                             running = false;

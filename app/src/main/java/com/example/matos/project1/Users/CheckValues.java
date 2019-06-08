@@ -7,6 +7,7 @@ import java.lang.reflect.Array;
 public class CheckValues {
 
     static boolean checkUsername = false;
+    static boolean reset = false;
     static boolean checkEmail = false;
     static boolean checkPassword = false;
     static String[] suffix = {".com",".org",".net",".int",".edu",".gov",".AD",".AE",".AF",".AG",".AI",".AL",".AM",".AN",".AO",".AQ",".AR",".AS",".AT",".AU",".AW",".AZ",".BA",".BB",".BD",".BE",".BF",".BG",".BH",".BI",".BJ",".BM",".BN",".BO",".BR",".BS",".BT",".BV",".BW",".BT",".TP",".TR",".TT",".TV",".TW",".TZ",".UA",".UG",".UK",".UM",".US",".UY",".UZ",".VA",".VC",".VE",".VG",".VI",".VN",".VU","WF",".WS",".YE",".YT",".YU",".ZA",".ZM",".ZR",".ZW"};
@@ -78,22 +79,6 @@ public class CheckValues {
 
         return legal;
     }
-
-    private static boolean emailExist(String email){
-        if(checkEmail(email)){
-
-            // Make a HTTP post to verify the email exist in the database
-
-
-
-        } else{
-            return false;
-        }
-
-        return true;
-    }
-
-
 
 
 }

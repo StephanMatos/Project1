@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import dmax.dialog.SpotsDialog;
 
-import com.example.matos.project1.ForgotPasswordActivity;
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 

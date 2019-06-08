@@ -144,7 +144,6 @@ public class TabSignupFragment extends Fragment {
         //buildAlert("Error - Password not valid","Password must have a length between 8-20 characters and can only contain a-z A-Z 0-9 <>,;.:_!#¤%&/()=?+*£$€{}");
 
 
-
         if(validEmail && validPassword && validUsername){
             new AsyncNewUser(getContext()).execute(email.getText().toString(),password.getText().toString(),username.getText().toString());
 

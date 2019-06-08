@@ -1,21 +1,27 @@
 package com.example.matos.project1;
 
+import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.matos.project1.Users.AsyncLogin;
+import com.example.matos.project1.Users.AsyncResetPassword;
 import com.example.matos.project1.Users.CheckValues;
 
 import dmax.dialog.SpotsDialog;
 
 import static com.example.matos.project1.TabSignupFragment.progressDialog;
+import static java.security.AccessController.getContext;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
+    public static AlertDialog progressDialog;
     private EditText email_EditText;
     private Button send_Button;
+    private boolean validEmail = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,29 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         progressDialog.show();
 
 
+        validEmail = CheckValues.checkEmail(email);
 
+        if(!validEmail){
+            progressDialog.dismiss();
+            buildAlert("Email is not valid","Login with username is not possible");
+        }
+
+        if (validEmail){
+            progressDialog.dismiss();
+
+
+        }
+
+
+
+    }
+
+    private void buildAlert(String title, String text){
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(text)
+                .setNeutralButton("OK",null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }

@@ -79,7 +79,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
 
                             editTextCode1 = dialog.findViewById(R.id.editTextCode1);
-
+                            //blablabl
                             editTextCode1.requestFocus();
                             dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 

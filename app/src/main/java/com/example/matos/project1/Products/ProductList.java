@@ -1,4 +1,4 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Products;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.matos.project1.R;
+import com.example.matos.project1.SavedValues;
+import com.example.matos.project1.Services;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -12,12 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:src="@drawable/ic_email"
-        app:layout_constraintBottom_toBottomOf="@+id/email_TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/email_EditText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/email_TextView" />
+        app:layout_constraintTop_toTopOf="@+id/email_EditText" />
 
     <EditText
-        android:id="@+id/email_TextView"
+        android:id="@+id/email_EditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -43,7 +43,7 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lock_ImageView"
-        app:layout_constraintTop_toBottomOf="@+id/email_TextView" />
+        app:layout_constraintTop_toBottomOf="@+id/email_EditText" />
 
     <ImageView
         android:id="@+id/lock_ImageView"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pass_TextView" />
 
     <Button
-        android:id="@+id/login_button"
+        android:id="@+id/send_Button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -90,7 +90,7 @@
         android:textColor="#000000"
         android:textSize="14dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/login_button"
-        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+        app:layout_constraintStart_toStartOf="@+id/send_Button"
+        app:layout_constraintTop_toBottomOf="@+id/send_Button" />
 
 </android.support.constraint.ConstraintLayout>

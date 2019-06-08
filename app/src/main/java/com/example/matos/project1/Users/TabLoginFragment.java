@@ -1,34 +1,28 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Users;
 
 
-import android.Manifest;
 import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.airbnb.lottie.LottieAnimationView;
-
 import dmax.dialog.SpotsDialog;
 
+import com.example.matos.project1.Menu.HomeActivity;
+import com.example.matos.project1.R;
+
 public class TabLoginFragment extends Fragment {
-
-
-    EditText email, password;
-    Button login;
-    TextView forgotPass;
+    private EditText email, password;
+    private Button login;
+    private TextView forgotPass;
+    private CheckBox rememberMe_checkBox;
     public static AlertDialog progressDialog;
     @Nullable
     @Override
@@ -41,9 +35,10 @@ public class TabLoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        email = view.findViewById(R.id.email_TextView);
+        email = view.findViewById(R.id.email_EditText);
         password = view.findViewById(R.id.pass_TextView);
         forgotPass = view.findViewById(R.id.forgotPassTextView);
+        rememberMe_checkBox = view.findViewById(R.id.checkBox);
 
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,10 +48,11 @@ public class TabLoginFragment extends Fragment {
             }
         });
 
-        login = view.findViewById(R.id.login_button);
+        login = view.findViewById(R.id.send_Button);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // be able to login without connection to a server - Testing purposes
                 if (email.getText().toString().equals("a") && password.getText().toString().equals("a")){
                     Intent intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);

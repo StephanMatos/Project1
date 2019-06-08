@@ -1,11 +1,11 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Users;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
+
+import com.example.matos.project1.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,30 +15,32 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import dmax.dialog.SpotsDialog;
 
-public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
+
+public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
+
     private Context context;
-
     private String email,password;
-    SavedValues savedValues = SavedValues.getInstance();
+    boolean success = false;
 
 
-    public AsyncLogin(Context context){
+    public AsyncNewUser(Context context){
         this.context = context;
     }
 
-
     @Override
     protected Boolean doInBackground(String... Strings) {
-        boolean success = false;
+
         String data;
         email = Strings[0];
         password = Strings[1];
 
         try {
-            String LoginUrl = "https://easyeats.dk/users.php?email="+Strings[0]+"&password="+Strings[1];
-            System.out.println(" This is strings : "+email +  "   "  + password);
 
+            String LoginUrl = "https://easyeats.dk/signup.php?email="+Strings[0]+"&password="+Strings[1]+"&username="+Strings[2];
+            System.out.println(LoginUrl);
+            System.out.println(" This is strings : "+Strings[0] +  "   "  + Strings[1] + "    "  + Strings[2]);
             URL url = new URL(LoginUrl);
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             InputStream inputStream = connection.getInputStream();
@@ -48,12 +50,12 @@ public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
             System.out.println("Message is :" + data);
             System.out.println("Response is : "+ response);
 
-            connection.disconnect();
             if(data.equals("success")){
                 success = true;
             }else{
                 success = false;
             }
+
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -63,24 +65,24 @@ public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
 
     @Override
     protected void onPostExecute(Boolean success){
-        if(success){
-            TabLoginFragment.progressDialog.dismiss();
-            Intent intent = new Intent(context,HomeActivity.class);
-            context.startActivity(intent);
-            ((Activity)context).finish();
-            savedValues.saveEmail(email);
-            savedValues.savePassword(password);
 
+        if(success){
+        TabSignupFragment.progressDialog.dismiss();
+        TabLoginFragment.progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(context).build();
+        TabLoginFragment.progressDialog.setMessage("Loading...");
+        TabLoginFragment.progressDialog.show();
+        new AsyncLogin(context).execute(email,password);
 
         } else{
             //publish faulty dialog
-            TabLoginFragment.progressDialog.dismiss();
+
             new AlertDialog.Builder(context)
-                    .setTitle("Wrong Email or Password")
-                    .setMessage("Username can not be used to login")
+                    .setTitle("User Already exist")
+                    .setMessage("Try logging in")
                     .setNeutralButton("OK",null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }
     }
 }
+

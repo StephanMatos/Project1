@@ -22,14 +22,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         send_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Attempt_passRecovery(email_EditText.getText().toString());
+                attempt_passRecovery(email_EditText.getText().toString());
             }
         });
 
 
     }
 
-    public void Attempt_passRecovery(String email){
+    public void attempt_passRecovery(String email){
 
 
     }

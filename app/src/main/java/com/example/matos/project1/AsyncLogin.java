@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.CheckBox;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -70,6 +71,7 @@ public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
             ((Activity)context).finish();
             savedValues.saveEmail(email);
             savedValues.savePassword(password);
+
 
 
         } else{

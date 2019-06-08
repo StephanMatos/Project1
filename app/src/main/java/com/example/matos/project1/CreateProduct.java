@@ -70,7 +70,6 @@ public class CreateProduct extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         productStateSpinner.setAdapter(dataAdapter);
 
-
     }
 
 

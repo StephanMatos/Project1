@@ -1,15 +1,16 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Scan;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
+import com.example.matos.project1.Products.CreateProduct;
+import com.example.matos.project1.Products.Product;
+import com.example.matos.project1.SavedValues;
+import com.example.matos.project1.Services;
 import com.google.zxing.Result;
 
 import org.json.JSONArray;

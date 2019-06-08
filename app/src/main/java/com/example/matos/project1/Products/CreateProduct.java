@@ -1,4 +1,4 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Products;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.matos.project1.R;
 
 import java.io.IOException;
 import java.util.ArrayList;

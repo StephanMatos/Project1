@@ -2,6 +2,7 @@ package com.example.matos.project1;
 
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.airbnb.lottie.LottieAnimationView;
+
+import dmax.dialog.SpotsDialog;
 
 public class TabLoginFragment extends Fragment {
     EditText email, password;
     Button login;
-    public static ProgressDialog progressDialog;
+    TextView forgotPass;
+    public static AlertDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +37,15 @@ public class TabLoginFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         email = view.findViewById(R.id.email_TextView);
         password = view.findViewById(R.id.pass_TextView);
+        forgotPass = view.findViewById(R.id.forgotPassTextView);
+
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
         login = view.findViewById(R.id.login_button);
         login.setOnClickListener(new View.OnClickListener() {
@@ -48,9 +64,9 @@ public class TabLoginFragment extends Fragment {
     private void attempt_login() {
         boolean check = true;
 
-        progressDialog = new ProgressDialog(getContext());
+        progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
+
         progressDialog.setMessage("Loading...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
         boolean validEmail = CheckValues.checkEmail(email.getText().toString());
 

@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import dmax.dialog.SpotsDialog;
+
 public class TabSignupFragment extends Fragment {
-    public static ProgressDialog progressDialog;
+    public static AlertDialog progressDialog;
     private TextView username,email,password;
     private Button signUp;
     boolean validEmail = false;
@@ -51,9 +53,8 @@ public class TabSignupFragment extends Fragment {
 
     private void create_user() {
         System.out.println("create user");
-        progressDialog = new ProgressDialog(getContext());
+        progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
         progressDialog.setMessage("Loading...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
         validEmail = CheckValues.checkEmail(email.getText().toString());

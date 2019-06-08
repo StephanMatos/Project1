@@ -6,6 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.matos.project1.Users.CheckValues;
+
+import dmax.dialog.SpotsDialog;
+
+import static com.example.matos.project1.TabSignupFragment.progressDialog;
+
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     private EditText email_EditText;
@@ -30,6 +36,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     public void attempt_passRecovery(String email){
+
+        progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(this).build();
+
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
 
 
     }

@@ -24,12 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Product" />
-        <activity android:name=".ProductList" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".ScanActivity" />
+        <activity android:name=".Products.Product" />
+        <activity android:name=".Products.ProductList" />
+        <activity android:name=".Menu.HomeActivity" />
+        <activity android:name=".Scan.ScanActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Users.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme" />
         <activity android:name=".ForgotPasswordActivity"></activity>

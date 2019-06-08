@@ -1,4 +1,4 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Products;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.example.matos.project1.Products.Product;
+import com.example.matos.project1.R;
+import com.example.matos.project1.SavedValues;
+import com.example.matos.project1.Services;
 
 import org.json.JSONArray;
 import org.json.JSONException;

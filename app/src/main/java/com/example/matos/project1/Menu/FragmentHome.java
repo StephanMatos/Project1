@@ -1,4 +1,4 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Menu;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.matos.project1.R;
 
 public class FragmentHome extends Fragment {
 

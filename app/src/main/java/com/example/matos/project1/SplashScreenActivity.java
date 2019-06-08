@@ -1,12 +1,12 @@
 package com.example.matos.project1;
 
-import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.matos.project1.Users.LoginActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

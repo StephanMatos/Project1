@@ -1,4 +1,4 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Users;
 
 import android.util.Patterns;
 

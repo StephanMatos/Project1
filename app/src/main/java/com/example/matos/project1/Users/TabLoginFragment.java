@@ -1,4 +1,4 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Users;
 
 
 import android.app.AlertDialog;
@@ -18,6 +18,9 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 
 import dmax.dialog.SpotsDialog;
+
+import com.example.matos.project1.Menu.HomeActivity;
+import com.example.matos.project1.R;
 
 public class TabLoginFragment extends Fragment {
     EditText email, password;

@@ -82,6 +82,10 @@ public class CheckValues {
     private static boolean emailExist(String email){
         if(checkEmail(email)){
 
+            // Make a HTTP post to verify the email exist in the database
+
+
+
         } else{
             return false;
         }

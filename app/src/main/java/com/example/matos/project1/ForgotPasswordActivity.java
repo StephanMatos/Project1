@@ -55,7 +55,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             progressDialog.dismiss();
             buildAlert("Email is not valid","Login with username is not possible");
         }
-
+    //JUHUUUUU
         if (validEmail){
             progressDialog.dismiss();
 

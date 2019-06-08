@@ -36,7 +36,7 @@ public class TabLoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        email = view.findViewById(R.id.email_TextView);
+        email = view.findViewById(R.id.email_EditText);
         password = view.findViewById(R.id.pass_TextView);
         forgotPass = view.findViewById(R.id.forgotPassTextView);
         rememberMe_checkBox = view.findViewById(R.id.checkBox);
@@ -49,7 +49,7 @@ public class TabLoginFragment extends Fragment {
             }
         });
 
-        login = view.findViewById(R.id.login_button);
+        login = view.findViewById(R.id.send_Button);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -37,9 +37,9 @@ public class TabSignupFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         username = view.findViewById(R.id.usernameTextView);
-        email = view.findViewById(R.id.email_TextView);
+        email = view.findViewById(R.id.email_EditText);
         password = view.findViewById(R.id.pass_TextView);
-        signUp = view.findViewById(R.id.login_button);
+        signUp = view.findViewById(R.id.send_Button);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override

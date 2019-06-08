@@ -116,9 +116,11 @@ public class ItemAdapter extends BaseAdapter {
                     if(json.getInt("inFavorites") == 0){
                         new sendPostAPI().execute("favorites.php?username=" + username + "&barcode=" + json.getString("barcode"));
                         heartImageView.setImageResource(R.drawable.filledheart);
+                        json.put("inFavorites", 1);
                     } else {
                         new sendPostAPI().execute("favorites.php?delete=1&username=" + username + "&barcode=" + json.getString("barcode"));
                         heartImageView.setImageResource(R.drawable.emptyheart);
+                        json.put("inFavorites", 0);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

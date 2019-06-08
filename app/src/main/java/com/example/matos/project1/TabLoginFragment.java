@@ -1,13 +1,17 @@
 package com.example.matos.project1;
 
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +24,8 @@ import com.airbnb.lottie.LottieAnimationView;
 import dmax.dialog.SpotsDialog;
 
 public class TabLoginFragment extends Fragment {
+
+
     EditText email, password;
     Button login;
     TextView forgotPass;

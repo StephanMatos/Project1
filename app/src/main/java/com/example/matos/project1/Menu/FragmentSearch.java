@@ -1,4 +1,4 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Menu;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +12,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.example.matos.project1.R;
 
 public class FragmentSearch extends Fragment {
 

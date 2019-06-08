@@ -1,12 +1,14 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Users;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.CheckBox;
+
+import com.example.matos.project1.Menu.HomeActivity;
+import com.example.matos.project1.SavedValues;
 
 import java.io.BufferedReader;
 import java.io.IOException;

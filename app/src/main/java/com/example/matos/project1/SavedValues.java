@@ -17,7 +17,6 @@ public class SavedValues {
 
     public String getEmail(){
         return email;
-        //hel
     }
 
     public void savePassword(String input){

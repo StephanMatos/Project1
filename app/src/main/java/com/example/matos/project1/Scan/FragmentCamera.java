@@ -1,7 +1,5 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Scan;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,8 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+
+import com.example.matos.project1.R;
 
 public class FragmentCamera extends Fragment {
 

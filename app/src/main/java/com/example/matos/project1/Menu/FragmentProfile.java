@@ -1,4 +1,4 @@
-package com.example.matos.project1;
+package com.example.matos.project1.Menu;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -15,6 +15,9 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.example.matos.project1.Products.ProductList;
+import com.example.matos.project1.R;
 
 public class FragmentProfile extends Fragment  {
 

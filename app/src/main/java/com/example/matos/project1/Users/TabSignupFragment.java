@@ -64,7 +64,6 @@ public class TabSignupFragment extends Fragment {
 
         // Instance of login to login after sign up
         tabLoginFragment = new TabLoginFragment();
-        alert = AlertDialogBoxes.getInstance();
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,28 +164,24 @@ public class TabSignupFragment extends Fragment {
         if(validEmail && validPassword && validUsername){
             new AsyncNewUser().execute(email.getText().toString(),password.getText().toString(),username.getText().toString());
             waitForResults();
-
         } else{
             progressDialog.dismiss();
-            alert.AlertDialog("Fejl","Teksten vil blive grøn når det intastede er gyldigt. Tryk på spørgsmålstegnet for mere info","Ok",getActivity());
+            AlertDialogBoxes.AlertDialog("Fejl","Teksten vil blive grøn når det intastede er gyldigt. Tryk på spørgsmålstegnet for mere info","Ok",getActivity());
         }
     }
 
     public void waitForResults() {
         new Thread(new Runnable() {
             public void run() {
-                System.out.println("running in tab");
                 while(active){
                     try {
                         if(success){
                             tabLoginFragment.attempt_login(email.getText().toString(),password.getText().toString(),true,getActivity());
-
                             active = false;
                         }else if(failure){
 
                             active = false;
                             progressDialog.dismiss();
-
 
                         }else if(exist){
                             progressDialog.dismiss();

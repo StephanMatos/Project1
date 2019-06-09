@@ -95,8 +95,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void goToHome(){
-        System.out.println("this is context");
-        System.out.println(getContext());
+
         Intent intent = new Intent(getContext(), HomeActivity.class);
         getContext().startActivity(intent);
     }
@@ -111,23 +110,6 @@ public class LoginActivity extends AppCompatActivity {
 
         return rootView;
     }*/
-
-    void showAlertDialog(final String title,final String text){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                new AlertDialog.Builder(getContext())
-                        .setTitle(title)
-                        .setMessage(text)
-                        .setNeutralButton("OK",null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-            }
-        });
-
-    }
-
-
 
     // The FragmentPagerAdapter returns a fragment corresponding to one of the tabs
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

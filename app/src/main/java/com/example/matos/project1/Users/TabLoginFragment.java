@@ -36,7 +36,6 @@ public class TabLoginFragment extends Fragment {
     public static boolean success = false;
     public static boolean failure = false;
     boolean active = true;
-    AlertDialogBoxes alert;
 
     @Nullable
     @Override
@@ -84,26 +83,20 @@ public class TabLoginFragment extends Fragment {
     public void attempt_login(String email,String password, boolean signup, Context context1) {
 
         boolean check = true;
+        boolean validEmail = CheckValues.checkEmail(email);
 
         if(!signup){
             progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
             progressDialog.setMessage("Loading...");
             progressDialog.show();
         }
-
-        boolean validEmail = CheckValues.checkEmail(email);
-
         if(!validEmail){
             progressDialog.dismiss();
-            alert = AlertDialogBoxes.getInstance();
-            alert.AlertDialog("Fejl","Den indstastede email er ikke gyldig. Login kan kun ske ved brug af email","Ok",getActivity());
-        }
-
-
-        if(email.length() == 0 || password.length() == 0){
+            AlertDialogBoxes.AlertDialog("Fejl","Den indstastede email er ikke gyldig. Login kan kun ske ved brug af email","Ok",getActivity());
+        }else if(email.length() == 0 || password.length() == 0){
             progressDialog.dismiss();
-            alert = AlertDialogBoxes.getInstance();
-            alert.AlertDialog("Fejl","Email og/eller password kan ikke være tom","Ok",getActivity());
+
+            AlertDialogBoxes.AlertDialog("Fejl","Email og/eller password kan ikke være tom","Ok",getActivity());
             check = false;
         }
 
@@ -135,8 +128,7 @@ public class TabLoginFragment extends Fragment {
                         }else if(failure){
                             active = false;
                             progressDialog.dismiss();
-                            alert = AlertDialogBoxes.getInstance();
-                            alert.alertDialogOnUI("Fejl","Forkert email og/eller adgangskode. Prøv igen eller gå til reset password",getActivity());
+                            AlertDialogBoxes.alertDialogOnUI("Fejl","Forkert email og/eller adgangskode. Prøv igen eller gå til reset password",getActivity());
 
                         }
                         Thread.sleep(200);
@@ -147,6 +139,5 @@ public class TabLoginFragment extends Fragment {
 
             }
         }).start();
-
     }
 }

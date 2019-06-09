@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Products.Product" />
+        <activity android:name=".Products.CreateProduct" />
         <activity android:name=".Products.ProductList" />
         <activity android:name=".Menu.HomeActivity" />
         <activity android:name=".Scan.ScanActivity" />

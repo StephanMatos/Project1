@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Products.CreateProduct">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Create Product"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/productNameET"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Product name"
+        android:inputType="textCapSentences"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productImageView" />
+
+    <EditText
+        android:id="@+id/productDescriptionET"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Product description"
+        android:inputType="textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine"
+        android:lines="3"
+        app:layout_constraintEnd_toEndOf="@+id/productNameET"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/productNameET"
+        app:layout_constraintTop_toBottomOf="@+id/productNameET" />
+
+    <EditText
+        android:id="@+id/productPriceET"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Product price"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productDescriptionET" />
+
+    <Spinner
+        android:id="@+id/productStateSpinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/productPriceET"
+        app:layout_constraintEnd_toEndOf="@+id/productDescriptionET"
+        app:layout_constraintStart_toEndOf="@+id/productPriceET"
+        app:layout_constraintTop_toTopOf="@+id/productPriceET" />
+
+    <ImageView
+        android:id="@+id/productImageView"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title"
+        app:srcCompat="@android:drawable/ic_menu_report_image" />
+
+    <CheckBox
+        android:id="@+id/ovenCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Oven"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productPriceET" />
+
+    <CheckBox
+        android:id="@+id/stoveCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Stove"
+        app:layout_constraintStart_toEndOf="@+id/ovenCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/ovenCheckBox" />
+
+    <CheckBox
+        android:id="@+id/microwaveCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Microwave"
+        app:layout_constraintEnd_toStartOf="@+id/hotWaterCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/stoveCheckBox" />
+
+    <CheckBox
+        android:id="@+id/hotWaterCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Hot Water"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/microwaveCheckBox" />
+</android.support.constraint.ConstraintLayout>

@@ -3,19 +3,17 @@ package com.example.matos.project1.Users;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 
 import dmax.dialog.SpotsDialog;
+
+import static java.lang.Thread.sleep;
 
 
 public class ForgotPasswordActivity extends AppCompatActivity {
@@ -24,8 +22,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private Button send_Button;
     private Context context;
     public static AlertDialog progressDialog;
-    public static boolean success;
-    public static boolean failure;
+    public static boolean success = false;
+    public static boolean failure = false;
 
 
 
@@ -56,37 +54,45 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         progressDialog.setMessage("Loading...");
         progressDialog.show();
-        runThread();
+
         new AsyncResetPassword().execute(email_EditText.getText().toString());
+        runn();
     }
 
-    void runThread(){
-        Thread thread = new Thread() {
+    void show(){
+        final Dialog dialog = new Dialog(ForgotPasswordActivity.this);
+
+        dialog.setContentView(R.layout.dialogview_passreset);
+        dialog.setTitle("verification code");
+
+        editTextCode1 = dialog.findViewById(R.id.editTextCode1);
+        editTextCode1.requestFocus();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+
+
+
+        dialog.show();
+
+    }
+
+
+    void runn(){
+
+        runOnUiThread(new Runnable() {
             boolean running = true;
             @Override
             public void run() {
+
                 try {
                     while(running) {
                         System.out.println("running");
                         if(success){
                             progressDialog.dismiss();
+
                             running = false;
-
-                            final Dialog dialog = new Dialog(ForgotPasswordActivity.this);
-
-                            dialog.setContentView(R.layout.dialogview_passreset);
-                            dialog.setTitle("verification code");
-
-
-                            editTextCode1 = dialog.findViewById(R.id.editTextCode1);
-                            //blablabl
-                            editTextCode1.requestFocus();
-                            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-
-
-
-                            dialog.show();
+                            show();
+                            return;
 
                         } else if (failure){
                             running = false;
@@ -107,11 +113,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
             }
-        };
-
-        thread.start();
-
+        });
     }
 
 

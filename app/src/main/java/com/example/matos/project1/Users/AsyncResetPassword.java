@@ -9,13 +9,13 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
-public class AsyncResetPassword extends AsyncTask<String,Void,Boolean> {
+
+public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
 
     private boolean success;
 
-
     @Override
-    protected Boolean doInBackground(String... Strings) {
+    protected Void doInBackground(String... Strings) {
         ForgotPasswordActivity.success = false;
         ForgotPasswordActivity.failure = false;
 
@@ -42,19 +42,17 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Boolean> {
         }catch (IOException e){
             e.printStackTrace();
         }
-
-        return success;
-    }
-
-    @Override
-    protected void onPostExecute(Boolean success){
         if(success){
             ForgotPasswordActivity.success = true;
+            System.out.println("succes true");
 
         } else {
             ForgotPasswordActivity.failure = true;
+            System.out.println("failure true");
         }
+        return null;
     }
+
 
 
 }

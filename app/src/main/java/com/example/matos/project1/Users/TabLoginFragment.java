@@ -18,12 +18,20 @@ import dmax.dialog.SpotsDialog;
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 
+import static java.lang.Thread.sleep;
+
 public class TabLoginFragment extends Fragment {
+
     private EditText email, password;
     private Button login;
     private TextView forgotPass;
     private CheckBox rememberMe_checkBox;
+
+    public static boolean success = false;
+    private static boolean failure = false;
     public static AlertDialog progressDialog;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -84,7 +92,8 @@ public class TabLoginFragment extends Fragment {
         }
 
         if(check && validEmail){
-            new AsyncLogin(getContext()).execute(email.getText().toString(),password.getText().toString());
+            new AsyncLogin().execute(email.getText().toString(),password.getText().toString());
+
         }
 
 
@@ -98,5 +107,7 @@ public class TabLoginFragment extends Fragment {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+
 
 }

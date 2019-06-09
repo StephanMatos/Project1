@@ -1,6 +1,8 @@
 package com.example.matos.project1.Users;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
@@ -19,9 +21,13 @@ import android.widget.ImageView;
 
 import com.example.matos.project1.R;
 
+import static java.lang.Thread.sleep;
+
 public class LoginActivity extends AppCompatActivity {
 
-
+    public static boolean success = false;
+    public static boolean failure = false;
+    Context context;
     // The SectionsPagerAdapte that provide
     // fragments for each of the sections.
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -80,6 +86,52 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        context = this;
+    }
+
+    void waitForAsynctask(){
+
+        runOnUiThread(new Runnable() {
+            boolean running = true;
+            @Override
+            public void run() {
+
+                try {
+                    while(running) {
+                        System.out.println("running");
+                        if(success){
+                            //progressDialog.dismiss();
+
+                            running = false;
+
+                            return;
+
+                        } else if (failure){
+                            running = false;
+                            System.out.println("dialog");
+                            //progressDialog.dismiss();
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Fejl")
+                                    .setMessage("Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email")
+                                    .setNeutralButton("OK",null)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+
+
+                        }
+                        sleep(300);
+
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+
+    Context getContext(){
+        return context;
     }
 
 

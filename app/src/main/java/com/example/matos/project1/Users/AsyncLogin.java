@@ -2,14 +2,10 @@ package com.example.matos.project1.Users;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.CheckBox;
-
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.SavedValues;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,15 +16,11 @@ import javax.net.ssl.HttpsURLConnection;
 
 
 public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
-    private Context context;
+
 
     private String email,password;
-    SavedValues savedValues = SavedValues.getInstance();
+    private SavedValues savedValues = SavedValues.getInstance();
 
-
-    public AsyncLogin(Context context){
-        this.context = context;
-    }
 
 
     @Override
@@ -66,6 +58,7 @@ public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
 
     @Override
     protected void onPostExecute(Boolean success){
+        /*
         if(success){
             TabLoginFragment.progressDialog.dismiss();
             Intent intent = new Intent(context,HomeActivity.class);
@@ -85,6 +78,6 @@ public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
                     .setNeutralButton("OK",null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-        }
+        }*/
     }
 }

@@ -25,6 +25,9 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
 
     @Override
     protected Void doInBackground(String... Strings) {
+        System.out.println("login");
+        TabLoginFragment.success = false;
+        TabLoginFragment.failure = false;
         String data;
         email = Strings[0];
         password = Strings[1];
@@ -44,10 +47,10 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
 
             connection.disconnect();
             if(data.equals("success")){
-               LoginActivity.success = true;
+               TabLoginFragment.success = true;
                 savedValues.saveEmail(email);
                 savedValues.savePassword(password);
-            }else{ LoginActivity.failure = true;
+            }else{ TabLoginFragment.failure = true;
             }
         }catch (IOException e){
             e.printStackTrace();

@@ -2,7 +2,6 @@ package com.example.matos.project1.Users;
 
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,15 +14,33 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.R;
 
+import dmax.dialog.SpotsDialog;
+
 public class TabSignupFragment extends Fragment {
-    public static ProgressDialog progressDialog;
-    private TextView username,email,password;
-    private Button signUp;
+
+    // Validation of user input
     boolean validEmail = false;
     boolean validPassword = false;
     boolean validUsername = false;
+
+
+    public static AlertDialog progressDialog;
+    private TextView username,email,password;
+    private Button signUp;
+
+    //Instances
+    TabLoginFragment tabLoginFragment;
+    AlertDialogBoxes alert;
+
+    // Async task booleans
+    boolean active = true;
+    public static boolean success = false;
+    public static boolean failure = false;
+    public static boolean exist = false;
+
 
 
     @Nullable
@@ -37,10 +54,17 @@ public class TabSignupFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        // Text fields for user input
         username = view.findViewById(R.id.usernameTextView);
         email = view.findViewById(R.id.email_EditText);
         password = view.findViewById(R.id.pass_TextView);
+
+        // Buttons
         signUp = view.findViewById(R.id.send_Button);
+
+        // Instance of login to login after sign up
+        tabLoginFragment = new TabLoginFragment();
+        alert = AlertDialogBoxes.getInstance();
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +74,8 @@ public class TabSignupFragment extends Fragment {
 
 
         });
+
+        // Text listeners, will detect if the input is valid according to the standards set by the developers
         username.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -127,38 +153,53 @@ public class TabSignupFragment extends Fragment {
 
 
     private void create_user() {
-        System.out.println("create user");
-        progressDialog = new ProgressDialog(getContext());
+
+        progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
         progressDialog.setMessage("Loading...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
         validEmail = CheckValues.checkEmail(email.getText().toString());
         validPassword = CheckValues.checkPassword(password.getText().toString());
         validUsername = CheckValues.checkUsername(username.getText().toString());
 
-
-        //buildAlert("Error - Username not valid","Username must have a length between 4-20 characters and can only contain a-z A-Z 0-9 <>,;.:_!#¤%&/()=?+*£$€{}" );
-        //buildAlert("Error - Email not valid","Please enter a valid Email - The entered email will be used to login and recover password if lost");
-        //buildAlert("Error - Password not valid","Password must have a length between 8-20 characters and can only contain a-z A-Z 0-9 <>,;.:_!#¤%&/()=?+*£$€{}");
-
-
         if(validEmail && validPassword && validUsername){
-            new AsyncNewUser(getContext()).execute(email.getText().toString(),password.getText().toString(),username.getText().toString());
+            new AsyncNewUser().execute(email.getText().toString(),password.getText().toString(),username.getText().toString());
+            waitForResults();
 
         } else{
-            buildAlert("Fejl40 - Alle felter skal være grønne ","Tryk på spørgsmålestegnet ved tvivl" );
+            progressDialog.dismiss();
+            alert.AlertDialog("Fejl","Teksten vil blive grøn når det intastede er gyldigt. Tryk på spørgsmålstegnet for mere info","Ok",getActivity());
         }
-
-
     }
 
-    private void buildAlert(String title, String text){
-        new AlertDialog.Builder(getContext())
-                .setTitle(title)
-                .setMessage(text)
-                .setNeutralButton("OK",null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+    public void waitForResults() {
+        new Thread(new Runnable() {
+            public void run() {
+                System.out.println("running in tab");
+                while(active){
+                    try {
+                        if(success){
+                            tabLoginFragment.attempt_login(email.getText().toString(),password.getText().toString(),true,getActivity());
+
+                            active = false;
+                        }else if(failure){
+
+                            active = false;
+                            progressDialog.dismiss();
+
+
+                        }else if(exist){
+                            progressDialog.dismiss();
+                            active = false;
+                        }
+                        Thread.sleep(200);
+                    } catch (InterruptedException e){
+                        Thread.currentThread().interrupt();
+                    }
+                }
+
+            }
+        }).start();
+
     }
 }

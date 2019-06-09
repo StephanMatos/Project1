@@ -2,8 +2,11 @@ package com.example.matos.project1.Users;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import dmax.dialog.SpotsDialog;
 
+import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 
@@ -26,12 +30,13 @@ public class TabLoginFragment extends Fragment {
     private Button login;
     private TextView forgotPass;
     private CheckBox rememberMe_checkBox;
-    LoginActivity login1;
 
-    public static boolean success = false;
-    private static boolean failure = false;
     public static AlertDialog progressDialog;
-
+    Context context;
+    public static boolean success = false;
+    public static boolean failure = false;
+    boolean active = true;
+    AlertDialogBoxes alert;
 
     @Nullable
     @Override
@@ -44,10 +49,12 @@ public class TabLoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        context = getContext();
         email = view.findViewById(R.id.email_EditText);
         password = view.findViewById(R.id.pass_TextView);
         forgotPass = view.findViewById(R.id.forgotPassTextView);
         rememberMe_checkBox = view.findViewById(R.id.checkBox);
+
 
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +63,7 @@ public class TabLoginFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
 
         login = view.findViewById(R.id.send_Button);
         login.setOnClickListener(new View.OnClickListener() {
@@ -66,49 +74,79 @@ public class TabLoginFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);
                 } else {
-                    attempt_login();
+                    attempt_login(email.getText().toString(),password.getText().toString(),false,context);
                 }
             }
         });
 
     }
-    private void attempt_login() {
+
+    public void attempt_login(String email,String password, boolean signup, Context context1) {
+
         boolean check = true;
 
-        progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
+        if(!signup){
+            progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+        }
 
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-        boolean validEmail = CheckValues.checkEmail(email.getText().toString());
+        boolean validEmail = CheckValues.checkEmail(email);
 
         if(!validEmail){
             progressDialog.dismiss();
-            buildAlert("Email is not valid","Login with username is not possible");
+            alert = AlertDialogBoxes.getInstance();
+            alert.AlertDialog("Fejl","Den indstastede email er ikke gyldig. Login kan kun ske ved brug af email","Ok",getActivity());
         }
 
-        if(email.getText().toString().length() == 0 || password.getText().toString().length() == 0){
+
+        if(email.length() == 0 || password.length() == 0){
             progressDialog.dismiss();
-            buildAlert("Email and/or Password field can not be empty", "");
+            alert = AlertDialogBoxes.getInstance();
+            alert.AlertDialog("Fejl","Email og/eller password kan ikke være tom","Ok",getActivity());
             check = false;
         }
 
         if(check && validEmail){
-            new AsyncLogin().execute(email.getText().toString(),password.getText().toString());
-            login1.waitForAsynctask();
+            new AsyncLogin().execute(email,password);
+            waitForResults(signup);
         }
 
-
     }
 
-    private void buildAlert(String title, String text){
-        new AlertDialog.Builder(getContext())
-                .setTitle(title)
-                .setMessage(text)
-                .setNeutralButton("OK",null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+    public void waitForResults(final boolean signup) {
+        active = true;
+
+        new Thread(new Runnable() {
+            public void run() {
+                while(active){
+                    try {
+                        if(success){
+                            if(signup){
+                                LoginActivity loginActivity = LoginActivity.getInstance();
+                                System.out.println(loginActivity);
+                                loginActivity.goToHome();
+                            }else{
+                                progressDialog.dismiss();
+                                Intent intent = new Intent(getContext(),HomeActivity.class);
+                                startActivity(intent);
+                            }
+                            active = false;
+                        }else if(failure){
+                            active = false;
+                            progressDialog.dismiss();
+                            alert = AlertDialogBoxes.getInstance();
+                            alert.alertDialogOnUI("Fejl","Forkert email og/eller adgangskode. Prøv igen eller gå til reset password",getActivity());
+
+                        }
+                        Thread.sleep(200);
+                    } catch (InterruptedException e){
+                        Thread.currentThread().interrupt();
+                    }
+                }
+
+            }
+        }).start();
+
     }
-
-
-
 }

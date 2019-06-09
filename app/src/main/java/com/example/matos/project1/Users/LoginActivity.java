@@ -1,5 +1,6 @@
 package com.example.matos.project1.Users;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -22,28 +23,34 @@ import android.widget.ImageView;
 
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
+import com.example.matos.project1.SavedValues;
 
 import static java.lang.Thread.sleep;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static boolean success = false;
-    public static boolean failure = false;
-    Context context;
+    private static LoginActivity loginActivity;
+    static Context context;
+
     // The SectionsPagerAdapte that provide
     // fragments for each of the sections.
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
-
     // The ViewPager will host the section contents.
     private ViewPager mViewPager;
 
+    public static LoginActivity getInstance(){
+        if(loginActivity == null){
+            loginActivity = new LoginActivity();
+        }
+        return loginActivity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        context = getApplicationContext();
         // Create the adapter that will return a fragment for each of the two
         // primary sections of the activity (Login and Signup)
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -58,8 +65,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-
 
         ImageView help = findViewById(R.id.help_button);
 
@@ -82,64 +87,44 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-
                 dialog.show();
 
             }
         });
 
-        context = this;
     }
 
-    void waitForAsynctask(){
-
-        runOnUiThread(new Runnable() {
-            boolean running = true;
-            @Override
-            public void run() {
-                try {
-                    while(running) {
-                        System.out.println("running");
-                        if(success){
-                            TabLoginFragment.progressDialog.dismiss();
-                            running = false;
-                            Intent intent = new Intent(getContext(),HomeActivity.class);
-                            context.startActivity(intent);
-
-                        } else if (failure){
-
-                            running = false;
-                            System.out.println("dialog");
-                            TabLoginFragment.progressDialog.dismiss();
-                            new AlertDialog.Builder(getContext())
-                                    .setTitle("Fejl")
-                                    .setMessage("Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email")
-                                    .setNeutralButton("OK",null)
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .show();
-
-
-                        }
-                        sleep(400);
-
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
+    void goToHome(){
+        System.out.println("this is context");
+        System.out.println(getContext());
+        Intent intent = new Intent(getContext(), HomeActivity.class);
+        getContext().startActivity(intent);
     }
 
     Context getContext(){
         return context;
     }
 
-
+    /*
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 
         return rootView;
+    }*/
+
+    void showAlertDialog(final String title,final String text){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(title)
+                        .setMessage(text)
+                        .setNeutralButton("OK",null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+
     }
 
 
@@ -147,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
     // The FragmentPagerAdapter returns a fragment corresponding to one of the tabs
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        private SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

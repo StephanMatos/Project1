@@ -15,7 +15,7 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
+public class AsyncLogin extends AsyncTask<String,Void,Void> {
 
 
     private String email,password;
@@ -24,8 +24,7 @@ public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
 
 
     @Override
-    protected Boolean doInBackground(String... Strings) {
-        boolean success = false;
+    protected Void doInBackground(String... Strings) {
         String data;
         email = Strings[0];
         password = Strings[1];
@@ -45,39 +44,15 @@ public class AsyncLogin extends AsyncTask<String,Void,Boolean> {
 
             connection.disconnect();
             if(data.equals("success")){
-                success = true;
-            }else{
-                success = false;
+               LoginActivity.success = true;
+                savedValues.saveEmail(email);
+                savedValues.savePassword(password);
+            }else{ LoginActivity.failure = true;
             }
         }catch (IOException e){
             e.printStackTrace();
         }
 
-        return success;
-    }
-
-    @Override
-    protected void onPostExecute(Boolean success){
-        /*
-        if(success){
-            TabLoginFragment.progressDialog.dismiss();
-            Intent intent = new Intent(context,HomeActivity.class);
-            context.startActivity(intent);
-            ((Activity)context).finish();
-            savedValues.saveEmail(email);
-            savedValues.savePassword(password);
-
-
-
-        } else{
-            //publish faulty dialog
-            TabLoginFragment.progressDialog.dismiss();
-            new AlertDialog.Builder(context)
-                    .setTitle("Wrong Email or Password")
-                    .setMessage("Username can not be used to login")
-                    .setNeutralButton("OK",null)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-        }*/
+        return null;
     }
 }

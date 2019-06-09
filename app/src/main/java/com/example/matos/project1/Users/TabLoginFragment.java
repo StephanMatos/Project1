@@ -26,6 +26,7 @@ public class TabLoginFragment extends Fragment {
     private Button login;
     private TextView forgotPass;
     private CheckBox rememberMe_checkBox;
+    LoginActivity login1;
 
     public static boolean success = false;
     private static boolean failure = false;
@@ -93,7 +94,7 @@ public class TabLoginFragment extends Fragment {
 
         if(check && validEmail){
             new AsyncLogin().execute(email.getText().toString(),password.getText().toString());
-
+            login1.waitForAsynctask();
         }
 
 

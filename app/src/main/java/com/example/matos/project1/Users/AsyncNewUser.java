@@ -71,7 +71,7 @@ public class AsyncNewUser extends AsyncTask<String,Void,Boolean> {
         TabLoginFragment.progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(context).build();
         TabLoginFragment.progressDialog.setMessage("Loading...");
         TabLoginFragment.progressDialog.show();
-        new AsyncLogin(context).execute(email,password);
+        new AsyncLogin().execute(email,password);
 
         } else{
             //publish faulty dialog

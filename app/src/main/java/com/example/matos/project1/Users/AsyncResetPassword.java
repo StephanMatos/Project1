@@ -12,8 +12,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
 
-    private boolean success;
-
     @Override
     protected Void doInBackground(String... Strings) {
         ForgotPasswordActivity.success = false;
@@ -34,22 +32,17 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
 
             connection.disconnect();
             if(data.equals("success")){
-                success = true;
+                ForgotPasswordActivity.success = true;
+                System.out.println("succes true");
             }else{
-                success = false;
+                ForgotPasswordActivity.failure = true;
+                System.out.println("failure true");
             }
 
         }catch (IOException e){
             e.printStackTrace();
         }
-        if(success){
-            ForgotPasswordActivity.success = true;
-            System.out.println("succes true");
 
-        } else {
-            ForgotPasswordActivity.failure = true;
-            System.out.println("failure true");
-        }
         return null;
     }
 

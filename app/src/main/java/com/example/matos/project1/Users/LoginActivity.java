@@ -3,6 +3,7 @@ package com.example.matos.project1.Users;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 
+import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 
 import static java.lang.Thread.sleep;
@@ -95,21 +97,20 @@ public class LoginActivity extends AppCompatActivity {
             boolean running = true;
             @Override
             public void run() {
-
                 try {
                     while(running) {
                         System.out.println("running");
                         if(success){
-                            //progressDialog.dismiss();
-
+                            TabLoginFragment.progressDialog.dismiss();
                             running = false;
-
-                            return;
+                            Intent intent = new Intent(getContext(),HomeActivity.class);
+                            context.startActivity(intent);
 
                         } else if (failure){
+
                             running = false;
                             System.out.println("dialog");
-                            //progressDialog.dismiss();
+                            TabLoginFragment.progressDialog.dismiss();
                             new AlertDialog.Builder(getContext())
                                     .setTitle("Fejl")
                                     .setMessage("Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email")
@@ -119,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                         }
-                        sleep(300);
+                        sleep(400);
 
                     }
                 } catch (InterruptedException e) {

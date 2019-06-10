@@ -2,13 +2,19 @@ package com.example.matos.project1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.WindowManager;
+
+import com.example.matos.project1.Users.ForgotPasswordActivity;
 
 public class AlertDialogBoxes {
 
     private static AlertDialogBoxes alertDialogBoxes;
+    public static Dialog returnDialog;
+    public static Dialog dialog;
 
     public static AlertDialogBoxes getInstance(){
         if(alertDialogBoxes == null){
@@ -55,5 +61,21 @@ public class AlertDialogBoxes {
                 .setNeutralButton(buttonText,null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    public static void resetDialogOnUI(final Context context, final String title, final String email){
+
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialogview_passreset);
+                dialog.setTitle(title);
+                //dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                ForgotPasswordActivity.dialog = dialog;
+                dialog.show();
+            }
+        });
     }
 }

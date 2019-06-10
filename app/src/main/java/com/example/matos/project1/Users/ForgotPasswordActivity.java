@@ -14,27 +14,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.example.matos.project1.AlertDialogBoxes;
 import android.widget.TextView;
-
 import com.example.matos.project1.R;
-import com.example.matos.project1.SplashScreenActivity;
-
 import dmax.dialog.SpotsDialog;
-
-
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
+    // Text fields
     private EditText email_EditText, editTextCode1, editTextCode2, editTextCode3, editTextCode4, editTextCode5;
-    private TextView textViewEmail;
+    public EditText editTextEmail_dialog;
+
+    public String codeString, verificationCode, stringEmail;
+    // Buttons
     private Button send_Button, verifyCode_button;
+
+    // Context
     private Context context;
+    // Dialog
     public static AlertDialog progressDialog;
+    public static Dialog dialog;
+
+    // Async booleans
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean network = false;
     private boolean active;
-
-    public String codeString, verificationCode, stringEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +49,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         send_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stringEmail = email_EditText.getText().toString();
+                //stringEmail = email_EditText.getText().toString();
                 resetPassword();
             }
         });
 
     }
+
     Context getContext(){
         return context;
     }
@@ -67,18 +71,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     void resetDialog(){
-        final Dialog dialog = new Dialog(ForgotPasswordActivity.this);
 
-        dialog.setContentView(R.layout.dialogview_passreset);
-        dialog.setTitle("verification code");
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-        dialog.show();
         bindViews(dialog);
-        textViewEmail.setText(stringEmail);
+        System.out.println(stringEmail);
+
         setTextListners();
-
-
         verifyCode_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +105,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     try {
                         if(success){
                             progressDialog.dismiss();
+                            AlertDialogBoxes.resetDialogOnUI(getContext(),"Reset Password",stringEmail);
+                            Thread.sleep(500);
                             resetDialog();
                             active = false;
                         }else if(failure){
@@ -306,8 +305,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         editTextCode3 = dialog.findViewById(R.id.editTextCode3);
         editTextCode4 = dialog.findViewById(R.id.editTextCode4);
         editTextCode5 = dialog.findViewById(R.id.editTextCode5);
-        textViewEmail = dialog.findViewById(R.id.textViewEmail);
+        //editTextEmail_dialog = dialog.findViewById(R.id.editTextEmail_dialog);
+        System.out.println(editTextCode5);
+        System.out.println(editTextEmail_dialog);
         verifyCode_button = dialog.findViewById(R.id.verifyCode_button);
+        //editTextEmail_dialog.setText(stringEmail);
 
     }
 

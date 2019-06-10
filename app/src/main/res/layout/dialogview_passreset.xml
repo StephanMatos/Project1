@@ -42,8 +42,8 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
 
-    <TextView
-        android:id="@+id/textViewEmail"
+    <EditText
+        android:id="@+id/editTextEmail_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -52,7 +52,8 @@
         android:alpha=".8"
         android:gravity="center"
         android:lineSpacingExtra="4dp"
-        android:text="Stephanmatos@gmail.com"
+        android:text="info@EasyEats.dk"
+        android:focusable="false"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -72,7 +73,7 @@
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail_dialog" />
 
 
     <EditText

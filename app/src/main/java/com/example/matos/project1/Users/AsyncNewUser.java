@@ -18,6 +18,7 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
         TabSignupFragment.success = false;
         TabSignupFragment.failure = false;
         TabSignupFragment.exist = false;
+        TabSignupFragment.network = false;
         TabLoginFragment.success = false;
         TabLoginFragment.failure = false;
         String data;
@@ -36,14 +37,18 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
 
             System.out.println("Message is :" + data);
             System.out.println("Response is : "+ response);
-
-            if(data.equals("success")){
-                TabSignupFragment.success = true;
-            }else if(data.equals("User already exist")){
-                TabSignupFragment.exist = true;
+            if(response.equals("OK")){
+                if(data.equals("success")){
+                    TabSignupFragment.success = true;
+                }else if(data.equals("User already exist")){
+                    TabSignupFragment.exist = true;
+                }else{
+                    TabSignupFragment.failure = true;
+                }
             }else{
-                TabSignupFragment.failure = true;
+
             }
+
 
         }catch (IOException e){
             e.printStackTrace();

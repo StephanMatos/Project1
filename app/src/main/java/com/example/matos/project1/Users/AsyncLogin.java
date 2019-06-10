@@ -28,6 +28,7 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
         System.out.println("login");
         TabLoginFragment.success = false;
         TabLoginFragment.failure = false;
+        TabLoginFragment.network = false;
         String data;
         email = Strings[0];
         password = Strings[1];
@@ -42,16 +43,20 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             data = bufferedReader.readLine();
             String response = connection.getResponseMessage();
-            System.out.println("Message is :" + data);
-            System.out.println("Response is : "+ response);
-
             connection.disconnect();
-            if(data.equals("success")){
-               TabLoginFragment.success = true;
-                savedValues.saveEmail(email);
-                savedValues.savePassword(password);
-            }else{ TabLoginFragment.failure = true;
+
+            if(response.equals("OK")){
+                if(data.equals("success")){
+                    TabLoginFragment.success = true;
+                    savedValues.saveEmail(email);
+                    savedValues.savePassword(password);
+                }else{
+                    TabLoginFragment.failure = true;
+                }
+            }else{
+                TabLoginFragment.network = true;
             }
+
         }catch (IOException e){
             e.printStackTrace();
         }

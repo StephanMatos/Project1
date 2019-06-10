@@ -40,6 +40,7 @@ public class TabSignupFragment extends Fragment {
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean exist = false;
+    public static boolean network = false;
 
 
 
@@ -185,6 +186,10 @@ public class TabSignupFragment extends Fragment {
 
                         }else if(exist){
                             progressDialog.dismiss();
+                            active = false;
+                        }else if(network){
+                            progressDialog.dismiss();
+                            AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
                             active = false;
                         }
                         Thread.sleep(200);

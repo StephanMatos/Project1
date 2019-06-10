@@ -2,6 +2,7 @@ package com.example.matos.project1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -22,6 +23,22 @@ public class AlertDialogBoxes {
             @Override
             public void run() {
                 new AlertDialog.Builder(activity)
+                        .setTitle(title)
+                        .setMessage(text)
+                        .setNeutralButton("OK",null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+    }
+
+
+    public static void alertDialogOnUIContext(final String title, final String text, final Context context){
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog.Builder(context)
                         .setTitle(title)
                         .setMessage(text)
                         .setNeutralButton("OK",null)

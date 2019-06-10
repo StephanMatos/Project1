@@ -35,6 +35,7 @@ public class TabLoginFragment extends Fragment {
     Context context;
     public static boolean success = false;
     public static boolean failure = false;
+    public static boolean network = false;
     boolean active = true;
 
     @Nullable
@@ -126,10 +127,16 @@ public class TabLoginFragment extends Fragment {
                             }
                             active = false;
                         }else if(failure){
-                            active = false;
+
                             progressDialog.dismiss();
                             AlertDialogBoxes.alertDialogOnUI("Fejl","Forkert email og/eller adgangskode. Prøv igen eller gå til reset password",getActivity());
+                            active = false;
 
+                        }else if(network){
+
+                            progressDialog.dismiss();
+                            AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
+                            active = false;
                         }
                         Thread.sleep(200);
                     } catch (InterruptedException e){

@@ -16,6 +16,7 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
     protected Void doInBackground(String... Strings) {
         ForgotPasswordActivity.success = false;
         ForgotPasswordActivity.failure = false;
+        ForgotPasswordActivity.network = false;
 
         try {
 
@@ -27,17 +28,18 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String data = bufferedReader.readLine();
             String response = connection.getResponseMessage();
-            System.out.println("Message is :" + data);
-            System.out.println("Response is : "+ response);
-
             connection.disconnect();
-            if(data.equals("success")){
-                ForgotPasswordActivity.success = true;
-                System.out.println("succes true");
+            System.out.println(response);
+            if(response.equals("OK")){
+                if(data.equals("success")){
+                    ForgotPasswordActivity.success = true;
+                }else{
+                    ForgotPasswordActivity.failure = true;
+                }
             }else{
-                ForgotPasswordActivity.failure = true;
-                System.out.println("failure true");
+                ForgotPasswordActivity.network = true;
             }
+
 
         }catch (IOException e){
             e.printStackTrace();

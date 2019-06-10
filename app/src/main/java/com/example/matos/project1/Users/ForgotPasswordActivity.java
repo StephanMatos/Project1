@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.R;
 
 import dmax.dialog.SpotsDialog;
 
-import static java.lang.Thread.sleep;
 
 
 public class ForgotPasswordActivity extends AppCompatActivity {
@@ -24,7 +24,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     public static AlertDialog progressDialog;
     public static boolean success = false;
     public static boolean failure = false;
-
+    public static boolean network = false;
+    private boolean active;
 
 
     @Override
@@ -41,8 +42,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
     Context getContext(){
         return context;
@@ -51,15 +50,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     void resetPassword(){
         progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(this).build();
-
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
         new AsyncResetPassword().execute(email_EditText.getText().toString());
-        runn();
+        waitForResults();
     }
 
-    void show(){
+    void resetDialog(){
         final Dialog dialog = new Dialog(ForgotPasswordActivity.this);
 
         dialog.setContentView(R.layout.dialogview_passreset);
@@ -69,54 +67,39 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         editTextCode1.requestFocus();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-
-
-
         dialog.show();
 
     }
 
-
-    void runn(){
-
-        runOnUiThread(new Runnable() {
-            boolean running = true;
-            @Override
+    void waitForResults(){
+        active = true;
+        new Thread(new Runnable() {
             public void run() {
-
-                try {
-                    while(running) {
-                        System.out.println("running");
+                while(active){
+                    try {
                         if(success){
                             progressDialog.dismiss();
+                            resetDialog();
+                            active = false;
+                        }else if(failure){
 
-                            running = false;
-                            show();
-                            return;
-
-                        } else if (failure){
-                            running = false;
                             System.out.println("dialog");
                             progressDialog.dismiss();
-                            new AlertDialog.Builder(getContext())
-                                    .setTitle("Fejl")
-                                    .setMessage("Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email")
-                                    .setNeutralButton("OK",null)
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .show();
-
+                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email",getContext());
+                            active = false;
+                        }else if(network){
+                            progressDialog.dismiss();
+                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Kontroller at telefonen har forbindelse til internettet",getContext());
+                            active = false;
 
                         }
-                        sleep(300);
-
+                        Thread.sleep(200);
+                    } catch (InterruptedException e){
+                        Thread.currentThread().interrupt();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
 
             }
-        });
+        }).start();
     }
-
-
 }

@@ -61,7 +61,7 @@ public class TabSignupFragment extends Fragment {
         password = view.findViewById(R.id.pass_TextView);
 
         // Buttons
-        signUp = view.findViewById(R.id.send_Button);
+        signUp = view.findViewById(R.id.savePass_Button);
 
         // Instance of login to login after sign up
         tabLoginFragment = new TabLoginFragment();

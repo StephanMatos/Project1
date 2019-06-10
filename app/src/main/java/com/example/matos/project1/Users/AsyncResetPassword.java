@@ -17,7 +17,7 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
         ForgotPasswordActivity.success = false;
         ForgotPasswordActivity.failure = false;
         ForgotPasswordActivity.network = false;
-
+        //lala
         try {
 
             String resetUrl = "https://easyeats.dk/resetPassword.php?email="+Strings[0];

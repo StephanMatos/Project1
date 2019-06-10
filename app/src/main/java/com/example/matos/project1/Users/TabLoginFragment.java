@@ -55,14 +55,21 @@ public class TabLoginFragment extends Fragment {
         forgotPass = view.findViewById(R.id.forgotPassTextView);
         rememberMe_checkBox = view.findViewById(R.id.checkBox);
 
+        if(rememberMe_checkBox.isChecked()){
+            System.out.println("checked");
+        }
 
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
                 startActivity(intent);
+                if(rememberMe_checkBox.isChecked()){
+                    System.out.println("ischecked");
+                }
             }
         });
+
 
 
         login = view.findViewById(R.id.savePass_Button);

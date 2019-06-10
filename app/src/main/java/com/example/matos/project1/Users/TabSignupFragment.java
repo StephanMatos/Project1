@@ -26,7 +26,6 @@ public class TabSignupFragment extends Fragment {
     boolean validPassword = false;
     boolean validUsername = false;
 
-
     public static AlertDialog progressDialog;
     private TextView username,email,password;
     private Button signUp;
@@ -41,8 +40,6 @@ public class TabSignupFragment extends Fragment {
     public static boolean failure = false;
     public static boolean exist = false;
     public static boolean network = false;
-
-
 
     @Nullable
     @Override
@@ -168,6 +165,7 @@ public class TabSignupFragment extends Fragment {
         } else{
             progressDialog.dismiss();
             AlertDialogBoxes.AlertDialog("Fejl","Teksten vil blive grøn når det intastede er gyldigt. Tryk på spørgsmålstegnet for mere info","Ok",getActivity());
+            //adsad
         }
     }
 

@@ -12,32 +12,28 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import com.example.matos.project1.AlertDialogBoxes;
 import android.widget.TextView;
+
 import com.example.matos.project1.R;
+
 import dmax.dialog.SpotsDialog;
+
+import static java.lang.Thread.sleep;
+
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
-    // Text fields
     private EditText email_EditText, editTextCode1, editTextCode2, editTextCode3, editTextCode4, editTextCode5;
-    public EditText editTextEmail_dialog;
-
-    public String codeString, verificationCode, stringEmail;
-    // Buttons
+    private TextView textViewEmail;
     private Button send_Button, verifyCode_button;
-
-    // Context
     private Context context;
-    // Dialog
-    public static AlertDialog progressDialog;
     public static Dialog dialog;
-
-    // Async booleans
+    public static AlertDialog progressDialog;
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean network = false;
-    private boolean active;
+    public String codeString, verificationCode, stringEmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +45,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         send_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //stringEmail = email_EditText.getText().toString();
+                stringEmail = email_EditText.getText().toString();
                 resetPassword();
             }
         });
 
     }
-
     Context getContext(){
         return context;
     }
@@ -63,19 +58,28 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     void resetPassword(){
         progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(this).build();
+
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
         new AsyncResetPassword().execute(email_EditText.getText().toString());
-        waitForResults();
+        runn();
+
+        show();
     }
 
-    void resetDialog(){
+    void show(){
+        final Dialog dialog = new Dialog(ForgotPasswordActivity.this);
 
+        dialog.setContentView(R.layout.dialogview_passreset);
+        dialog.setTitle("verification code");
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.show();
         bindViews(dialog);
-        System.out.println(stringEmail);
-
+        textViewEmail.setText(stringEmail);
         setTextListners();
+
+
         verifyCode_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,38 +101,46 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     }
 
-    void waitForResults(){
-        active = true;
-        new Thread(new Runnable() {
+
+    void runn(){
+
+        runOnUiThread(new Runnable() {
+            boolean running = true;
+            @Override
             public void run() {
-                while(active){
-                    try {
+
+                try {
+                    while(running) {
+                        System.out.println("running");
                         if(success){
                             progressDialog.dismiss();
-                            AlertDialogBoxes.resetDialogOnUI(getContext(),"Reset Password",stringEmail);
-                            Thread.sleep(500);
-                            resetDialog();
-                            active = false;
-                        }else if(failure){
 
+                            running = false;
+                            show();
+                            return;
+
+                        } else if (failure){
+                            running = false;
                             System.out.println("dialog");
                             progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email",getContext());
-                            active = false;
-                        }else if(network){
-                            progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Kontroller at telefonen har forbindelse til internettet",getContext());
-                            active = false;
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Fejl")
+                                    .setMessage("Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email")
+                                    .setNeutralButton("OK",null)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+
 
                         }
-                        Thread.sleep(200);
-                    } catch (InterruptedException e){
-                        Thread.currentThread().interrupt();
+                        sleep(300);
+
                     }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
 
             }
-        }).start();
+        });
     }
 
     // check if the user have used a correct verification code
@@ -305,11 +317,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         editTextCode3 = dialog.findViewById(R.id.editTextCode3);
         editTextCode4 = dialog.findViewById(R.id.editTextCode4);
         editTextCode5 = dialog.findViewById(R.id.editTextCode5);
-        //editTextEmail_dialog = dialog.findViewById(R.id.editTextEmail_dialog);
-        System.out.println(editTextCode5);
-        System.out.println(editTextEmail_dialog);
+        textViewEmail = dialog.findViewById(R.id.textViewEmail);
         verifyCode_button = dialog.findViewById(R.id.verifyCode_button);
-        //editTextEmail_dialog.setText(stringEmail);
 
     }
 

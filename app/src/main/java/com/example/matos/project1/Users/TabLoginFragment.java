@@ -26,13 +26,17 @@ import static java.lang.Thread.sleep;
 
 public class TabLoginFragment extends Fragment {
 
+    // Text views, buttons etc
     private EditText email, password;
     private Button login;
     private TextView forgotPass;
     private CheckBox rememberMe_checkBox;
 
+    //Progress dialog and context
     public static AlertDialog progressDialog;
     Context context;
+
+    // Async task booleans
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean network = false;

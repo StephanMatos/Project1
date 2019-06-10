@@ -81,7 +81,7 @@
 
 
     <Button
-        android:id="@+id/send_Button"
+        android:id="@+id/savePass_Button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -33,7 +33,8 @@
             android:name=".Users.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Users.ForgotPasswordActivity"></activity>
+        <activity android:name=".Users.ForgotPasswordActivity" />
+        <activity android:name=".Users.create_new_password"></activity>
     </application>
 
 </manifest>

@@ -10,7 +10,7 @@ import com.example.matos.project1.Users.LoginActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    private int SPLASH_TIMEOUT = 3000;
+    private int SPLASH_TIMEOUT = 500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.WindowManager;
 
 import com.example.matos.project1.Users.ForgotPasswordActivity;
+import com.example.matos.project1.Users.LoginActivity;
 
 public class AlertDialogBoxes {
 
@@ -77,5 +80,45 @@ public class AlertDialogBoxes {
                 dialog.show();
             }
         });
+    }
+
+
+    public static void passwordResetOnUI(final Context context,final String title,final String text){
+
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                new AlertDialog.Builder(context)
+                        .setTitle(title)
+                        .setMessage(text)
+                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Intent intent = new Intent(context,LoginActivity.class);
+                                context.startActivity(intent);
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+    }
+
+    public static void cancelPasswordReset(final Context context,final String title, final String text){
+        new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(text)
+                .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(context,LoginActivity.class);
+                        context.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel",null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }

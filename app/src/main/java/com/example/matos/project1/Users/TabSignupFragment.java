@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.R;
@@ -32,7 +33,6 @@ public class TabSignupFragment extends Fragment {
 
     //Instances
     TabLoginFragment tabLoginFragment;
-    AlertDialogBoxes alert;
 
     // Async task booleans
     boolean active = true;
@@ -197,9 +197,11 @@ public class TabSignupFragment extends Fragment {
                 }
 
             }
-        }).start();//hello
+        }).start();
 
     }
+
+
 
     static void setBooleans(){
         success = false;

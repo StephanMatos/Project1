@@ -32,7 +32,7 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
         password = Strings[1];
 
         try {
-            String LoginUrl = "https://easyeats.dk/users.php?email="+Strings[0]+"&password="+Strings[1];
+            String LoginUrl = "https://easyeats.dk/users.php?email="+email+"&password="+password;
             System.out.println(" This is strings : "+email +  "   "  + password);
 
             URL url = new URL(LoginUrl);

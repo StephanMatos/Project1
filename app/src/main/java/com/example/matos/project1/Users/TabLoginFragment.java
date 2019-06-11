@@ -120,10 +120,12 @@ public class TabLoginFragment extends Fragment {
     }
 
     public void waitForResults(final boolean signup) {
-        active = true;
+
 
         new Thread(new Runnable() {
             public void run() {
+
+                active = true;
                 while(active){
                     try {
                         if(success){
@@ -157,7 +159,7 @@ public class TabLoginFragment extends Fragment {
 
             }
         }).start();
-    }//hello
+    }
 
     static void setBooleans(){
         success = false;

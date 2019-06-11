@@ -77,11 +77,16 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         new AsyncRequestResetPassword().execute(email_EditText.getText().toString());
         waitForResults();
     }
-    //hello
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     void resetDialog(){
 
         bindViews(dialog);
-        System.out.println(stringEmail);
+
 
         setTextListners();
 
@@ -136,7 +141,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             active = false;
                             progressDialog.dismiss();
                             dialog.dismiss();
-                            Intent New_password = new Intent(ForgotPasswordActivity.this, create_new_password.class);
+                            Intent New_password = new Intent(ForgotPasswordActivity.this, ResetPassword.class);
                             New_password.putExtra("email",email_EditText.getText().toString());
                             startActivity(New_password);
 

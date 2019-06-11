@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import com.example.matos.project1.Menu.HomeActivity;
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static LoginActivity loginActivity;
     static Context context;
+    private long backPressedTime = 0;
 
     // The SectionsPagerAdapte that provide
     // fragments for each of the sections.
@@ -38,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // The ViewPager will host the section contents.
     private ViewPager mViewPager;
-    //hello
+
     public static LoginActivity getInstance(){
         if(loginActivity == null){
             loginActivity = new LoginActivity();
@@ -91,6 +93,11 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 

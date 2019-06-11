@@ -11,20 +11,16 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class AsyncNewUser extends AsyncTask<String,Void,Void> {
 
-    private String email,password,username;
 
+    //hello
     @Override
     protected Void doInBackground(String... Strings) {
-        TabSignupFragment.success = false;
-        TabSignupFragment.failure = false;
-        TabSignupFragment.exist = false;
-        TabSignupFragment.network = false;
-        TabLoginFragment.success = false;
-        TabLoginFragment.failure = false;
+        TabSignupFragment.setBooleans();
         String data;
-        email = Strings[0];
-        password = Strings[1];
-        username = Strings[2];
+        String email = Strings[0];
+        String password = Strings[1];
+        String username = Strings[2];
+
         try {
 
             String LoginUrl = "https://easyeats.dk/signup.php?email="+email+"&password="+password+"&username="+username;
@@ -35,8 +31,9 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
             data = bufferedReader.readLine();
             String response = connection.getResponseMessage();
 
-            System.out.println("Message is :" + data);
-            System.out.println("Response is : "+ response);
+            System.out.println("This is Response : "+response);
+            System.out.println("This is data : "+data);
+
             if(response.equals("OK")){
                 if(data.equals("success")){
                     TabSignupFragment.success = true;

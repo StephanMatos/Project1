@@ -197,7 +197,14 @@ public class TabSignupFragment extends Fragment {
                 }
 
             }
-        }).start();
+        }).start();//hello
 
+    }
+
+    static void setBooleans(){
+        success = false;
+        failure = false;
+        exist = false;
+        network = false;
     }
 }

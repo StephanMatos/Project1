@@ -14,12 +14,21 @@ public class create_new_password extends AppCompatActivity {
 
     private EditText newPassword_EditText, verifyPassword_EditText;
     private Button savePass_Button;
+    private String email;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_password);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
 
+        if(bundle!=null) {
+            email =(String) bundle.get("email");
+            System.out.println(email);
+        }
+//hello
         newPassword_EditText = findViewById(R.id.newPassword_EditText);
         verifyPassword_EditText = findViewById(R.id.verifyPassword_EditText);
         savePass_Button = findViewById(R.id.savePass_Button);

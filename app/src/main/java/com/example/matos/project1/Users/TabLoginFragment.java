@@ -157,5 +157,11 @@ public class TabLoginFragment extends Fragment {
 
             }
         }).start();
+    }//hello
+
+    static void setBooleans(){
+        success = false;
+        failure = false;
+        network = false;
     }
 }

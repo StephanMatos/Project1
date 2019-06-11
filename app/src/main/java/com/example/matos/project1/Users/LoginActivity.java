@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // The ViewPager will host the section contents.
     private ViewPager mViewPager;
-
+    //hello
     public static LoginActivity getInstance(){
         if(loginActivity == null){
             loginActivity = new LoginActivity();

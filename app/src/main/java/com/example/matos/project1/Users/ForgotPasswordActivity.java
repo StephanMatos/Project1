@@ -9,31 +9,36 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-
+import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.R;
-
 import dmax.dialog.SpotsDialog;
-
-import static java.lang.Thread.sleep;
-
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
+    // Text fields
     private EditText email_EditText, editTextCode1, editTextCode2, editTextCode3, editTextCode4, editTextCode5;
-    private TextView textViewEmail;
+    public EditText editTextEmail_dialog;
+
+    public String codeString, verificationCode, stringEmail;
+    // Buttons
     private Button send_Button, verifyCode_button;
+
+    // Context
     private Context context;
-    public static Dialog dialog;
+    // Dialog
     public static AlertDialog progressDialog;
+    public static Dialog dialog;
+
+    // Async booleans
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean network = false;
-    public String codeString, verificationCode, stringEmail;
+    private boolean active;
 
+    public static boolean verification = false;
+    public static boolean verificationError = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,40 +50,40 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         send_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stringEmail = email_EditText.getText().toString();
+                //stringEmail = email_EditText.getText().toString();
                 resetPassword();
             }
         });
 
     }
+
     Context getContext(){
         return context;
+    }
+    static void setBooleans(){
+        success = false;
+        failure = false;
+        network = false;
+        verification = false;
+        verificationError = false;
     }
 
 
     void resetPassword(){
         progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(this).build();
-
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
-        new AsyncResetPassword().execute(email_EditText.getText().toString());
-        runn();
-
-        show();
+        new AsyncRequestResetPassword().execute(email_EditText.getText().toString());
+        waitForResults();
     }
+    //hello
+    void resetDialog(){
 
-    void show(){
-        final Dialog dialog = new Dialog(ForgotPasswordActivity.this);
-
-        dialog.setContentView(R.layout.dialogview_passreset);
-        dialog.setTitle("verification code");
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        dialog.show();
         bindViews(dialog);
-        textViewEmail.setText(stringEmail);
-        setTextListners();
+        System.out.println(stringEmail);
 
+        setTextListners();
 
         verifyCode_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,68 +91,78 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(dialog.getContext()).build();
                 progressDialog.setMessage("Verifying code...");
                 progressDialog.show();
+                verificationCode = editTextCode1.getText().toString() + editTextCode2.getText().toString() + editTextCode3.getText().toString() +
+                        editTextCode4.getText().toString() + editTextCode5.getText().toString();
 
-                if (attempt_verificationCode()) {
+                new AsyncCheckVerification().execute(email_EditText.getText().toString(),verificationCode);
+                waitForResults();
 
-                    progressDialog.dismiss();
-                    dialog.dismiss();
-                    Intent New_password = new Intent(ForgotPasswordActivity.this, create_new_password.class);
-                    startActivity(New_password);
-
-
-                }
             }
         });
 
     }
 
-
-    void runn(){
-
-        runOnUiThread(new Runnable() {
-            boolean running = true;
-            @Override
+    void waitForResults(){
+        active = true;
+        new Thread(new Runnable() {
             public void run() {
-
-                try {
-                    while(running) {
-                        System.out.println("running");
+                while(active){
+                    active = true;
+                    try {
                         if(success){
+
                             progressDialog.dismiss();
+                            AlertDialogBoxes.resetDialogOnUI(getContext(),"Reset Password",stringEmail);
+                            Thread.sleep(500);
+                            resetDialog();
+                            active = false;
+                            success = false;
 
-                            running = false;
-                            show();
-                            return;
+                        }else if(failure){
 
-                        } else if (failure){
-                            running = false;
-                            System.out.println("dialog");
                             progressDialog.dismiss();
-                            new AlertDialog.Builder(getContext())
-                                    .setTitle("Fejl")
-                                    .setMessage("Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email")
-                                    .setNeutralButton("OK",null)
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .show();
+                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email",getContext());
+                            active = false;
+                            failure = false;
 
+                        }else if(network){
+                            progressDialog.dismiss();
+                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Kontroller at telefonen har forbindelse til internettet",getContext());
+                            active = false;
+                            network = false;
+
+                        }else if(verification){
+                            verification = false;
+                            active = false;
+                            progressDialog.dismiss();
+                            dialog.dismiss();
+                            Intent New_password = new Intent(ForgotPasswordActivity.this, create_new_password.class);
+                            New_password.putExtra("email",email_EditText.getText().toString());
+                            startActivity(New_password);
+
+
+                        }else if(verificationError){
+                            progressDialog.dismiss();
+                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Den indstastede kode stemmer ikke over ens, prøv igen",getContext());
+                            active = false;
+                            verificationError = false;
 
                         }
-                        sleep(300);
 
+                        Thread.sleep(200);
+                    } catch (InterruptedException e){
+                        Thread.currentThread().interrupt();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
 
             }
-        });
+        }).start();
     }
 
     // check if the user have used a correct verification code
     public boolean attempt_verificationCode() {
 
-        verificationCode = editTextCode1.getText().toString() + editTextCode2.getText().toString() + editTextCode3.getText().toString() +
-                editTextCode4.getText().toString() + editTextCode5.getText().toString();
+
 
         if (verificationCode.length() < 4) {
             return false;
@@ -317,8 +332,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         editTextCode3 = dialog.findViewById(R.id.editTextCode3);
         editTextCode4 = dialog.findViewById(R.id.editTextCode4);
         editTextCode5 = dialog.findViewById(R.id.editTextCode5);
-        textViewEmail = dialog.findViewById(R.id.textViewEmail);
+        //editTextEmail_dialog = dialog.findViewById(R.id.editTextEmail_dialog);
         verifyCode_button = dialog.findViewById(R.id.verifyCode_button);
+        //editTextEmail_dialog.setText(stringEmail);
 
     }
 

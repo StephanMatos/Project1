@@ -28,7 +28,7 @@ public class Product extends AppCompatActivity {
     String barcode;
     JSONObject json;
 
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

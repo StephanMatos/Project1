@@ -56,6 +56,7 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
                         savedValues.saveEmail(email);
                         savedValues.savePassword(password);
                     }else{
+                        System.out.println("inside failure");
                         TabLoginFragment.failure = true;
                     }
                 }else{
@@ -65,6 +66,8 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
 
 
         }catch (IOException | NullPointerException e){
+            TabLoginFragment.unknown = true;
+
             e.printStackTrace();
         }
 

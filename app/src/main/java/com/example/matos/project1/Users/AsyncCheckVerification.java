@@ -52,6 +52,7 @@ public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
 
         }catch (IOException | NullPointerException e){
             e.printStackTrace();
+
         }
 
         return null;

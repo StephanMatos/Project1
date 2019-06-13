@@ -20,7 +20,6 @@ import dmax.dialog.SpotsDialog;
 import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
-import com.example.matos.project1.SharedPrefereces;
 
 import static java.lang.Thread.sleep;
 
@@ -32,10 +31,10 @@ public class TabLoginFragment extends Fragment {
     private TextView forgotPass;
 
     // save login credentials
-    public static CheckBox saveLoginCheckBox;
- //   public static SharedPreferences mPrefs;
- //   public SharedPreferences.Editor prefsEditor;
- //   public static final String PREFS_NAME = "CheckboxFile";
+    private CheckBox saveLoginCheckBox;
+    public static SharedPreferences mPrefs;
+    public SharedPreferences.Editor prefsEditor;
+    public static final String PREFS_NAME = "CheckboxFile";
 
     //Progress dialog and context
     public static AlertDialog progressDialog;
@@ -45,6 +44,7 @@ public class TabLoginFragment extends Fragment {
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean network = false;
+    public static boolean unknown = false;
     boolean active = true;
 
     @Nullable
@@ -55,7 +55,7 @@ public class TabLoginFragment extends Fragment {
 
         // Initializing activity Widgets
         bindWidget(view);
-
+        //saveLoginCheckBox.setChecked(false);
         return view;
     }
 
@@ -81,7 +81,6 @@ public class TabLoginFragment extends Fragment {
             public void onClick(View v) {
 
                 attempt_login(email.getText().toString(), password.getText().toString(), false, context);
-
 
             }
         });
@@ -121,6 +120,7 @@ public class TabLoginFragment extends Fragment {
             public void run() {
 
                 active = true;
+
                 while(active){
                     try {
                         if(success){
@@ -129,16 +129,15 @@ public class TabLoginFragment extends Fragment {
                                 loginActivity.goToHome();
                             }else{
                                 progressDialog.dismiss();
-
                                 if (saveLoginCheckBox.isChecked()) {
-                                    new SharedPrefereces.Editor().putBoolean("Checkbox", true);
-                                    email.setText(new SharedPrefereces(context).getString("Email",""));
-                                    password.setText(new SharedPrefereces(context).getString("Password",""));
+                                    prefsEditor.putBoolean("CheckBox",true);
+                                    prefsEditor.putString("Email",email.getText().toString());
+                                    prefsEditor.putString("Password",password.getText().toString());
+                                    prefsEditor.apply();
                                 } else {
-                                    new SharedPrefereces.Editor().putBoolean("Checkbox", false);
+                                    prefsEditor.putBoolean("CheckBox",false);
+                                    prefsEditor.apply();
                                 }
-
-
                                 Intent intent = new Intent(getContext(),HomeActivity.class);
                                 startActivity(intent);
 
@@ -155,6 +154,11 @@ public class TabLoginFragment extends Fragment {
                             progressDialog.dismiss();
                             AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
                             active = false;
+                        }else if(unknown){
+
+                            progressDialog.dismiss();
+                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl","Prøv igen eller kontakt support",getActivity());
+                            active = false;
                         }
                         Thread.sleep(200);
                     } catch (InterruptedException e){
@@ -170,46 +174,28 @@ public class TabLoginFragment extends Fragment {
         success = false;
         failure = false;
         network = false;
+        unknown = false;
     }
-
 
     // Check if the user have checked 'saveLoginCheckBox' from earlier
     private void automaticLogin() {
 
-        System.out.println("-----------INSIDE AUTOMATICLOGIN-------------");
+        mPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        prefsEditor = mPrefs.edit();
 
-        if (new SharedPrefereces(context).getBoolean("Checkbox", true)){
-
-            new SharedPrefereces.Editor().putBoolean("Checkbox", true);
-            email.setText(new SharedPrefereces(context).getString("Email",""));
-            password.setText(new SharedPrefereces(context).getString("Password",""));
-            saveLoginCheckBox.setChecked(true);
-
-
-/*
+        if (mPrefs.getBoolean("CheckBox", true)){
             prefsEditor.putBoolean("CheckBox",true);
+            saveLoginCheckBox.setChecked(true);
             email.setText(mPrefs.getString("Email",""));
             password.setText(mPrefs.getString("Password",""));
             prefsEditor.apply();
-            saveLoginCheckBox.setChecked(true);
-*/
-
-
-            attempt_login(email.getText().toString(), password.getText().toString(), false, context);
-
-
-
+            attempt_login(mPrefs.getString("Password",""),mPrefs.getString("Email",""), false, context);
         } else {
-            new SharedPrefereces.Editor().putBoolean("Checkbox", false);
+            prefsEditor.putBoolean("CheckBox",false);
             saveLoginCheckBox.setChecked(false);
-            email.setText(new SharedPrefereces(context).getString("Email",""));
-            password.requestFocus();
+            prefsEditor.apply();
         }
-
-
     }
-
-
 
     // Initializing activity Widgets
     private void bindWidget(View view) {
@@ -220,6 +206,4 @@ public class TabLoginFragment extends Fragment {
         login = view.findViewById(R.id.savePass_Button);
 
     }
-
-
 }

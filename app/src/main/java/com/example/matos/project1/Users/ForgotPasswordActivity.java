@@ -41,6 +41,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean network = false;
+    public static boolean unknown = false;
     private boolean active;
 
     public static boolean verification = false;
@@ -116,6 +117,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         success = false;
         failure = false;
         network = false;
+        unknown = false;
         verification = false;
         verificationError = false;
     }
@@ -203,7 +205,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             active = false;
                             verificationError = false;
 
-                        }
+                        }else if(unknown){
+                        AlertDialogBoxes.alertDialogOnUIContext("Ukendt fejl","Prøv igen eller kontakt support",getApplicationContext());
+                        progressDialog.dismiss();
+                        active = false;
+                    }
 
                         Thread.sleep(200);
                     } catch (InterruptedException e){
@@ -262,6 +268,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                 if (editable.length() == 1) {
                     return;
+
                 } else if (editable.length() == 0 ) {
                     editTextCode2.clearFocus();
                     editTextCode1.requestFocus();
@@ -292,7 +299,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
                 if (editable.length() == 1) {
-                    return;
+                    //return;
                 } else if (editable.length() == 0) {
                     editTextCode3.clearFocus();
                     editTextCode2.requestFocus();

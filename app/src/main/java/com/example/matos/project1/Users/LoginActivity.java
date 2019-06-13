@@ -1,7 +1,5 @@
 package com.example.matos.project1.Users;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +10,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 
 import android.view.View;
-import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
-import com.example.matos.project1.SavedValues;
 
 import static java.lang.Thread.sleep;
 
@@ -49,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         return loginActivity;
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

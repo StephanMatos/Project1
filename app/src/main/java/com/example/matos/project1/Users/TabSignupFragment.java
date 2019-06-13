@@ -175,7 +175,7 @@ public class TabSignupFragment extends Fragment {
                 while(active){
                     try {
                         if(success){
-                            tabLoginFragment.attempt_login(email.getText().toString(),password.getText().toString(),true,getActivity());
+                            tabLoginFragment.attempt_login(email.getText().toString(),password.getText().toString(),true);
                             active = false;
                         }else if(failure){
 

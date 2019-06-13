@@ -52,7 +52,6 @@ public class TabLoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_login,container,false);
-
         // Initializing activity Widgets
         bindWidget(view);
         //saveLoginCheckBox.setChecked(false);
@@ -80,14 +79,14 @@ public class TabLoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                attempt_login(email.getText().toString(), password.getText().toString(), false, context);
+                attempt_login(email.getText().toString(), password.getText().toString(), false);
 
             }
         });
 
     }
 
-    public void attempt_login(String email,String password, boolean signup, Context context1) {
+    public void attempt_login(String email,String password, boolean signup) {
 
         boolean check = true;
         boolean validEmail = CheckValues.checkEmail(email);
@@ -184,20 +183,28 @@ public class TabLoginFragment extends Fragment {
     private void automaticLogin() {
 
         mPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        System.out.println(mPrefs);
         prefsEditor = mPrefs.edit();
 
         if (mPrefs.getBoolean("CheckBox",true)){
             saveLoginCheckBox.setChecked(true);
-            email.setText(mPrefs.getString("Email",""));
-            password.setText(mPrefs.getString("Password",""));
+
+            String shared_email = mPrefs.getString("Email","");
+            email.setText(shared_email);
+
+            String shared_password = mPrefs.getString("Password","");
+            password.setText(shared_password);
             prefsEditor.apply();
-            attempt_login(mPrefs.getString("Password",""),mPrefs.getString("Email",""), false, context);
+
+            attempt_login(shared_email,shared_password, false);
+
         } else {
-            prefsEditor.putBoolean("CheckBox",false);
             email.setText(mPrefs.getString("Email",""));
-            password.requestFocus();
-            saveLoginCheckBox.setChecked(false);
-            prefsEditor.commit();
+
+            if(email.getText().toString().length() > 0){
+                password.requestFocus();
+            }
+
         }
     }
 

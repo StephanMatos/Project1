@@ -46,6 +46,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         mScannerView.stopCamera();           // Stop camera on pause
     }
     public void onBackPressed() {
+        this.finish();
         Intent intent = new Intent(this,HomeActivity.class);
         startActivity(intent);
 

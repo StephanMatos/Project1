@@ -84,20 +84,6 @@ public class CreateProduct extends AppCompatActivity {
             }
         });
 
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("test", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("key1", "dette er test 1");
-        editor.commit();
-
-        System.out.println("-----------------------------------------------------------------" + sp.getString("key1", "11111111111"));
-
-        editor.putString("key1", "Dette er test 2");
-        editor.commit();
-
-        System.out.println("-----------------------------------------------------------------" + sp.getString("key1", "222222222222"));
-
-
-
     }
 
 

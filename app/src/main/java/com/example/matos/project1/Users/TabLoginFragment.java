@@ -44,6 +44,7 @@ public class TabLoginFragment extends Fragment {
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean network = false;
+    public static boolean unknown = false;
     boolean active = true;
 
     @Nullable
@@ -54,9 +55,7 @@ public class TabLoginFragment extends Fragment {
 
         // Initializing activity Widgets
         bindWidget(view);
-
         //saveLoginCheckBox.setChecked(false);
-
         return view;
     }
 
@@ -121,6 +120,7 @@ public class TabLoginFragment extends Fragment {
             public void run() {
 
                 active = true;
+
                 while(active){
                     try {
                         if(success){
@@ -154,6 +154,11 @@ public class TabLoginFragment extends Fragment {
                             progressDialog.dismiss();
                             AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
                             active = false;
+                        }else if(unknown){
+
+                            progressDialog.dismiss();
+                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl","Prøv igen eller kontakt support",getActivity());
+                            active = false;
                         }
                         Thread.sleep(200);
                     } catch (InterruptedException e){
@@ -169,6 +174,7 @@ public class TabLoginFragment extends Fragment {
         success = false;
         failure = false;
         network = false;
+        unknown = false;
     }
 
     // Check if the user have checked 'saveLoginCheckBox' from earlier

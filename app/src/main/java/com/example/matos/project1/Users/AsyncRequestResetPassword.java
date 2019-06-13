@@ -32,19 +32,25 @@ public class AsyncRequestResetPassword extends AsyncTask<String,Void,Void> {
 
             System.out.println("This is Response : "+response);
             System.out.println("This is data : "+data);
-
-            if(response.equals("OK")){
-                if(data.equals("success")){
-                    ForgotPasswordActivity.success = true;
-                }else{
-                    ForgotPasswordActivity.failure = true;
-                }
+            if(data == null || response == null) {
+                System.out.println("NullPointerException");
+                ResetPassword.network = true;
             }else{
-                ForgotPasswordActivity.network = true;
+                if(response.equals("OK")){
+                    if(data.equals("success")){
+                        ForgotPasswordActivity.success = true;
+                    }else{
+                        ForgotPasswordActivity.failure = true;
+                    }
+                }else{
+                    ForgotPasswordActivity.network = true;
+                }
             }
 
 
+
         }catch (IOException | NullPointerException e){
+            ForgotPasswordActivity.unknown = true;
             e.printStackTrace();
         }
 

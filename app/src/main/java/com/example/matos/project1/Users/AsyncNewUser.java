@@ -1,6 +1,8 @@
 package com.example.matos.project1.Users;
 
 import android.os.AsyncTask;
+import android.widget.Switch;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,12 +42,16 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
                 TabSignupFragment.network = true;
             }else{
                 if(response.equals("OK")){
-                    if(data.equals("success")){
-                        TabSignupFragment.success = true;
-                    }else if(data.equals("User already exist")){
-                        TabSignupFragment.exist = true;
-                    }else{
-                        TabSignupFragment.failure = true;
+                    switch(data){
+                        case "success":
+                            TabSignupFragment.success = true;
+                            break;
+                        case "User Already exist":
+                            TabSignupFragment.exist = true;
+                            break;
+                            default:
+                                TabSignupFragment.failure = true;
+                                break;
                     }
                 }else{
                         TabSignupFragment.network = true;
@@ -53,6 +59,7 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
             }
 
         }catch (IOException | NullPointerException e){
+            TabSignupFragment.unknown = true;
             e.printStackTrace();
         }
 

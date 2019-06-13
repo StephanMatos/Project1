@@ -26,6 +26,7 @@ public class ResetPassword extends AppCompatActivity {
     public static boolean failure = false;
     public static boolean network = false;
     public static boolean active = true;
+    public static boolean unknown = false;
     Context context;
 
     @Override
@@ -63,6 +64,7 @@ public class ResetPassword extends AppCompatActivity {
         failure = false;
         network = false;
         active = true;
+        unknown = false;
     }
 
     Context getContext(){
@@ -112,6 +114,10 @@ public class ResetPassword extends AppCompatActivity {
                             active = false;
                         }else if(network){
                             AlertDialogBoxes.alertDialogOnUIContext("Netværksfejl","Kontroller at telefonen er forbundet til internettet",getApplicationContext());
+                            progressDialog.dismiss();
+                            active = false;
+                        }else if(unknown){
+                            AlertDialogBoxes.alertDialogOnUIContext("Ukendt fejl","Prøv igen eller kontakt support",getApplicationContext());
                             progressDialog.dismiss();
                             active = false;
                         }

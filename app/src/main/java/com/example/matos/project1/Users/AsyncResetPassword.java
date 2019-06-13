@@ -56,6 +56,7 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
 
 
         }catch (IOException | NullPointerException e){
+            ResetPassword.unknown = true;
             e.printStackTrace();
         }
 

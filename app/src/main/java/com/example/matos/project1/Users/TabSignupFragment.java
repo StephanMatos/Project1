@@ -40,6 +40,7 @@ public class TabSignupFragment extends Fragment {
     public static boolean failure = false;
     public static boolean exist = false;
     public static boolean network = false;
+    public static boolean unknown = false;
 
     @Nullable
     @Override
@@ -192,6 +193,11 @@ public class TabSignupFragment extends Fragment {
                             AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
                             active = false;
 
+                        }else if(unknown){
+
+                            progressDialog.dismiss();
+                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl","Prøv igen eller kontakt support",getActivity());
+                            active = false;
                         }
                         Thread.sleep(200);
                     } catch (InterruptedException e){
@@ -211,5 +217,6 @@ public class TabSignupFragment extends Fragment {
         failure = false;
         exist = false;
         network = false;
+        unknown = false;
     }
 }

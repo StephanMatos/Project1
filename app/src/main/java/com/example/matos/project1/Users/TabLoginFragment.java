@@ -21,7 +21,6 @@ import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 
-import static android.content.Context.MODE_PRIVATE;
 import static java.lang.Thread.sleep;
 
 public class TabLoginFragment extends Fragment {
@@ -61,15 +60,15 @@ public class TabLoginFragment extends Fragment {
         return view;
     }
 
-
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         context = getContext();
 
+        // Check if the user have checked 'saveLoginCheckBox' from earlier
         automaticLogin();
 
+        // If the user have forgotten his/hers password and want to reset password
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,10 +80,8 @@ public class TabLoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // be able to login without connection to a server - Testing purposes
 
                 attempt_login(email.getText().toString(), password.getText().toString(), false, context);
-
 
             }
         });
@@ -174,7 +171,7 @@ public class TabLoginFragment extends Fragment {
         network = false;
     }
 
-
+    // Check if the user have checked 'saveLoginCheckBox' from earlier
     private void automaticLogin() {
 
         mPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);

@@ -22,7 +22,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     // Text fields
     private EditText email_EditText, editTextCode1, editTextCode2, editTextCode3, editTextCode4, editTextCode5;
-    public EditText editTextEmail_dialog;
+    public TextView reopen_verificationDialog_TextView;
 
     public String codeString, verificationCode, stringEmail;
     // Buttons
@@ -390,5 +390,3 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 }
 
 
-
-}

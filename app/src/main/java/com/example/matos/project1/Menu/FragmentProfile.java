@@ -1,5 +1,6 @@
 package com.example.matos.project1.Menu;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,9 +16,15 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.content.SharedPreferences;
 
 import com.example.matos.project1.Products.ProductList;
 import com.example.matos.project1.R;
+import com.example.matos.project1.Users.LoginActivity;
+
+import java.util.StringJoiner;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class FragmentProfile extends Fragment  {
 
@@ -46,6 +53,7 @@ public class FragmentProfile extends Fragment  {
 
         LinearLayout favoriteLayout = view.findViewById(R.id.favoriteLayout);
         LinearLayout recentLayout = view.findViewById(R.id.recentLayout);
+        LinearLayout logoutLayout = view.findViewById(R.id.logoutLayout);
         ImageView changepicture = view.findViewById(R.id.changePicture);
         final ImageView profile_image = view.findViewById(R.id.profile_picture);
 
@@ -68,11 +76,24 @@ public class FragmentProfile extends Fragment  {
             }
         });
 
+        logoutLayout.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("CommitPrefEdits")
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences sp = getContext().getSharedPreferences("CheckboxFile", MODE_PRIVATE);
+                SharedPreferences.Editor e = sp.edit();
+                e.putBoolean("CheckBox", false);
+                e.apply();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
         changepicture.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
                 // create a Dialog component
                 final Dialog dialog = new Dialog(context);
 
@@ -97,6 +118,7 @@ public class FragmentProfile extends Fragment  {
                 });
 
 
+
                 dialog.show();
             }
         });
@@ -104,6 +126,5 @@ public class FragmentProfile extends Fragment  {
 
 
     }
-
 
 }

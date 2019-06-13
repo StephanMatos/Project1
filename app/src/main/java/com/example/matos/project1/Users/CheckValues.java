@@ -7,10 +7,9 @@ import java.lang.reflect.Array;
 public class CheckValues {
 
     static boolean checkUsername = false;
-    static boolean reset = false;
     static boolean checkEmail = false;
     static boolean checkPassword = false;
-    static String[] suffix = {".com",".org",".net",".int",".edu",".gov",".AD",".AE",".AF",".AG",".AI",".AL",".AM",".AN",".AO",".AQ",".AR",".AS",".AT",".AU",".AW",".AZ",".BA",".BB",".BD",".BE",".BF",".BG",".BH",".BI",".BJ",".BM",".BN",".BO",".BR",".BS",".BT",".BV",".BW",".BT",".TP",".TR",".TT",".TV",".TW",".TZ",".UA",".UG",".UK",".UM",".US",".UY",".UZ",".VA",".VC",".VE",".VG",".VI",".VN",".VU","WF",".WS",".YE",".YT",".YU",".ZA",".ZM",".ZR",".ZW"};
+    //static String[] suffix = {".com",".org",".net",".int",".edu",".gov",".AD",".AE",".AF",".AG",".AI",".AL",".AM",".AN",".AO",".AQ",".AR",".AS",".AT",".AU",".AW",".AZ",".BA",".BB",".BD",".BE",".BF",".BG",".BH",".BI",".BJ",".BM",".BN",".BO",".BR",".BS",".BT",".BV",".BW",".BT",".TP",".TR",".TT",".TV",".TW",".TZ",".UA",".UG",".UK",".UM",".US",".UY",".UZ",".VA",".VC",".VE",".VG",".VI",".VN",".VU","WF",".WS",".YE",".YT",".YU",".ZA",".ZM",".ZR",".ZW"};
 
     public static boolean checkUsername(String username){
         int length = username.length();
@@ -68,9 +67,9 @@ public class CheckValues {
     private static boolean isSpecialCharacter(String string){
         boolean legal = false;
         for(int i = 0; i < string.length(); i++){
-            System.out.println("run number : " + i);
+
             legal = string.substring(i,i+1).matches("[^a-zA-Z0-9<>,;.:_!#¤%&/()=?+*£$€{}]");
-            System.out.println(" This is substring letter : "+string.substring(i,i+1) +"This is Legal status : " +legal);
+
            if(legal){
                return legal;
            }

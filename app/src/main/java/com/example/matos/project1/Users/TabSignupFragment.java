@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.R;
@@ -32,7 +33,6 @@ public class TabSignupFragment extends Fragment {
 
     //Instances
     TabLoginFragment tabLoginFragment;
-    AlertDialogBoxes alert;
 
     // Async task booleans
     boolean active = true;
@@ -40,6 +40,7 @@ public class TabSignupFragment extends Fragment {
     public static boolean failure = false;
     public static boolean exist = false;
     public static boolean network = false;
+    public static boolean unknown = false;
 
     @Nullable
     @Override
@@ -165,7 +166,6 @@ public class TabSignupFragment extends Fragment {
         } else{
             progressDialog.dismiss();
             AlertDialogBoxes.AlertDialog("Fejl","Teksten vil blive grøn når det intastede er gyldigt. Tryk på spørgsmålstegnet for mere info","Ok",getActivity());
-            //adsad
         }
     }
 
@@ -183,11 +183,20 @@ public class TabSignupFragment extends Fragment {
                             progressDialog.dismiss();
 
                         }else if(exist){
+
                             progressDialog.dismiss();
                             active = false;
+
                         }else if(network){
+
                             progressDialog.dismiss();
                             AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
+                            active = false;
+
+                        }else if(unknown){
+
+                            progressDialog.dismiss();
+                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl","Prøv igen eller kontakt support",getActivity());
                             active = false;
                         }
                         Thread.sleep(200);
@@ -197,14 +206,17 @@ public class TabSignupFragment extends Fragment {
                 }
 
             }
-        }).start();//hello
+        }).start();
 
     }
+
+
 
     static void setBooleans(){
         success = false;
         failure = false;
         exist = false;
         network = false;
+        unknown = false;
     }
 }

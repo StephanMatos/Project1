@@ -4,9 +4,8 @@ package com.example.matos.project1.Users;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -30,7 +29,12 @@ public class TabLoginFragment extends Fragment {
     private EditText email, password;
     private Button login;
     private TextView forgotPass;
-    private CheckBox rememberMe_checkBox;
+
+    // save login credentials
+    private CheckBox saveLoginCheckBox;
+    public static SharedPreferences mPrefs;
+    public SharedPreferences.Editor prefsEditor;
+    public static final String PREFS_NAME = "CheckboxFile";
 
     //Progress dialog and context
     public static AlertDialog progressDialog;
@@ -40,6 +44,7 @@ public class TabLoginFragment extends Fragment {
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean network = false;
+    public static boolean unknown = false;
     boolean active = true;
 
     @Nullable
@@ -48,45 +53,35 @@ public class TabLoginFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_login,container,false);
 
+        // Initializing activity Widgets
+        bindWidget(view);
+        //saveLoginCheckBox.setChecked(false);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
         context = getContext();
-        email = view.findViewById(R.id.email_EditText);
-        password = view.findViewById(R.id.pass_TextView);
-        forgotPass = view.findViewById(R.id.forgotPassTextView);
-        rememberMe_checkBox = view.findViewById(R.id.checkBox);
 
-        if(rememberMe_checkBox.isChecked()){
-            System.out.println("checked");
-        }
+        // Check if the user have checked 'saveLoginCheckBox' from earlier
+        automaticLogin();
 
+        // If the user have forgotten his/hers password and want to reset password
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
                 startActivity(intent);
-                if(rememberMe_checkBox.isChecked()){
-                    System.out.println("ischecked");
-                }
             }
         });
 
-
-
-        login = view.findViewById(R.id.savePass_Button);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // be able to login without connection to a server - Testing purposes
-                if (email.getText().toString().equals("a") && password.getText().toString().equals("a")){
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
-                } else {
-                    attempt_login(email.getText().toString(),password.getText().toString(),false,context);
-                }
+
+                attempt_login(email.getText().toString(), password.getText().toString(), false, context);
+
             }
         });
 
@@ -120,21 +115,35 @@ public class TabLoginFragment extends Fragment {
     }
 
     public void waitForResults(final boolean signup) {
-        active = true;
 
         new Thread(new Runnable() {
             public void run() {
+
+                active = true;
+
                 while(active){
                     try {
                         if(success){
                             if(signup){
                                 LoginActivity loginActivity = LoginActivity.getInstance();
-                                System.out.println(loginActivity);
                                 loginActivity.goToHome();
                             }else{
                                 progressDialog.dismiss();
+                                if (saveLoginCheckBox.isChecked()) {
+                                    prefsEditor.putBoolean("CheckBox",true);
+                                    prefsEditor.putString("Email",email.getText().toString());
+                                    prefsEditor.putString("Password",password.getText().toString());
+                                    prefsEditor.apply();
+
+                                } else {
+
+                                    prefsEditor.putBoolean("CheckBox",false);
+                                    prefsEditor.apply();
+
+                                }
                                 Intent intent = new Intent(getContext(),HomeActivity.class);
                                 startActivity(intent);
+
                             }
                             active = false;
                         }else if(failure){
@@ -148,6 +157,11 @@ public class TabLoginFragment extends Fragment {
                             progressDialog.dismiss();
                             AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
                             active = false;
+                        }else if(unknown){
+
+                            progressDialog.dismiss();
+                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl","Prøv igen eller kontakt support",getActivity());
+                            active = false;
                         }
                         Thread.sleep(200);
                     } catch (InterruptedException e){
@@ -157,11 +171,43 @@ public class TabLoginFragment extends Fragment {
 
             }
         }).start();
-    }//hello
+    }
 
     static void setBooleans(){
         success = false;
         failure = false;
         network = false;
+        unknown = false;
+    }
+
+    // Check if the user have checked 'saveLoginCheckBox' from earlier
+    private void automaticLogin() {
+
+        mPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        prefsEditor = mPrefs.edit();
+
+        if (mPrefs.getBoolean("CheckBox",true)){
+            saveLoginCheckBox.setChecked(true);
+            email.setText(mPrefs.getString("Email",""));
+            password.setText(mPrefs.getString("Password",""));
+            prefsEditor.apply();
+            attempt_login(mPrefs.getString("Password",""),mPrefs.getString("Email",""), false, context);
+        } else {
+            prefsEditor.putBoolean("CheckBox",false);
+            email.setText(mPrefs.getString("Email",""));
+            password.requestFocus();
+            saveLoginCheckBox.setChecked(false);
+            prefsEditor.commit();
+        }
+    }
+
+    // Initializing activity Widgets
+    private void bindWidget(View view) {
+        email = view.findViewById(R.id.email_EditText);
+        password = view.findViewById(R.id.pass_TextView);
+        forgotPass = view.findViewById(R.id.forgotPassTextView);
+        saveLoginCheckBox = view.findViewById(R.id.checkBox);
+        login = view.findViewById(R.id.savePass_Button);
+
     }
 }

@@ -32,7 +32,7 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
         password = Strings[1];
 
         try {
-            String LoginUrl = "https://easyeats.dk/users.php?email="+Strings[0]+"&password="+Strings[1];
+            String LoginUrl = "https://easyeats.dk/login.php?email="+email+"&password="+password;
             System.out.println(" This is strings : "+email +  "   "  + password);
 
             URL url = new URL(LoginUrl);
@@ -46,19 +46,28 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
             System.out.println("This is Response : "+response);
             System.out.println("This is data : "+data);
 
-            if(response.equals("OK")){
-                if(data.equals("success")){
-                    TabLoginFragment.success = true;
-                    savedValues.saveEmail(email);
-                    savedValues.savePassword(password);
-                }else{
-                    TabLoginFragment.failure = true;
-                }
-            }else{
+            if(data == null || response == null){
+                System.out.println("NullPointerException");
                 TabLoginFragment.network = true;
+            }else{
+                if(response.equals("OK")){
+                    if(data.equals("success")){
+                        TabLoginFragment.success = true;
+                        savedValues.saveEmail(email);
+                        savedValues.savePassword(password);
+                    }else{
+                        System.out.println("inside failure");
+                        TabLoginFragment.failure = true;
+                    }
+                }else{
+                    TabLoginFragment.network = true;
+                }
             }
 
-        }catch (IOException e){
+
+        }catch (IOException | NullPointerException e){
+            TabLoginFragment.unknown = true;
+
             e.printStackTrace();
         }
 

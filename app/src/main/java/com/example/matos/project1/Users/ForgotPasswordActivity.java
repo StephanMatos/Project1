@@ -11,6 +11,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.R;
 import dmax.dialog.SpotsDialog;
@@ -19,11 +22,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     // Text fields
     private EditText email_EditText, editTextCode1, editTextCode2, editTextCode3, editTextCode4, editTextCode5;
-    public EditText editTextEmail_dialog;
+    public TextView reopen_verificationDialog_TextView;
 
     public String codeString, verificationCode, stringEmail;
     // Buttons
     private Button send_Button, verifyCode_button;
+
+    //ImageViews
+    private ImageView help_button;
 
     // Context
     private Context context;
@@ -35,6 +41,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean network = false;
+    public static boolean unknown = false;
     private boolean active;
 
     public static boolean verification = false;
@@ -44,9 +51,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-        email_EditText = findViewById(R.id.email_EditText);
-        send_Button = findViewById(R.id.savePass_Button);
+        Intent intent = getIntent();
+        final Bundle bundle = intent.getExtras();
+
+        // Initializing activity Widgets
+        bindViews();
+
         context = this;
+
         send_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,15 +67,57 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         });
 
+        // If the user press the help ('?') icon in the top, a dialog with instructions will follow
+        help_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // create a Dialog component
+                final Dialog dialog = new Dialog(context);
+
+                dialog.setContentView(R.layout.dialogview_help_passreset);
+                dialog.setTitle("Reset password");
+
+                Button ok_Button = dialog.findViewById(R.id.ok_button);
+
+                ok_Button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+
+            }
+        });
+
+        reopen_verificationDialog_TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (email_EditText.length() == 0) {
+                    AlertDialogBoxes.alertDialogOnUIContext("Fejl","Feltet 'Email' skal udfyldes",getContext());
+
+                } else {
+                    AlertDialogBoxes.resetDialogOnUI(getContext(),"Reset Password", email_EditText.getText().toString());
+                }
+
+
+            }
+        });
     }
 
     Context getContext(){
         return context;
     }
+
+
     static void setBooleans(){
         success = false;
         failure = false;
         network = false;
+        unknown = false;
         verification = false;
         verificationError = false;
     }
@@ -77,11 +131,15 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         new AsyncRequestResetPassword().execute(email_EditText.getText().toString());
         waitForResults();
     }
-    //hello
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     void resetDialog(){
 
-        bindViews(dialog);
-        System.out.println(stringEmail);
+        bindDialogViews(dialog);
 
         setTextListners();
 
@@ -136,7 +194,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             active = false;
                             progressDialog.dismiss();
                             dialog.dismiss();
-                            Intent New_password = new Intent(ForgotPasswordActivity.this, create_new_password.class);
+                            Intent New_password = new Intent(ForgotPasswordActivity.this, ResetPassword.class);
                             New_password.putExtra("email",email_EditText.getText().toString());
                             startActivity(New_password);
 
@@ -147,7 +205,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             active = false;
                             verificationError = false;
 
-                        }
+                        }else if(unknown){
+                        AlertDialogBoxes.alertDialogOnUIContext("Ukendt fejl","Prøv igen eller kontakt support",getApplicationContext());
+                        progressDialog.dismiss();
+                        active = false;
+                    }
 
                         Thread.sleep(200);
                     } catch (InterruptedException e){
@@ -157,18 +219,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
             }
         }).start();
-    }
-
-    // check if the user have used a correct verification code
-    public boolean attempt_verificationCode() {
-
-
-
-        if (verificationCode.length() < 4) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
     // Moving between the "boxes" based on the users input
@@ -218,6 +268,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                 if (editable.length() == 1) {
                     return;
+
                 } else if (editable.length() == 0 ) {
                     editTextCode2.clearFocus();
                     editTextCode1.requestFocus();
@@ -248,7 +299,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
                 if (editable.length() == 1) {
-                    return;
+                    //return;
                 } else if (editable.length() == 0) {
                     editTextCode3.clearFocus();
                     editTextCode2.requestFocus();
@@ -322,11 +373,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     }
 
-
-
-
-    private void bindViews(Dialog dialog) {
-        //here initialize dialog components
+    //initializing dialog Widgets
+    private void bindDialogViews(Dialog dialog) {
         editTextCode1 = dialog.findViewById(R.id.editTextCode1);
         editTextCode2 = dialog.findViewById(R.id.editTextCode2);
         editTextCode3 = dialog.findViewById(R.id.editTextCode3);
@@ -338,8 +386,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     }
 
-
-
-
+    // Initializing activity Widgets
+    private void bindViews () {
+        email_EditText = findViewById(R.id.email_EditText);
+        send_Button = findViewById(R.id.savePass_Button);
+        help_button = findViewById(R.id.help_button);
+        reopen_verificationDialog_TextView = findViewById(R.id.reopen_verificationDialog_TextView);
+    }
 
 }
+
+

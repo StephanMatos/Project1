@@ -1,6 +1,8 @@
 package com.example.matos.project1.Users;
 
 import android.os.AsyncTask;
+import android.widget.Switch;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +27,7 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
 
             String LoginUrl = "https://easyeats.dk/signup.php?email="+email+"&password="+password+"&username="+username;
             URL url = new URL(LoginUrl);
+
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             InputStream inputStream = connection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -34,20 +37,29 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
             System.out.println("This is Response : "+response);
             System.out.println("This is data : "+data);
 
-            if(response.equals("OK")){
-                if(data.equals("success")){
-                    TabSignupFragment.success = true;
-                }else if(data.equals("User already exist")){
-                    TabSignupFragment.exist = true;
-                }else{
-                    TabSignupFragment.failure = true;
-                }
+            if(data == null || response == null) {
+                System.out.println("NullPointerException");
+                TabSignupFragment.network = true;
             }else{
-
+                if(response.equals("OK")){
+                    switch(data){
+                        case "success":
+                            TabSignupFragment.success = true;
+                            break;
+                        case "User Already exist":
+                            TabSignupFragment.exist = true;
+                            break;
+                            default:
+                                TabSignupFragment.failure = true;
+                                break;
+                    }
+                }else{
+                        TabSignupFragment.network = true;
+                }
             }
 
-
-        }catch (IOException e){
+        }catch (IOException | NullPointerException e){
+            TabSignupFragment.unknown = true;
             e.printStackTrace();
         }
 

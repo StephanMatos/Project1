@@ -20,6 +20,7 @@ public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
         try {
             String resetUrl = "https://easyeats.dk/checkVerification.php?email="+email+"&verification="+code;
             System.out.println(resetUrl);
+
             URL url = new URL(resetUrl);
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             InputStream inputStream = connection.getInputStream();
@@ -31,19 +32,27 @@ public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
             System.out.println("This is Response : "+response);
             System.out.println("This is data : "+data);
 
-            if(response.equals("OK")){
-                if(data.equals("success")){
-                    ForgotPasswordActivity.verification = true;
-                }else{
-                    ForgotPasswordActivity.verificationError = true;
-                }
-            }else{
+            if(data == null || response == null){
+                System.out.println("NULL");
                 ForgotPasswordActivity.network = true;
+            }else{
+                if(response.equals("OK")){
+                    if(data.equals("success")){
+                        ForgotPasswordActivity.verification = true;
+                    }else{
+                        ForgotPasswordActivity.verificationError = true;
+                    }
+                }else{
+                    ForgotPasswordActivity.network = true;
+                }
             }
 
 
-        }catch (IOException e){
+
+
+        }catch (IOException | NullPointerException e){
             e.printStackTrace();
+
         }
 
         return null;

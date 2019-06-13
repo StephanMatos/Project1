@@ -1,6 +1,7 @@
 package com.example.matos.project1.Products;
 
 import android.graphics.Bitmap;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class    Product extends AppCompatActivity {
+public class Product extends AppCompatActivity {
 
 
     RatingBar ratingBar;
@@ -33,7 +34,7 @@ public class    Product extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         postponeEnterTransition();
 
-        productImage = findViewById(R.id.productImage);
+
         ovenImageView = findViewById(R.id.oven);
         microwaveImageView = findViewById(R.id.microwave);
         stoveImageView = findViewById(R.id.stove);
@@ -74,6 +75,13 @@ public class    Product extends AppCompatActivity {
         });
 
         new getProduct().execute();
+
+    }
+
+    public void onBackPressed() {
+
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
 
     }
 

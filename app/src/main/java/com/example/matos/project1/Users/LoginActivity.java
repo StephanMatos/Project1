@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import com.example.matos.project1.Menu.HomeActivity;
@@ -30,7 +31,9 @@ import static java.lang.Thread.sleep;
 public class LoginActivity extends AppCompatActivity {
 
     private static LoginActivity loginActivity;
+
     static Context context;
+    private long backPressedTime = 0;
 
     // The SectionsPagerAdapte that provide
     // fragments for each of the sections.
@@ -38,7 +41,8 @@ public class LoginActivity extends AppCompatActivity {
 
     // The ViewPager will host the section contents.
     private ViewPager mViewPager;
-    //hello
+
+
     public static LoginActivity getInstance(){
         if(loginActivity == null){
             loginActivity = new LoginActivity();
@@ -94,6 +98,20 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        long t = System.currentTimeMillis();
+        if (t - backPressedTime > 3000) {    // 2 secs
+            backPressedTime = t;
+            Toast.makeText(this, "Press back again to close application",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+
+            super.onBackPressed();
+        }
+    }
+
+
     void goToHome(){
 
         Intent intent = new Intent(getContext(), HomeActivity.class);
@@ -103,13 +121,6 @@ public class LoginActivity extends AppCompatActivity {
     Context getContext(){
         return context;
     }
-
-    /*
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-
-        return rootView;
-    }*/
 
     // The FragmentPagerAdapter returns a fragment corresponding to one of the tabs
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

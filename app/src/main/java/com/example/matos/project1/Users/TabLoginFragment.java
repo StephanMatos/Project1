@@ -134,9 +134,12 @@ public class TabLoginFragment extends Fragment {
                                     prefsEditor.putString("Email",email.getText().toString());
                                     prefsEditor.putString("Password",password.getText().toString());
                                     prefsEditor.apply();
+
                                 } else {
+
                                     prefsEditor.putBoolean("CheckBox",false);
                                     prefsEditor.apply();
+
                                 }
                                 Intent intent = new Intent(getContext(),HomeActivity.class);
                                 startActivity(intent);
@@ -183,8 +186,7 @@ public class TabLoginFragment extends Fragment {
         mPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         prefsEditor = mPrefs.edit();
 
-        if (mPrefs.getBoolean("CheckBox", true)){
-            prefsEditor.putBoolean("CheckBox",true);
+        if (mPrefs.getBoolean("CheckBox",true)){
             saveLoginCheckBox.setChecked(true);
             email.setText(mPrefs.getString("Email",""));
             password.setText(mPrefs.getString("Password",""));
@@ -192,8 +194,10 @@ public class TabLoginFragment extends Fragment {
             attempt_login(mPrefs.getString("Password",""),mPrefs.getString("Email",""), false, context);
         } else {
             prefsEditor.putBoolean("CheckBox",false);
+            email.setText(mPrefs.getString("Email",""));
+            password.requestFocus();
             saveLoginCheckBox.setChecked(false);
-            prefsEditor.apply();
+            prefsEditor.commit();
         }
     }
 

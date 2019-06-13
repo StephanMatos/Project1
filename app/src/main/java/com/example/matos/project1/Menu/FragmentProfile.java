@@ -4,10 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,11 +16,13 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.content.SharedPreferences;
 
 import com.example.matos.project1.Products.ProductList;
 import com.example.matos.project1.R;
 import com.example.matos.project1.Users.LoginActivity;
-import com.example.matos.project1.Users.TabLoginFragment;
+
+import java.util.StringJoiner;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -81,6 +81,10 @@ public class FragmentProfile extends Fragment  {
             @Override
             public void onClick(View v) {
 
+                SharedPreferences sp = getContext().getSharedPreferences("CheckboxFile", MODE_PRIVATE);
+                SharedPreferences.Editor e = sp.edit();
+                e.putBoolean("CheckBox", false);
+                e.apply();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }

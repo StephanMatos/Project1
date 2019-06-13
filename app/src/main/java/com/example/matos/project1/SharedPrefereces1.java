@@ -8,17 +8,17 @@ import android.content.SharedPreferences;
 import java.util.Map;
 import java.util.Set;
 
-public class SharedPrefereces implements SharedPreferences {
+public class SharedPrefereces1 implements SharedPreferences {
 
     private SharedPreferences sharedPref;
     protected Context context;
 
-    public SharedPrefereces(Context context, SharedPreferences delegate) {
+    public SharedPrefereces1(Context context, SharedPreferences delegate) {
         this.sharedPref = delegate;
         this.context = context;
     }
 
-    public SharedPrefereces(Context context) {
+    public SharedPrefereces1(Context context) {
         this.sharedPref = context.getSharedPreferences ( "SaveLogin", Context.MODE_PRIVATE );
         this.context = context;
     }
@@ -77,13 +77,15 @@ public class SharedPrefereces implements SharedPreferences {
         this.sharedPref.unregisterOnSharedPreferenceChangeListener ( onSharedPreferenceChangeListener );
     }
 
+
+
     public class Editor implements SharedPreferences.Editor {
 
         SharedPreferences.Editor editor;
 
         @SuppressLint("CommitPrefEdits")
         public Editor() {
-            this.editor = SharedPrefereces.this.sharedPref.edit ( );
+            this.editor = SharedPrefereces1.this.sharedPref.edit ( );
         }
 
         @Override

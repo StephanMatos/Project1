@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".Products.CreateProduct">
 
+    <Button
+        android:id="@+id/createProductBtn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/roundbutton_primarydark"
+        android:text="Create Product"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/Title"
         android:layout_width="wrap_content"

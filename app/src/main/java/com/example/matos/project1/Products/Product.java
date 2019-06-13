@@ -1,5 +1,6 @@
 package com.example.matos.project1.Products;
 
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,12 +17,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Product extends AppCompatActivity {
+public class    Product extends AppCompatActivity {
 
 
     RatingBar ratingBar;
     TextView productRating, productName, productState, descriptionText;
-    ImageView heartImageView, ovenImageView, microwaveImageView, stoveImageView, hotwaterImageView;
+    ImageView productImage, heartImageView, ovenImageView, microwaveImageView, stoveImageView, hotwaterImageView;
     String barcode;
     JSONObject json;
 
@@ -32,7 +33,7 @@ public class Product extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         postponeEnterTransition();
 
-
+        productImage = findViewById(R.id.productImage);
         ovenImageView = findViewById(R.id.oven);
         microwaveImageView = findViewById(R.id.microwave);
         stoveImageView = findViewById(R.id.stove);
@@ -78,6 +79,8 @@ public class Product extends AppCompatActivity {
 
     private class getProduct extends AsyncTask<Void, Void, Void> {
 
+        Bitmap productMainImageBitmap;
+
         @Override
         protected void onPreExecute() {
 
@@ -94,9 +97,12 @@ public class Product extends AppCompatActivity {
             try {
                 jsons = new JSONArray(data);
                 json = jsons.getJSONObject(0);
+                productMainImageBitmap = Services.StringToBitMap(json.getString("productmainimage"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+
 
             return null;
         }
@@ -105,6 +111,7 @@ public class Product extends AppCompatActivity {
         protected void onPostExecute(Void avoid) {
             //test
             try {
+                productImage.setImageBitmap(productMainImageBitmap);
                 productName.setText(json.getString("productname"));
                 productRating.setText(String.format("%.2f", json.getDouble("avgrating")));
                 descriptionText.setText(json.getString("description"));

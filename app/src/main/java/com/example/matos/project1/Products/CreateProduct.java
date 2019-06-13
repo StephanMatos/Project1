@@ -2,14 +2,17 @@ package com.example.matos.project1.Products;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.matos.project1.R;
+import com.example.matos.project1.Services;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +36,7 @@ public class CreateProduct extends AppCompatActivity {
     EditText productNameET, productDescriptionET, productPriceET;
     Spinner productStateSpinner;
     CheckBox ovenCheckBox, stoveCheckBox, microwaveCheckBox, hotWaterCheckBox;
-
+    Button createProductBtn;
 
 
 
@@ -53,6 +57,7 @@ public class CreateProduct extends AppCompatActivity {
         stoveCheckBox = findViewById(R.id.stoveCheckBox);
         microwaveCheckBox = findViewById(R.id.microwaveCheckBox);
         hotWaterCheckBox = findViewById(R.id.hotWaterCheckBox);
+        createProductBtn = findViewById(R.id.createProductBtn);
 
 
         productImageView.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +76,27 @@ public class CreateProduct extends AppCompatActivity {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(CreateProduct.this, android.R.layout.simple_spinner_item, spinnerList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         productStateSpinner.setAdapter(dataAdapter);
+
+        createProductBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CreateProductAsync().execute();
+            }
+        });
+
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("test", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("key1", "dette er test 1");
+        editor.commit();
+
+        System.out.println("-----------------------------------------------------------------" + sp.getString("key1", "11111111111"));
+
+        editor.putString("key1", "Dette er test 2");
+        editor.commit();
+
+        System.out.println("-----------------------------------------------------------------" + sp.getString("key1", "222222222222"));
+
+
 
     }
 
@@ -139,4 +165,22 @@ public class CreateProduct extends AppCompatActivity {
         }
     }
 
+    public class CreateProductAsync extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            String address = "products.php?barcode=" + barcode
+                    + "&productname=" + productNameET.getText().toString()
+                    + "&productdescription=" + productDescriptionET.getText().toString()
+                    + "&price=" + productPriceET.getText().toString()
+                    + "&grill=" + (hotWaterCheckBox.isChecked() ? 1 : 0)
+                    + "&ovn=" + (ovenCheckBox.isChecked() ? 1 : 0)
+                    + "&komfur=" + (stoveCheckBox.isChecked() ? 1 : 0)
+                    + "&mikroovn=" + (microwaveCheckBox.isChecked() ? 1 : 0)
+                    + "&andet=" + 0
+                    + "&state=" + productStateSpinner.getSelectedItem().toString();
+            Services.postAPI(address, bitmapProductImage);
+            return null;
+        }
+    }
 }

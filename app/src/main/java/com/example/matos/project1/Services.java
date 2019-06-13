@@ -1,20 +1,28 @@
 package com.example.matos.project1;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class Services {
 
@@ -150,6 +158,75 @@ public class Services {
             e.printStackTrace();
         }
 
+    }
+
+    public static void postAPI(String address, Bitmap image) {
+
+        System.out.println("Calling post API");
+        try {
+
+            address = address.replaceAll(" ", "%20");
+            URL url = new URL("https://easyeats.dk/" + address);
+            System.out.println("URL is: " + url);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestProperty("Accept-Charset", "UTF-8");
+            urlConnection.setDoOutput(true);
+
+            OutputStream os = urlConnection.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            //writer.write("image=" + getStringImage(image) + "&imagename=" + filename);
+            writer.write("image=" + getStringImage(image));
+            //System.out.println(getStringImage(image));
+
+            writer.flush();
+            writer.close();
+            os.close();
+
+            int responseCode = urlConnection.getResponseCode();
+            System.out.println("Response code is------------------ " + responseCode);
+            String response = "";
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                String line = br.readLine();
+                response = line;
+                while(line != null){
+                    line = br.readLine();
+                    response += line;
+                }
+            } else {
+                response = "Error Registering";
+            }
+            System.out.println("response is: " + response);
+            urlConnection.disconnect();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+    public static Bitmap StringToBitMap(String encodedString){
+        encodedString = encodedString.replace("\\/", "/");
+        encodedString = encodedString.replace(" ", "+");
+        try{
+            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
     }
 
     public static ArrayList<JSONObject> testJSONS(){

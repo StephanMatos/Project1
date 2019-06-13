@@ -31,6 +31,7 @@ import static java.lang.Thread.sleep;
 public class LoginActivity extends AppCompatActivity {
 
     private static LoginActivity loginActivity;
+
     static Context context;
     private long backPressedTime = 0;
 
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // The ViewPager will host the section contents.
     private ViewPager mViewPager;
+
 
     public static LoginActivity getInstance(){
         if(loginActivity == null){
@@ -98,8 +100,17 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        long t = System.currentTimeMillis();
+        if (t - backPressedTime > 3000) {    // 2 secs
+            backPressedTime = t;
+            Toast.makeText(this, "Press back again to close application",
+                    Toast.LENGTH_SHORT).show();
+        } else {
 
+            super.onBackPressed();
+        }
     }
+
 
     void goToHome(){
 
@@ -110,13 +121,6 @@ public class LoginActivity extends AppCompatActivity {
     Context getContext(){
         return context;
     }
-
-    /*
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-
-        return rootView;
-    }*/
 
     // The FragmentPagerAdapter returns a fragment corresponding to one of the tabs
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

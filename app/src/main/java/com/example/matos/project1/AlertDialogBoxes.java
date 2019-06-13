@@ -75,7 +75,7 @@ public class AlertDialogBoxes {
                 dialog = new Dialog(context);
                 dialog.setContentView(R.layout.dialogview_passreset);
                 dialog.setTitle(title);
-                //dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
                 ForgotPasswordActivity.dialog = dialog;
                 dialog.show();
             }

@@ -11,7 +11,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 
 public class AsyncRequestResetPassword extends AsyncTask<String,Void,Void> {
-    //hello
+
     @Override
     protected Void doInBackground(String... Strings) {
         System.out.println("AsyncRequestResetPassword");
@@ -44,7 +44,7 @@ public class AsyncRequestResetPassword extends AsyncTask<String,Void,Void> {
             }
 
 
-        }catch (IOException e){
+        }catch (IOException | NullPointerException e){
             e.printStackTrace();
         }
 

@@ -131,7 +131,6 @@ public class TabLoginFragment extends Fragment {
                         if(success){
                             if(signup){
                                 LoginActivity loginActivity = LoginActivity.getInstance();
-                                System.out.println(loginActivity);
                                 loginActivity.goToHome();
                             }else{
                                 progressDialog.dismiss();

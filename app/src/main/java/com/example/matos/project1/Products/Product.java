@@ -1,5 +1,6 @@
 package com.example.matos.project1.Products;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.Services;
@@ -73,6 +76,13 @@ public class Product extends AppCompatActivity {
         });
 
         new getProduct().execute();
+
+    }
+
+    public void onBackPressed() {
+
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
 
     }
 

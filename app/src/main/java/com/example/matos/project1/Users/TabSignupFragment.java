@@ -165,7 +165,6 @@ public class TabSignupFragment extends Fragment {
         } else{
             progressDialog.dismiss();
             AlertDialogBoxes.AlertDialog("Fejl","Teksten vil blive grøn når det intastede er gyldigt. Tryk på spørgsmålstegnet for mere info","Ok",getActivity());
-            //adsad
         }
     }
 
@@ -183,12 +182,16 @@ public class TabSignupFragment extends Fragment {
                             progressDialog.dismiss();
 
                         }else if(exist){
+
                             progressDialog.dismiss();
                             active = false;
+
                         }else if(network){
+
                             progressDialog.dismiss();
                             AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
                             active = false;
+
                         }
                         Thread.sleep(200);
                     } catch (InterruptedException e){

@@ -1,21 +1,25 @@
 package com.example.matos.project1.Menu;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.matos.project1.Menu.FragmentHome;
 import com.example.matos.project1.Menu.FragmentProfile;
 import com.example.matos.project1.Menu.FragmentSearch;
 import com.example.matos.project1.R;
 import com.example.matos.project1.Scan.FragmentCamera;
+import com.example.matos.project1.Users.ForgotPasswordActivity;
+import com.example.matos.project1.Users.LoginActivity;
 
 
 public class HomeActivity extends AppCompatActivity {
-
+    private long backPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,26 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navgationListner);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        long t = System.currentTimeMillis();
+        if (t - backPressedTime > 3000) {    // 3 secs
+            backPressedTime = t;
+            Toast.makeText(this, "Press back again to close application",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+
+            finish();
+            super.onBackPressed();
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory( Intent.CATEGORY_HOME );
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
+
+        }
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navgationListner =
                 new BottomNavigationView.OnNavigationItemSelectedListener() {

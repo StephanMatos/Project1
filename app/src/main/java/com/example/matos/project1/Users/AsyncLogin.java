@@ -46,19 +46,25 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
             System.out.println("This is Response : "+response);
             System.out.println("This is data : "+data);
 
-            if(response.equals("OK")){
-                if(data.equals("success")){
-                    TabLoginFragment.success = true;
-                    savedValues.saveEmail(email);
-                    savedValues.savePassword(password);
-                }else{
-                    TabLoginFragment.failure = true;
-                }
-            }else{
+            if(data == null || response == null){
+                System.out.println("NullPointerException");
                 TabLoginFragment.network = true;
+            }else{
+                if(response.equals("OK")){
+                    if(data.equals("success")){
+                        TabLoginFragment.success = true;
+                        savedValues.saveEmail(email);
+                        savedValues.savePassword(password);
+                    }else{
+                        TabLoginFragment.failure = true;
+                    }
+                }else{
+                    TabLoginFragment.network = true;
+                }
             }
 
-        }catch (IOException e){
+
+        }catch (IOException | NullPointerException e){
             e.printStackTrace();
         }
 

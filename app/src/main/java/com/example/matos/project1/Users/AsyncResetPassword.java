@@ -29,21 +29,18 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
             URL url = new URL(resetUrl);
 
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-
             InputStream inputStream = connection.getInputStream();
-
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
             String data = bufferedReader.readLine();
-
             String response = connection.getResponseMessage();
-
             connection.disconnect();
 
-            System.out.println(response);
+            System.out.println("This is Response : "+response);
+            System.out.println("This is data : "+data);
 
-            if(data == null || response == null){
-                System.out.println("NULL");
+            if(data == null || response == null) {
+                System.out.println("NullPointerException");
+                ResetPassword.network = true;
             }else{
                 if(response.equals("OK")){
                     if(data.equals("success")){
@@ -58,7 +55,7 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
 
 
 
-        }catch (IOException e){
+        }catch (IOException | NullPointerException e){
             e.printStackTrace();
         }
 

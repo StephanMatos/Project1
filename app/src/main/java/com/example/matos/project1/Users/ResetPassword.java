@@ -28,9 +28,6 @@ public class ResetPassword extends AppCompatActivity {
     public static boolean active = true;
     Context context;
 
-    private long backPressedTime = 0;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +38,7 @@ public class ResetPassword extends AppCompatActivity {
 
         if(bundle!=null) {
             email =(String) bundle.get("email");
-            System.out.println(email);
+            System.out.println("This is email : "+email);
         }
 
         newPassword_EditText = findViewById(R.id.newPassword_EditText);

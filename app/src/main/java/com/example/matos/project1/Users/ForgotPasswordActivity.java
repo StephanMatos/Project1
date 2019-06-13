@@ -30,6 +30,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     // Dialog
     public static AlertDialog progressDialog;
     public static Dialog dialog;
+    // Instance
+
 
     // Async booleans
     public static boolean success = false;
@@ -164,17 +166,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         }).start();
     }
 
-    // check if the user have used a correct verification code
-    public boolean attempt_verificationCode() {
-
-
-
-        if (verificationCode.length() < 4) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
     // Moving between the "boxes" based on the users input
     public void setTextListners() {

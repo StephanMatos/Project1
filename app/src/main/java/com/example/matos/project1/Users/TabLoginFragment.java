@@ -20,6 +20,7 @@ import dmax.dialog.SpotsDialog;
 import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
+import com.example.matos.project1.SharedPrefereces;
 
 import static java.lang.Thread.sleep;
 
@@ -31,10 +32,10 @@ public class TabLoginFragment extends Fragment {
     private TextView forgotPass;
 
     // save login credentials
-    private CheckBox saveLoginCheckBox;
-    public static SharedPreferences mPrefs;
-    public SharedPreferences.Editor prefsEditor;
-    public static final String PREFS_NAME = "CheckboxFile";
+    public static CheckBox saveLoginCheckBox;
+ //   public static SharedPreferences mPrefs;
+ //   public SharedPreferences.Editor prefsEditor;
+ //   public static final String PREFS_NAME = "CheckboxFile";
 
     //Progress dialog and context
     public static AlertDialog progressDialog;
@@ -54,8 +55,6 @@ public class TabLoginFragment extends Fragment {
 
         // Initializing activity Widgets
         bindWidget(view);
-
-        //saveLoginCheckBox.setChecked(false);
 
         return view;
     }
@@ -82,6 +81,7 @@ public class TabLoginFragment extends Fragment {
             public void onClick(View v) {
 
                 attempt_login(email.getText().toString(), password.getText().toString(), false, context);
+
 
             }
         });
@@ -129,15 +129,16 @@ public class TabLoginFragment extends Fragment {
                                 loginActivity.goToHome();
                             }else{
                                 progressDialog.dismiss();
+
                                 if (saveLoginCheckBox.isChecked()) {
-                                    prefsEditor.putBoolean("CheckBox",true);
-                                    prefsEditor.putString("Email",email.getText().toString());
-                                    prefsEditor.putString("Password",password.getText().toString());
-                                    prefsEditor.apply();
+                                    new SharedPrefereces.Editor().putBoolean("Checkbox", true);
+                                    email.setText(new SharedPrefereces(context).getString("Email",""));
+                                    password.setText(new SharedPrefereces(context).getString("Password",""));
                                 } else {
-                                    prefsEditor.putBoolean("CheckBox",false);
-                                    prefsEditor.apply();
+                                    new SharedPrefereces.Editor().putBoolean("Checkbox", false);
                                 }
+
+
                                 Intent intent = new Intent(getContext(),HomeActivity.class);
                                 startActivity(intent);
 
@@ -171,25 +172,44 @@ public class TabLoginFragment extends Fragment {
         network = false;
     }
 
+
     // Check if the user have checked 'saveLoginCheckBox' from earlier
     private void automaticLogin() {
 
-        mPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        prefsEditor = mPrefs.edit();
+        System.out.println("-----------INSIDE AUTOMATICLOGIN-------------");
 
-        if (mPrefs.getBoolean("CheckBox", true)){
-            prefsEditor.putBoolean("CheckBox",true);
+        if (new SharedPrefereces(context).getBoolean("Checkbox", true)){
+
+            new SharedPrefereces.Editor().putBoolean("Checkbox", true);
+            email.setText(new SharedPrefereces(context).getString("Email",""));
+            password.setText(new SharedPrefereces(context).getString("Password",""));
             saveLoginCheckBox.setChecked(true);
+
+
+/*
+            prefsEditor.putBoolean("CheckBox",true);
             email.setText(mPrefs.getString("Email",""));
             password.setText(mPrefs.getString("Password",""));
             prefsEditor.apply();
-            attempt_login(mPrefs.getString("Password",""),mPrefs.getString("Email",""), false, context);
+            saveLoginCheckBox.setChecked(true);
+*/
+
+
+            attempt_login(email.getText().toString(), password.getText().toString(), false, context);
+
+
+
         } else {
-            prefsEditor.putBoolean("CheckBox",false);
+            new SharedPrefereces.Editor().putBoolean("Checkbox", false);
             saveLoginCheckBox.setChecked(false);
-            prefsEditor.apply();
+            email.setText(new SharedPrefereces(context).getString("Email",""));
+            password.requestFocus();
         }
+
+
     }
+
+
 
     // Initializing activity Widgets
     private void bindWidget(View view) {
@@ -200,4 +220,6 @@ public class TabLoginFragment extends Fragment {
         login = view.findViewById(R.id.savePass_Button);
 
     }
+
+
 }

@@ -18,12 +18,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.content.SharedPreferences;
 
-import com.example.matos.project1.Products.ProductList;
 import com.example.matos.project1.R;
 import com.example.matos.project1.Users.LoginActivity;
 
 import java.util.Objects;
-import java.util.StringJoiner;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -55,24 +53,6 @@ public class FragmentProfile extends Fragment  {
         ImageView changepicture = view.findViewById(R.id.changePicture);
         final ImageView profile_image = view.findViewById(R.id.profile_picture);
 
-
-                favoriteLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProductList.class);
-                intent.putExtra("type", "Favorites");
-                startActivity(intent);
-            }
-        });
-
-        recentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProductList.class);
-                intent.putExtra("type", "Recents");
-                startActivity(intent);
-            }
-        });
 
         logoutLayout.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("CommitPrefEdits")

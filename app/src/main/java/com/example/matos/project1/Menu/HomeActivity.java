@@ -30,6 +30,8 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment selectedFragment;
 
     FloatingActionButton cameraBtn;
+    //lool
+    //lool2.0
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

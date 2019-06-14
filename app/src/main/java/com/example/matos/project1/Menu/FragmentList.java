@@ -1,7 +1,6 @@
 package com.example.matos.project1.Menu;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

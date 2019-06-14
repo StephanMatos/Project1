@@ -33,9 +33,11 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
 
         try {
             String LoginUrl = "https://easyeats.dk/login.php?email="+email+"&password="+password;
-            System.out.println(" This is strings : "+email +  "   "  + password);
+            System.out.println(LoginUrl);
 
             URL url = new URL(LoginUrl);
+
+
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             InputStream inputStream = connection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

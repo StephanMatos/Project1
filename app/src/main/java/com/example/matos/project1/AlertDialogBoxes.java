@@ -121,4 +121,14 @@ public class AlertDialogBoxes {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+    public static void finnishactivity(final Activity activity){
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                activity.finish();
+            }
+        });
+    }
 }

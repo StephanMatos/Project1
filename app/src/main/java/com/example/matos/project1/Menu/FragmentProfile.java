@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.content.SharedPreferences;
 import android.widget.Switch;
 
+import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.Products.ProductList;
 import com.example.matos.project1.R;
 import com.example.matos.project1.Users.LoginActivity;
@@ -44,9 +45,11 @@ public class FragmentProfile extends Fragment  {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        context = container.getContext();
-
+        try{
+            context = container.getContext();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
         return view;
     }
@@ -99,6 +102,7 @@ public class FragmentProfile extends Fragment  {
                 e.apply();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
+                AlertDialogBoxes.finnishactivity(getActivity());
             }
         });
 

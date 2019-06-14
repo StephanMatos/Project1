@@ -1,6 +1,7 @@
 package com.example.matos.project1.Users;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -38,7 +39,6 @@ public class TabLoginFragment extends Fragment {
 
     //Progress dialog and context
     public static AlertDialog progressDialog;
-    Context context;
 
     // Async task booleans
     public static boolean success = false;
@@ -52,20 +52,21 @@ public class TabLoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_login,container,false);
-
         // Initializing activity Widgets
         bindWidget(view);
         //saveLoginCheckBox.setChecked(false);
+
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+/*
 
-        context = getContext();
-
+*/
         // Check if the user have checked 'saveLoginCheckBox' from earlier
-        automaticLogin();
+        automaticLogin(getActivity());
 
         // If the user have forgotten his/hers password and want to reset password
         forgotPass.setOnClickListener(new View.OnClickListener() {
@@ -79,15 +80,14 @@ public class TabLoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                attempt_login(email.getText().toString(), password.getText().toString(), false, context);
-
+                attempt_login(email.getText().toString(), password.getText().toString(), false,getActivity());
             }
         });
 
     }
 
-    public void attempt_login(String email,String password, boolean signup, Context context1) {
+    public void attempt_login(String email,String password, boolean signup,final Activity activity) {
+
 
         boolean check = true;
         boolean validEmail = CheckValues.checkEmail(email);
@@ -109,35 +109,44 @@ public class TabLoginFragment extends Fragment {
 
         if(check && validEmail){
             new AsyncLogin().execute(email,password);
-            waitForResults(signup);
+            waitForResults(signup,activity);
+
         }
 
     }
 
-    public void waitForResults(final boolean signup) {
+    public void waitForResults(final boolean signup, final Activity activity) {
 
         new Thread(new Runnable() {
             public void run() {
 
                 active = true;
 
-                while(active) {
+                while(active){
                     try {
-                        if (success) {
-                            if (signup) {
-                                LoginActivity loginActivity = LoginActivity.getInstance();
-                                loginActivity.goToHome();
-                            } else {
+                        if(success){
+                            if(signup){
+                                TabSignupFragment.progressDialog.dismiss();
+                                Intent intent = new Intent(activity,HomeActivity.class);
+                                activity.startActivity(intent);
+                                AlertDialogBoxes.finnishactivity(activity);
+
+
+                            }else{
+                                System.out.println(getContext());
                                 progressDialog.dismiss();
                                 if (saveLoginCheckBox.isChecked()) {
                                     prefsEditor.putBoolean("CheckBox", true);
                                     prefsEditor.putString("Email", email.getText().toString());
                                     prefsEditor.putString("Password", password.getText().toString());
                                     prefsEditor.apply();
+
                                 } else {
                                     prefsEditor.putBoolean("CheckBox", false);
                                     prefsEditor.apply();
+
                                 }
+                                AlertDialogBoxes.finnishactivity(getActivity());
                                 Intent intent = new Intent(getContext(), HomeActivity.class);
                                 startActivity(intent);
 
@@ -146,22 +155,22 @@ public class TabLoginFragment extends Fragment {
                         } else if (failure) {
 
                             progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Fejl", "Forkert email og/eller adgangskode. Prøv igen eller gå til reset password", getActivity());
+                            AlertDialogBoxes.alertDialogOnUI("Fejl","Forkert email og/eller adgangskode. Prøv igen eller gå til reset password",getActivity());
                             active = false;
 
-                        } else if (network) {
+                        }else if(network){
 
                             progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Fejl", "Kontroller at telefonen har forbindelse til internettet", getActivity());
+                            AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
                             active = false;
-                        } else if (unknown) {
+                        }else if(unknown){
 
                             progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl", "Prøv igen eller kontakt support", getActivity());
+                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl","Prøv igen eller kontakt support",getActivity());
                             active = false;
                         }
                         Thread.sleep(200);
-                    } catch (InterruptedException e) {
+                    } catch (InterruptedException e){
                         Thread.currentThread().interrupt();
                     }
                 }
@@ -178,25 +187,34 @@ public class TabLoginFragment extends Fragment {
     }
 
     // Check if the user have checked 'saveLoginCheckBox' from earlier
-    private void automaticLogin() {
+    private void automaticLogin(Activity activity) {
+        try{
+            mPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            prefsEditor = mPrefs.edit();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
-        mPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        prefsEditor = mPrefs.edit();
 
         if (mPrefs.getBoolean("CheckBox",true)){
             saveLoginCheckBox.setChecked(true);
-            email.setText(mPrefs.getString("Email",""));
-            password.setText(mPrefs.getString("Password",""));
+
+            String shared_email = mPrefs.getString("Email","");
+            email.setText(shared_email);
+
+            String shared_password = mPrefs.getString("Password","");
+            password.setText(shared_password);
             prefsEditor.apply();
 
-            attempt_login(password.getText().toString(),email.getText().toString(), false, context);
+            attempt_login(shared_email,shared_password, false,activity);
 
         } else {
-            prefsEditor.putBoolean("CheckBox",false);
             email.setText(mPrefs.getString("Email",""));
-            password.requestFocus();
-            saveLoginCheckBox.setChecked(false);
-            prefsEditor.commit();
+
+            if(email.getText().toString().length() > 0){
+                password.requestFocus();
+            }
+
         }
     }
 

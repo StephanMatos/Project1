@@ -1,7 +1,5 @@
 package com.example.matos.project1.Users;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +10,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 
 import android.view.View;
-import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,16 +20,13 @@ import android.widget.Toast;
 
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
-import com.example.matos.project1.SavedValues;
 
 import static java.lang.Thread.sleep;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static LoginActivity loginActivity;
 
-    static Context context;
-    private long backPressedTime = 0;
+
 
     // The SectionsPagerAdapte that provide
     // fragments for each of the sections.
@@ -42,19 +35,10 @@ public class LoginActivity extends AppCompatActivity {
     // The ViewPager will host the section contents.
     private ViewPager mViewPager;
 
-
-    public static LoginActivity getInstance(){
-        if(loginActivity == null){
-            loginActivity = new LoginActivity();
-        }
-        return loginActivity;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        context = getApplicationContext();
         // Create the adapter that will return a fragment for each of the two
         // primary sections of the activity (Login and Signup)
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -100,27 +84,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        long t = System.currentTimeMillis();
-        if (t - backPressedTime > 3000) {    // 2 secs
-            backPressedTime = t;
-            Toast.makeText(this, "Press back again to close application",
-                    Toast.LENGTH_SHORT).show();
-        } else {
-
-            super.onBackPressed();
-        }
+            this.finish();
     }
 
 
-    void goToHome(){
-
-        Intent intent = new Intent(getContext(), HomeActivity.class);
-        getContext().startActivity(intent);
-    }
-
-    Context getContext(){
-        return context;
-    }
 
     // The FragmentPagerAdapter returns a fragment corresponding to one of the tabs
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

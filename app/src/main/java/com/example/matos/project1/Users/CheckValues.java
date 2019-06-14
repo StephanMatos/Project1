@@ -2,36 +2,20 @@ package com.example.matos.project1.Users;
 
 import android.util.Patterns;
 
-import java.lang.reflect.Array;
+class CheckValues {
 
-public class CheckValues {
-
-    static boolean checkUsername = false;
-    static boolean checkEmail = false;
-    static boolean checkPassword = false;
+    private static boolean checkUsername = false;
+    private static boolean checkEmail = false;
+    private static boolean checkPassword = false;
     //static String[] suffix = {".com",".org",".net",".int",".edu",".gov",".AD",".AE",".AF",".AG",".AI",".AL",".AM",".AN",".AO",".AQ",".AR",".AS",".AT",".AU",".AW",".AZ",".BA",".BB",".BD",".BE",".BF",".BG",".BH",".BI",".BJ",".BM",".BN",".BO",".BR",".BS",".BT",".BV",".BW",".BT",".TP",".TR",".TT",".TV",".TW",".TZ",".UA",".UG",".UK",".UM",".US",".UY",".UZ",".VA",".VC",".VE",".VG",".VI",".VN",".VU","WF",".WS",".YE",".YT",".YU",".ZA",".ZM",".ZR",".ZW"};
 
-    public static boolean checkUsername(String username){
-        int length = username.length();
+    static boolean checkUsername(String username){
 
-        if(length < 21 && length > 3){
-            checkUsername = true;
-        }else {
-            checkUsername =  false;
-            return checkUsername;
-        }
-        boolean isValid = isSpecialCharacter(username);
-        if(!isValid){
-            checkUsername = true;
-        }else{
-            checkUsername =  false;
-            return checkUsername;
-        }
+        return ((username.length() < 21) && (username.length() > 3)) && isSpecialCharacter(username);
 
-        return checkUsername;
     }
 
-    public static boolean checkEmail(String email){
+    static boolean checkEmail(String email){
         int length = email.length();
         if(length < 100 && length > 6){
             checkEmail = true;
@@ -42,26 +26,9 @@ public class CheckValues {
         return checkEmail;
     }
 
-    public static boolean checkPassword(String password){
-//hello
-        int length = password.length();
-        if(length > 7 && length < 21){
-            checkPassword = true;
-        }else{
-            checkPassword = false;
-            return checkPassword;
-        }
+    static boolean checkPassword(String password){
 
-        boolean isValid = isSpecialCharacter(password);
-
-        if(!isValid){
-            checkPassword = true;
-        } else{
-            checkPassword = false;
-            return checkPassword;
-        }
-
-        return checkPassword;
+        return ((password.length() < 21) && (password.length() > 7)) && isSpecialCharacter(password);
     }
 
     private static boolean isSpecialCharacter(String string){
@@ -71,12 +38,11 @@ public class CheckValues {
             legal = string.substring(i,i+1).matches("[^a-zA-Z0-9<>,;.:_!#¤%&/()=?+*£$€{}]");
 
            if(legal){
-               return legal;
+              return !legal;
            }
-
         }
 
-        return legal;
+        return !legal;
     }
 
 

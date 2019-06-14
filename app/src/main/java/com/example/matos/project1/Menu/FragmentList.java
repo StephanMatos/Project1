@@ -1,12 +1,18 @@
-package com.example.matos.project1.Products;
+package com.example.matos.project1.Menu;
 
 import android.app.AlertDialog;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.matos.project1.Products.ItemAdapter;
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.Services;
@@ -16,29 +22,38 @@ import org.json.JSONException;
 
 import dmax.dialog.SpotsDialog;
 
-public class ProductList extends AppCompatActivity {
 
+public class FragmentList extends Fragment {
+
+    String type;
     ListView listView;
-    TextView titleTextView;
 
-    String type = "";
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            type = bundle.getString("type", "");
+        }
+
+        return inflater.inflate(R.layout.fragment_list, container, false);
+
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_list);
+        listView = view.findViewById(R.id.listView);
 
-        listView = findViewById(R.id.listView);
-        titleTextView = findViewById(R.id.titleTextView);
-
-        type = getIntent().getExtras().getString("type");
-
-        titleTextView.setText(type);
+        TextView t = view.findViewById(R.id.titleTextView);
+        t.setText(type);
 
         new setupList().execute();
 
     }
+
 
     private class setupList extends AsyncTask<Void, Void, Void> {
 
@@ -47,7 +62,7 @@ public class ProductList extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            dialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(ProductList.this).build();
+            dialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getActivity()).build();
             dialog.setMessage("Loading...");
             dialog.show();
         }
@@ -76,7 +91,7 @@ public class ProductList extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void avoid) {
 
-            ItemAdapter itemAdapter = new ItemAdapter(ProductList.this, jsons);
+            ItemAdapter itemAdapter = new ItemAdapter(getActivity(), jsons);
             listView.setAdapter(itemAdapter);
             dialog.dismiss();
         }

@@ -35,7 +35,7 @@ public class Product extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         postponeEnterTransition();
 
-
+        productImage = findViewById(R.id.productImage);
         ovenImageView = findViewById(R.id.oven);
         microwaveImageView = findViewById(R.id.microwave);
         stoveImageView = findViewById(R.id.stove);
@@ -118,7 +118,6 @@ public class Product extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void avoid) {
-            //test
             try {
                 productImage.setImageBitmap(productMainImageBitmap);
                 productName.setText(json.getString("productname"));

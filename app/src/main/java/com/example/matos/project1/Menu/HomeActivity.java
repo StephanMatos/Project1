@@ -4,11 +4,14 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.matos.project1.AlertDialogBoxes;
@@ -17,6 +20,7 @@ import com.example.matos.project1.Menu.FragmentProfile;
 import com.example.matos.project1.Menu.FragmentSearch;
 import com.example.matos.project1.R;
 import com.example.matos.project1.Scan.FragmentCamera;
+import com.example.matos.project1.Scan.ScanActivity;
 import com.example.matos.project1.Users.ForgotPasswordActivity;
 import com.example.matos.project1.Users.LoginActivity;
 
@@ -25,12 +29,22 @@ public class HomeActivity extends AppCompatActivity {
     private long backPressedTime = 0;
     private Fragment selectedFragment;
 
+    FloatingActionButton cameraBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        cameraBtn = findViewById(R.id.cameraBtn);
 
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, ScanActivity.class);
+                startActivity(intent);
+            }
+        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navgationListner);
@@ -82,10 +96,16 @@ public class HomeActivity extends AppCompatActivity {
                                 selectedFragment = new FragmentSearch();
                                 break;
                             case R.id.nav_favorites:
-                                selectedFragment = new FragmentCamera();
+                                selectedFragment = new FragmentList();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("type", "Favorites");
+                                selectedFragment.setArguments(bundle);
                                 break;
                             case R.id.nav_recents:
-                                selectedFragment = new FragmentCamera();
+                                selectedFragment = new FragmentList();
+                                Bundle bundle1 = new Bundle();
+                                bundle1.putString("type", "Recents");
+                                selectedFragment.setArguments(bundle1);
                                 break;
                             case R.id.nav_profile:
                                 selectedFragment = new FragmentProfile();

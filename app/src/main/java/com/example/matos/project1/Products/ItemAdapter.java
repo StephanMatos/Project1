@@ -27,9 +27,26 @@ public class ItemAdapter extends BaseAdapter {
     private JSONArray jsons;
     private Context c;
 
-    ItemAdapter(Context c, JSONArray jsons){
+    public ItemAdapter(Context c, JSONArray jsons){
         this.c = c;
         this.jsons = jsons;
+
+        for(int i = 0; i < jsons.length(); i++){
+            try {
+                JSONObject json = jsons.getJSONObject(i);
+                String imageString = json.getString("productmainimage");
+
+                imageString = imageString.replace("\\/", "/");
+                imageString = imageString.replace(" ", "+");
+
+                json.put("productmainimage", imageString);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
 
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -79,6 +96,8 @@ public class ItemAdapter extends BaseAdapter {
 
         try {
             productNameTextView.setText(json.getString("productname"));
+            productImage.setImageBitmap(Services.StringToBitMap(json.getString("productmainimage")));
+
 
             double rating = json.getDouble("avgrating");
             productRating.setText(String.format("%.2f", rating));

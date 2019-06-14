@@ -25,10 +25,8 @@ import static java.lang.Thread.sleep;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static LoginActivity loginActivity;
 
-    static Context context;
-    private long backPressedTime = 0;
+
 
     // The SectionsPagerAdapte that provide
     // fragments for each of the sections.
@@ -37,21 +35,10 @@ public class LoginActivity extends AppCompatActivity {
     // The ViewPager will host the section contents.
     private ViewPager mViewPager;
 
-
-    public static LoginActivity getInstance(){
-        if(loginActivity == null){
-            loginActivity = new LoginActivity();
-        }
-        return loginActivity;
-    }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        context = getApplicationContext();
         // Create the adapter that will return a fragment for each of the two
         // primary sections of the activity (Login and Signup)
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -97,27 +84,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        long t = System.currentTimeMillis();
-        if (t - backPressedTime > 3000) {    // 2 secs
-            backPressedTime = t;
-            Toast.makeText(this, "Press back again to close application",
-                    Toast.LENGTH_SHORT).show();
-        } else {
-
             this.finish();
-        }
     }
 
 
-    void goToHome(){
-
-        Intent intent = new Intent(getContext(), HomeActivity.class);
-        getContext().startActivity(intent);
-    }
-
-    Context getContext(){
-        return context;
-    }
 
     // The FragmentPagerAdapter returns a fragment corresponding to one of the tabs
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

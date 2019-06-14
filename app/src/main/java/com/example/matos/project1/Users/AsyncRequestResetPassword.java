@@ -55,7 +55,6 @@ public class AsyncRequestResetPassword extends AsyncTask<String,Void,Void> {
         }
 
         return null;
-        //lort
     }
 
 

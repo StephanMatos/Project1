@@ -1,7 +1,10 @@
 package com.example.matos.project1.Users;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.matos.project1.AlertDialogBoxes;
+import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 
 import dmax.dialog.SpotsDialog;
@@ -67,7 +71,7 @@ public class TabSignupFragment extends Fragment {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                create_user();
+                create_user(getContext(),getActivity());
             }
 
 
@@ -89,11 +93,11 @@ public class TabSignupFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 validUsername = CheckValues.checkUsername(username.getText().toString());
                 if(validUsername){
-                    System.out.println("valid");
+
                     username.setTextColor(Color.GREEN);
                 }else{
                     username.setTextColor(Color.RED);
-                    System.out.println("not valid");
+
                 }
 
             }
@@ -114,11 +118,11 @@ public class TabSignupFragment extends Fragment {
                 validEmail = CheckValues.checkEmail(email.getText().toString());
 
                 if(validEmail){
-                    System.out.println("valid");
+
                     email.setTextColor(Color.GREEN);
                 }else{
                     email.setTextColor(Color.RED);
-                    System.out.println("not valid");
+
                 }
             }
         });
@@ -137,11 +141,11 @@ public class TabSignupFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 validPassword = CheckValues.checkPassword(password.getText().toString());
                 if(validPassword){
-                    System.out.println("valid");
+
                     password.setTextColor(Color.GREEN);
                 }else{
                     password.setTextColor(Color.RED);
-                    System.out.println("not valid");
+
                 }
 
             }
@@ -150,7 +154,7 @@ public class TabSignupFragment extends Fragment {
     }
 
 
-    private void create_user() {
+    private void create_user(Context context,Activity activity) {
 
         progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
         progressDialog.setMessage("Loading...");
@@ -162,20 +166,23 @@ public class TabSignupFragment extends Fragment {
 
         if(validEmail && validPassword && validUsername){
             new AsyncNewUser().execute(email.getText().toString(),password.getText().toString(),username.getText().toString());
-            waitForResults();
+            waitForResults(activity,context);
         } else{
             progressDialog.dismiss();
             AlertDialogBoxes.AlertDialog("Fejl","Teksten vil blive grøn når det intastede er gyldigt. Tryk på spørgsmålstegnet for mere info","Ok",getActivity());
         }
     }
 
-    public void waitForResults() {
+    public void waitForResults(final Activity activity, final Context context) {
         new Thread(new Runnable() {
             public void run() {
                 while(active){
                     try {
                         if(success){
-                            tabLoginFragment.attempt_login(email.getText().toString(),password.getText().toString(),true);
+                            System.out.println("in SIgnup");
+                            System.out.println(activity);
+                            System.out.println(context);
+                            tabLoginFragment.attempt_login(email.getText().toString(),password.getText().toString(),true,activity);
                             active = false;
                         }else if(failure){
 

@@ -31,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
 
     FloatingActionButton cameraBtn;
     //lool
+    //lool2.0
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

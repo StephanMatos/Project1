@@ -81,12 +81,16 @@ public class HomeActivity extends AppCompatActivity {
                             case R.id.nav_search:
                                 selectedFragment = new FragmentSearch();
                                 break;
+                            case R.id.nav_favorites:
+                                selectedFragment = new FragmentCamera();
+                                break;
+                            case R.id.nav_recents:
+                                selectedFragment = new FragmentCamera();
+                                break;
                             case R.id.nav_profile:
                                 selectedFragment = new FragmentProfile();
                                 break;
-                            case R.id.nav_camera:
-                                selectedFragment = new FragmentCamera();
-                                break;
+
                         }
 
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();

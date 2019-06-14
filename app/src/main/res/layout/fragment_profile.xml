@@ -286,8 +286,8 @@
             <ImageView
                 android:id="@+id/logout_arrow"
                 android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center_vertical"
+                android:layout_height="23dp"
+                android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_pointer_right" />
 
         </LinearLayout>

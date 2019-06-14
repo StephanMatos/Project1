@@ -52,6 +52,7 @@ public class TabLoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_login,container,false);
+
         // Initializing activity Widgets
         bindWidget(view);
         //saveLoginCheckBox.setChecked(false);
@@ -129,23 +130,22 @@ public class TabLoginFragment extends Fragment {
                             }else{
                                 progressDialog.dismiss();
                                 if (saveLoginCheckBox.isChecked()) {
-                                    prefsEditor.putBoolean("CheckBox",true);
-                                    prefsEditor.putString("Email",email.getText().toString());
-                                    prefsEditor.putString("Password",password.getText().toString());
+                                    prefsEditor.putBoolean("CheckBox", true);
+                                    prefsEditor.putString("Email", email.getText().toString());
+                                    prefsEditor.putString("Password", password.getText().toString());
                                     prefsEditor.apply();
 
                                 } else {
-
-                                    prefsEditor.putBoolean("CheckBox",false);
+                                    prefsEditor.putBoolean("CheckBox", false);
                                     prefsEditor.apply();
 
                                 }
-                                Intent intent = new Intent(getContext(),HomeActivity.class);
+                                Intent intent = new Intent(getContext(), HomeActivity.class);
                                 startActivity(intent);
 
                             }
                             active = false;
-                        }else if(failure){
+                        } else if (failure) {
 
                             progressDialog.dismiss();
                             AlertDialogBoxes.alertDialogOnUI("Fejl","Forkert email og/eller adgangskode. Prøv igen eller gå til reset password",getActivity());

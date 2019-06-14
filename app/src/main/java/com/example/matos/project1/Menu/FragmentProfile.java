@@ -22,6 +22,7 @@ import com.example.matos.project1.Products.ProductList;
 import com.example.matos.project1.R;
 import com.example.matos.project1.Users.LoginActivity;
 
+import java.util.Objects;
 import java.util.StringJoiner;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -29,9 +30,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class FragmentProfile extends Fragment  {
 
     Context context;
-
-
-
 
     int[] icons = {R.drawable.ic_account1, R.drawable.ic_account2,R.drawable.ic_account3, R.drawable.ic_account4,R.drawable.ic_account5,R.drawable.ic_account6,R.drawable.ic_account7,
             R.drawable.ic_account8, R.drawable.ic_account9};
@@ -80,8 +78,7 @@ public class FragmentProfile extends Fragment  {
             @SuppressLint("CommitPrefEdits")
             @Override
             public void onClick(View v) {
-
-                SharedPreferences sp = getContext().getSharedPreferences("CheckboxFile", MODE_PRIVATE);
+                SharedPreferences sp = Objects.requireNonNull(getContext()).getSharedPreferences("CheckboxFile", MODE_PRIVATE);
                 SharedPreferences.Editor e = sp.edit();
                 e.putBoolean("CheckBox", false);
                 e.apply();

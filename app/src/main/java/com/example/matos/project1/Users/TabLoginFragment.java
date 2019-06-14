@@ -121,50 +121,47 @@ public class TabLoginFragment extends Fragment {
 
                 active = true;
 
-                while(active){
+                while(active) {
                     try {
-                        if(success){
-                            if(signup){
+                        if (success) {
+                            if (signup) {
                                 LoginActivity loginActivity = LoginActivity.getInstance();
                                 loginActivity.goToHome();
-                            }else{
+                            } else {
                                 progressDialog.dismiss();
                                 if (saveLoginCheckBox.isChecked()) {
-                                    prefsEditor.putBoolean("CheckBox",true);
-                                    prefsEditor.putString("Email",email.getText().toString());
-                                    prefsEditor.putString("Password",password.getText().toString());
+                                    prefsEditor.putBoolean("CheckBox", true);
+                                    prefsEditor.putString("Email", email.getText().toString());
+                                    prefsEditor.putString("Password", password.getText().toString());
                                     prefsEditor.apply();
-
                                 } else {
-
-                                    prefsEditor.putBoolean("CheckBox",false);
+                                    prefsEditor.putBoolean("CheckBox", false);
                                     prefsEditor.apply();
-
                                 }
-                                Intent intent = new Intent(getContext(),HomeActivity.class);
+                                Intent intent = new Intent(getContext(), HomeActivity.class);
                                 startActivity(intent);
 
                             }
                             active = false;
-                        }else if(failure){
+                        } else if (failure) {
 
                             progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Fejl","Forkert email og/eller adgangskode. Prøv igen eller gå til reset password",getActivity());
+                            AlertDialogBoxes.alertDialogOnUI("Fejl", "Forkert email og/eller adgangskode. Prøv igen eller gå til reset password", getActivity());
                             active = false;
 
-                        }else if(network){
+                        } else if (network) {
 
                             progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
+                            AlertDialogBoxes.alertDialogOnUI("Fejl", "Kontroller at telefonen har forbindelse til internettet", getActivity());
                             active = false;
-                        }else if(unknown){
+                        } else if (unknown) {
 
                             progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl","Prøv igen eller kontakt support",getActivity());
+                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl", "Prøv igen eller kontakt support", getActivity());
                             active = false;
                         }
                         Thread.sleep(200);
-                    } catch (InterruptedException e){
+                    } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
                 }
@@ -191,7 +188,9 @@ public class TabLoginFragment extends Fragment {
             email.setText(mPrefs.getString("Email",""));
             password.setText(mPrefs.getString("Password",""));
             prefsEditor.apply();
-            attempt_login(mPrefs.getString("Password",""),mPrefs.getString("Email",""), false, context);
+
+            attempt_login(password.getText().toString(),email.getText().toString(), false, context);
+
         } else {
             prefsEditor.putBoolean("CheckBox",false);
             email.setText(mPrefs.getString("Email",""));

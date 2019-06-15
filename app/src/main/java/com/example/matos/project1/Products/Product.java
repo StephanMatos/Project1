@@ -2,6 +2,8 @@ package com.example.matos.project1.Products;
 
 import android.graphics.Bitmap;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,21 +21,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Product extends AppCompatActivity {
 
 
+    ImageView rateBtn;
     RatingBar ratingBar;
     TextView productRating, productName, productState, descriptionText;
     ImageView productImage, heartImageView, ovenImageView, microwaveImageView, stoveImageView, hotwaterImageView;
     String barcode;
     JSONObject json;
 
-//
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         postponeEnterTransition();
+
+        rateBtn = findViewById(R.id.rateButton);
 
         productImage = findViewById(R.id.productImage);
         ovenImageView = findViewById(R.id.oven);
@@ -74,6 +82,28 @@ public class Product extends AppCompatActivity {
                 }
             }
         });
+
+        rateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<String> list = new ArrayList<>();
+                try {
+                    if(json.getString("grill").equals("1")) list.add("Grill");
+                    if(json.getString("ovn").equals("1")) list.add("Ovn");
+                    if(json.getString("komfur").equals("1")) list.add("Komfur");
+                    if(json.getString("mikroovn").equals("1")) list.add("Mikroovn");
+
+                    SelectStateDialog dialog = new SelectStateDialog(Product.this, list, json.getInt("productID"));
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
 
         new getProduct().execute();
 

@@ -107,7 +107,7 @@ public class HomeActivity extends AppCompatActivity {
         setupViewPager(viewPager);
     }
 
-
+//Push me... and then...
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         fragmentHome = new FragmentHome();

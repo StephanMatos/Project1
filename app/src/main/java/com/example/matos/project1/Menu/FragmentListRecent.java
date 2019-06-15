@@ -23,7 +23,7 @@ import org.json.JSONException;
 import dmax.dialog.SpotsDialog;
 
 
-public class FragmentList extends Fragment {
+public class FragmentListRecent extends Fragment {
 
     String type;
     ListView listView;
@@ -73,11 +73,9 @@ public class FragmentList extends Fragment {
             String username = SavedValues.getInstance().getEmail();
 
             String data;
-            if(type.equals("Favorites")){
-                data = Services.callAPI("products.php?username=" + username + "&favorites=1");
-            } else {
-                data = Services.callAPI("products.php?username=" + username + "&recents=1");
-            }
+
+            data = Services.callAPI("products.php?username=" + username + "&recents=1");
+
 
             try {
                 jsons = new JSONArray(data);

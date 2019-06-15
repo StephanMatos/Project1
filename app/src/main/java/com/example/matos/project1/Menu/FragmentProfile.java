@@ -1,6 +1,5 @@
 package com.example.matos.project1.Menu;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,9 +16,8 @@ import android.widget.AdapterView;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.content.SharedPreferences;
-import android.widget.Switch;
+
 import com.example.matos.project1.R;
 import com.example.matos.project1.Users.LoginActivity;
 
@@ -61,12 +59,31 @@ public class FragmentProfile extends Fragment  {
         System.out.println("------------PROFILE---------- ");
 
         setSingleEvent(gridLayout);
-    /*
+/*
         LinearLayout favoriteLayout = view.findViewById(R.id.favoriteLayout);
         LinearLayout recentLayout = view.findViewById(R.id.recentLayout);
         LinearLayout logoutLayout = view.findViewById(R.id.logoutLayout);
         ImageView changepicture = view.findViewById(R.id.changePicture);
         final ImageView profile_image = view.findViewById(R.id.profile_picture);
+
+
+        favoriteLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProductList.class);
+                intent.putExtra("type", "Favorites");
+                startActivity(intent);
+            }
+        });
+
+        recentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProductList.class);
+                intent.putExtra("type", "Recents");
+                startActivity(intent);
+            }
+        });
 
 
         logoutLayout.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +96,11 @@ public class FragmentProfile extends Fragment  {
                 e.apply();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
+                AlertDialogBoxes.finnishactivity(getActivity());
             }
         });
 
+*/
         changepicture.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -116,7 +135,7 @@ public class FragmentProfile extends Fragment  {
         });
 
 
-    */
+
 
 
 

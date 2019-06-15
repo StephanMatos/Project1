@@ -1,38 +1,45 @@
 package com.example.matos.project1.Menu;
 
-import android.content.ClipData;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.matos.project1.AlertDialogBoxes;
-import com.example.matos.project1.Menu.FragmentHome;
-import com.example.matos.project1.Menu.FragmentProfile;
-import com.example.matos.project1.Menu.FragmentSearch;
 import com.example.matos.project1.R;
-import com.example.matos.project1.Scan.FragmentCamera;
 import com.example.matos.project1.Scan.ScanActivity;
-import com.example.matos.project1.Users.ForgotPasswordActivity;
-import com.example.matos.project1.Users.LoginActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeActivity extends AppCompatActivity {
     private long backPressedTime = 0;
-    private Fragment selectedFragment;
+
+    private FragmentProfile fragmentProfile;
+    private FragmentListRecent fragmentListRecent;
+    private FragmentListFavorites fragmentListFavorites;
+    private FragmentSearch fragmentSearch;
+    private  FragmentHome fragmentHome;
+
+    private ViewPager viewPager;
+    MenuItem prevMenuItem;
+    BottomNavigationView bottomNavigationView;
 
     FloatingActionButton cameraBtn;
-    //lool
-    //lool2.0
 
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +55,93 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(navgationListner);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+        bottomNavigationView = findViewById(R.id.navigationView);
+        viewPager = findViewById(R.id.viewpager);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        viewPager.setCurrentItem(0);
+                        break;
+                    case R.id.nav_search:
+                        viewPager.setCurrentItem(1);
+                        break;
+
+                    case R.id.nav_recents:
+                        viewPager.setCurrentItem(2);
+                        break;
+                   case R.id.nav_favorites:
+                       break;
+                    case R.id.nav_profile:
+                        viewPager.setCurrentItem(3);
+                        break;
+                }
+
+                return false;
+            }
+        });
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+            @Override
+            public void onPageSelected(int position) {
+                if (prevMenuItem != null) {
+                    prevMenuItem.setChecked(false);
+                } else {
+                    bottomNavigationView.getMenu().getItem(0).setChecked(false);
+                }
+                Log.d("page", "onPageSelected: " + position);
+                bottomNavigationView.getMenu().getItem(position).setChecked(true);
+                prevMenuItem = bottomNavigationView.getMenu().getItem(position);
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        setupViewPager(viewPager);
+    }
+
+//Push me... and then...
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        fragmentHome = new FragmentHome();
+        fragmentSearch = new FragmentSearch();
+        fragmentListRecent = new FragmentListRecent();
+        fragmentListFavorites = new FragmentListFavorites();
+        fragmentProfile = new FragmentProfile();
+        viewPagerAdapter.addFragment(fragmentHome);
+        viewPagerAdapter.addFragment(fragmentSearch);
+        viewPagerAdapter.addFragment(fragmentListFavorites);
+        viewPagerAdapter.addFragment(fragmentListRecent);
+        viewPagerAdapter.addFragment(fragmentProfile);
+        viewPager.setAdapter(viewPagerAdapter);
+    }
+
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment) {
+            mFragmentList.add(fragment);
+        }
     }
 
 
@@ -67,7 +157,7 @@ public class HomeActivity extends AppCompatActivity {
         } else {
 
             Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-            homeIntent.addCategory( Intent.CATEGORY_HOME );
+            homeIntent.addCategory(Intent.CATEGORY_HOME);
             homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(homeIntent);
 
@@ -75,54 +165,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        selectedFragment = new FragmentHome();
+        //fragmentHome = new FragmentHome();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
-
-
-
     }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener navgationListner =
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        selectedFragment = null;
-
-                        switch (item.getItemId()) {
-                            case R.id.nav_home:
-                                selectedFragment = new FragmentHome();
-                                break;
-                            case R.id.nav_search:
-                                selectedFragment = new FragmentSearch();
-                                break;
-                            case R.id.nav_favorites:
-                                selectedFragment = new FragmentList();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("type", "Favorites");
-                                selectedFragment.setArguments(bundle);
-                                break;
-                            case R.id.nav_recents:
-                                selectedFragment = new FragmentList();
-                                Bundle bundle1 = new Bundle();
-                                bundle1.putString("type", "Recents");
-                                selectedFragment.setArguments(bundle1);
-                                break;
-                            case R.id.nav_profile:
-                                selectedFragment = new FragmentProfile();
-                                break;
-
-                        }
-
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-
-                        return true;
-                    }
-                };
-
-
-
 
 
 }

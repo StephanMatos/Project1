@@ -1,6 +1,5 @@
 package com.example.matos.project1.Menu;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,17 +16,12 @@ import android.widget.AdapterView;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.content.SharedPreferences;
-import android.widget.Switch;
 
-import com.example.matos.project1.AlertDialogBoxes;
-import com.example.matos.project1.Products.ProductList;
 import com.example.matos.project1.R;
 import com.example.matos.project1.Users.LoginActivity;
 
 import java.util.Objects;
-import java.util.StringJoiner;
 
 import static android.content.Context.MODE_PRIVATE;
 

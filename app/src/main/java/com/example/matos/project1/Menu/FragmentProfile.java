@@ -61,7 +61,7 @@ public class FragmentProfile extends Fragment  {
         System.out.println("------------PROFILE---------- ");
 
         setSingleEvent(gridLayout);
-/*
+    /*
         LinearLayout favoriteLayout = view.findViewById(R.id.favoriteLayout);
         LinearLayout recentLayout = view.findViewById(R.id.recentLayout);
         LinearLayout logoutLayout = view.findViewById(R.id.logoutLayout);
@@ -116,7 +116,7 @@ public class FragmentProfile extends Fragment  {
         });
 
 
-
+    */
 
 
 

@@ -69,9 +69,9 @@ public class CreateProduct extends AppCompatActivity {
 
 
         List<String> spinnerList = new ArrayList<String>();
-        spinnerList.add("Frozen");
-        spinnerList.add("Fresh");
-        spinnerList.add("Ready");
+        spinnerList.add("Frossen");
+        spinnerList.add("Fersk");
+        spinnerList.add("Spiseklar");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(CreateProduct.this, android.R.layout.simple_spinner_item, spinnerList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

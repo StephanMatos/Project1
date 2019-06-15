@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Products.CreateProduct">
@@ -33,6 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:background="@drawable/edittext"
         android:id="@+id/productNameET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -48,6 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/productImageView" />
 
     <EditText
+        android:background="@drawable/edittext"
         android:id="@+id/productDescriptionET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,6 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/productNameET" />
 
     <EditText
+        android:background="@drawable/edittext"
         android:id="@+id/productPriceET"
         android:layout_width="140dp"
         android:layout_height="wrap_content"

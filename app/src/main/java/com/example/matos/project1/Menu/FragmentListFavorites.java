@@ -57,14 +57,10 @@ public class FragmentListFavorites extends Fragment {
 
     private class setupList extends AsyncTask<Void, Void, Void> {
 
-        AlertDialog dialog;
         JSONArray jsons;
 
         @Override
         protected void onPreExecute() {
-            dialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getActivity()).build();
-            dialog.setMessage("Loading...");
-            dialog.show();
         }
 
         @Override
@@ -90,7 +86,6 @@ public class FragmentListFavorites extends Fragment {
 
             ItemAdapter itemAdapter = new ItemAdapter(getActivity(), jsons);
             listView.setAdapter(itemAdapter);
-            dialog.dismiss();
         }
     }
 

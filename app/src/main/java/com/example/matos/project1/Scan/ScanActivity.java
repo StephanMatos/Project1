@@ -98,7 +98,6 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
             {
                 Intent intent = new Intent(ScanActivity.this, Product.class);
                 intent.putExtra("barcode", barcode);
-                onBackPressed();
                 startActivity(intent);
             } else {
 
@@ -109,7 +108,6 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
                             case DialogInterface.BUTTON_POSITIVE:
                                 Intent intent = new Intent(ScanActivity.this, CreateProduct.class);
                                 intent.putExtra("barcode", barcode);
-                                onBackPressed();
                                 startActivity(intent);
                                 break;
 

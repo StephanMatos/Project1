@@ -27,7 +27,7 @@ import java.util.List;
 public class Product extends AppCompatActivity {
 
 
-    ImageView rateBtn;
+    TextView rateBtn;
     RatingBar ratingBar;
     TextView productRating, productName, productState, descriptionText;
     ImageView productImage, heartImageView, ovenImageView, microwaveImageView, stoveImageView, hotwaterImageView;
@@ -109,12 +109,6 @@ public class Product extends AppCompatActivity {
 
     }
 
-    public void onBackPressed() {
-
-        Intent intent = new Intent(this,HomeActivity.class);
-        startActivity(intent);
-
-    }
 
     private class getProduct extends AsyncTask<Void, Void, Void> {
 
@@ -155,6 +149,8 @@ public class Product extends AppCompatActivity {
                 descriptionText.setText(json.getString("description"));
                 productState.setText(json.getString("state"));
                 ratingBar.setProgress((int) (json.getDouble("avgrating")));
+
+                System.out.println("state of p is: " + json.getString("state"));
 
                 if(json.getInt("ovn") == 1) {ovenImageView.setBackgroundResource(R.drawable.custom_round);}
                 if(json.getInt("grill") == 1) {hotwaterImageView.setBackgroundResource(R.drawable.custom_round);}

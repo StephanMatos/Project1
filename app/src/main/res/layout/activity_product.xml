@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Products.Product">
@@ -10,7 +11,6 @@
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -23,10 +23,26 @@
             android:layout_height="match_parent">
 
 
+            <Button
+                android:id="@+id/rateButton"
+                android:layout_width="100dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/roundbutton_primarycolor"
+                android:text="Rate"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                app:layout_constraintEnd_toStartOf="@+id/heart"
+                app:layout_constraintStart_toEndOf="@+id/ratingBar"
+                app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
             <ImageView
                 android:id="@+id/oven"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,16 +53,19 @@
                 android:id="@+id/heart"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:transitionName="heartTransition"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/productImage"
+                app:layout_constraintTop_toTopOf="@+id/rateButton"
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <ImageView
                 android:id="@+id/stove"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +74,8 @@
 
             <ImageView
                 android:id="@+id/microwave"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,8 +84,8 @@
 
             <ImageView
                 android:id="@+id/hotwater"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,8 +107,8 @@
 
             <ImageView
                 android:id="@+id/productImage"
-                android:layout_width="100sp"
-                android:layout_height="100sp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:transitionName="pictureTransition"
@@ -100,13 +119,15 @@
                 android:id="@+id/productName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="3"
                 android:text="Product Name"
-                android:textSize="30sp"
+                android:textSize="24sp"
                 android:transitionName="productNameTransition"
-                app:layout_constraintEnd_toStartOf="@+id/heart"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/productImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,7 +138,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="2dp"
                 android:text="State"
-                android:textSize="24dp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/productImage"
                 app:layout_constraintTop_toBottomOf="@+id/productName" />
 
@@ -126,26 +147,26 @@
                 style="@style/Widget.AppCompat.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginStart="8dp"
                 android:isIndicator="false"
                 android:numStars="5"
                 android:rating="0.0"
                 android:stepSize="1"
-                app:layout_constraintStart_toEndOf="@+id/productImage"
-                app:layout_constraintTop_toBottomOf="@+id/productState" />
+                app:layout_constraintBottom_toBottomOf="@+id/productRating"
+                app:layout_constraintStart_toEndOf="@+id/productRating"
+                app:layout_constraintTop_toTopOf="@+id/productRating" />
 
             <TextView
                 android:id="@+id/productRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="0.0"
                 android:textSize="24dp"
                 android:transitionName="productRatingTransition"
-                app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/productImage" />
 
             <TextView
                 android:id="@+id/description"
@@ -156,7 +177,7 @@
                 android:text="Description"
                 android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productImage" />
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
             <TextView
                 android:id="@+id/cookingmethods"
@@ -265,20 +286,5 @@
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
-
-    <ImageView
-        android:id="@+id/rateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@android:drawable/star_big_on"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
-        app:srcCompat="@mipmap/ic_launcher_round" />
 
 </android.support.constraint.ConstraintLayout>

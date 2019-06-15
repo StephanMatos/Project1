@@ -8,15 +8,19 @@
 
     <TextView
         android:id="@+id/productName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/productImageView"
         android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:layout_toEndOf="@+id/productImageView"
+        android:ellipsize="end"
+        android:lines="2"
         android:text="Product Name"
         android:textSize="18sp"
         android:textStyle="bold"
         android:transitionName="productNameTransition"
+        app:layout_constraintEnd_toStartOf="@+id/hotwater"
         app:layout_constraintStart_toEndOf="@+id/productImageView"
         app:layout_constraintTop_toTopOf="@+id/productImageView" />
 

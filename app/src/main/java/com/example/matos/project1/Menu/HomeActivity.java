@@ -68,14 +68,14 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.nav_search:
                         viewPager.setCurrentItem(1);
                         break;
-
-                    case R.id.nav_recents:
+                    case R.id.nav_favorites:
                         viewPager.setCurrentItem(2);
                         break;
-                   case R.id.nav_favorites:
+                   case R.id.nav_recents:
+                        viewPager.setCurrentItem(3);
                        break;
                     case R.id.nav_profile:
-                        viewPager.setCurrentItem(3);
+                        viewPager.setCurrentItem(4);
                         break;
                 }
 
@@ -168,7 +168,7 @@ public class HomeActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         //fragmentHome = new FragmentHome();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
     }
 
 

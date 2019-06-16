@@ -6,9 +6,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
-
-import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.Products.CreateProduct;
 import com.example.matos.project1.Products.Product;
 import com.example.matos.project1.SavedValues;
@@ -45,12 +42,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         super.onPause();
         mScannerView.stopCamera();           // Stop camera on pause
     }
-    public void onBackPressed() {
-        this.finish();
-        Intent intent = new Intent(this,HomeActivity.class);
-        startActivity(intent);
 
-    }
 
     @Override
     public void handleResult(Result rawResult) {
@@ -94,8 +86,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
                 JSONObject json = jsons.getJSONObject(0);
 
 
-            if(json.getString("barcode") != "null")
-            {
+            if(json.getString("barcode") != "null") {
                 Intent intent = new Intent(ScanActivity.this, Product.class);
                 intent.putExtra("barcode", barcode);
                 startActivity(intent);

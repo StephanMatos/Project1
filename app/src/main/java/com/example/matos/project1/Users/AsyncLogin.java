@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.SavedValues;
+import com.example.matos.project1.SplashScreenActivity;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +28,8 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
     @Override
     protected Void doInBackground(String... Strings) {
         TabLoginFragment.setBooleans();
+        SplashScreenActivity.setBooleans();
+
 
         String data;
         email = Strings[0];
@@ -55,11 +59,13 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
                 if(response.equals("OK")){
                     if(data.equals("success")){
                         TabLoginFragment.success = true;
+                        SplashScreenActivity.success = true;
                         savedValues.saveEmail(email);
                         savedValues.savePassword(password);
                     }else{
                         System.out.println("inside failure");
                         TabLoginFragment.failure = true;
+                        SplashScreenActivity.failure = true;
                     }
                 }else{
                     TabLoginFragment.network = true;

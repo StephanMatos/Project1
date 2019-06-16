@@ -1,10 +1,7 @@
 package com.example.matos.project1.AsyncTask;
 
-import android.app.AlertDialog;
 import android.os.AsyncTask;
-
 import com.example.matos.project1.Menu.HomeActivity;
-import com.example.matos.project1.Products.ItemAdapter;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.Services;
 
@@ -17,7 +14,7 @@ public class SetupList extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        //HomeActivity.success = false;
+        System.out.println("new setupList");
 
         String username = SavedValues.getInstance().getEmail();
 
@@ -29,10 +26,22 @@ public class SetupList extends AsyncTask<Void, Void, Void> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //HomeActivity.success = true;
-        //HomeActivity.jsons = jsons;
+
+        HomeActivity.favorites = jsons;
+
+        data = Services.callAPI("products.php?username=" + username + "&recents=1");
+        try {
+            jsons = new JSONArray(data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        HomeActivity.recents = jsons;
         return null;
     }
+
+
+
 
 
 }

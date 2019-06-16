@@ -6,12 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.Users.AsyncLogin;
 import com.example.matos.project1.Users.LoginActivity;
-import com.example.matos.project1.Users.TabLoginFragment;
-import com.example.matos.project1.Users.TabSignupFragment;
 
 import static com.example.matos.project1.Users.TabLoginFragment.PREFS_NAME;
 import static com.example.matos.project1.Users.TabLoginFragment.mPrefs;
@@ -38,9 +35,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                if (mPrefs.getBoolean("CheckBox",true)){
-
-
+                if (mPrefs.getBoolean("CheckBox",false)){
+                    System.out.println("auto");
                     String shared_email = mPrefs.getString("Email","");
                     System.out.println(shared_email);
                     String shared_password = mPrefs.getString("Password","");
@@ -52,9 +48,11 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
                 }else{
+                    System.out.println("not auto");
                     Intent HomeIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
-                    startActivity(HomeIntent);
                     finish();
+                    startActivity(HomeIntent);
+
                 }
 
 
@@ -82,10 +80,14 @@ public class SplashScreenActivity extends AppCompatActivity {
                             active = false;
                             splash.finish();
                         }else if(failure){
-
+                            Intent intent = new Intent(context,LoginActivity.class);
+                            context.startActivity(intent);
+                            context.getSharedPreferences("CheckboxFile",MODE_PRIVATE).edit().clear().apply();
                             active = false;
                         }else if(network){
                             active = false;
+                            Intent intent = new Intent(context,LoginActivity.class);
+                            context.startActivity(intent);
                         }
 
                         Thread.sleep(200);

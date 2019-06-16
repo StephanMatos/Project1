@@ -106,13 +106,12 @@ public class Services {
 
     public static String callAPI(String query) {
 
-        System.out.println("API query is: " + query);
+
         try {
 
             query = query.replaceAll(" ", "%20");
             URL url = new URL("https://easyeats.dk/" + query);
-            System.out.println("Query is");
-            System.out.println("https://easyeats.dk/" + query);
+
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));

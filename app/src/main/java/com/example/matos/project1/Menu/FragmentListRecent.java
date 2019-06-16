@@ -27,6 +27,7 @@ public class FragmentListRecent extends Fragment {
 
     String type;
     ListView listView;
+    public ItemAdapter itemAdapter;
 
     @Nullable
     @Override
@@ -46,13 +47,25 @@ public class FragmentListRecent extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         listView = view.findViewById(R.id.listView);
+        itemAdapter = new ItemAdapter(getActivity(), HomeActivity.recents);
+        listView.setAdapter(itemAdapter);
 
-        TextView t = view.findViewById(R.id.titleTextView);
-        t.setText(type);
+        //TextView t = view.findViewById(R.id.titleTextView);
+        //t.setText(type);
 
-        new setupList().execute();
+        //new setupList().execute();
 
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        System.out.println("recents on resume");
+        itemAdapter = new ItemAdapter(getActivity(), HomeActivity.recents);
+        listView.setAdapter(itemAdapter);
+    }
+
+    /*
 
 
     private class setupList extends AsyncTask<Void, Void, Void> {
@@ -88,6 +101,6 @@ public class FragmentListRecent extends Fragment {
             ItemAdapter itemAdapter = new ItemAdapter(getActivity(), jsons);
             listView.setAdapter(itemAdapter);
         }
-    }
+    }*/
 
 }

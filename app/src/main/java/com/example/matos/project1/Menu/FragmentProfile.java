@@ -18,6 +18,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.content.SharedPreferences;
 
+import com.example.matos.project1.AlertDialogBoxes;
+import com.example.matos.project1.AsyncTask.SetupList;
 import com.example.matos.project1.R;
 import com.example.matos.project1.Users.LoginActivity;
 
@@ -96,7 +98,7 @@ public class FragmentProfile extends Fragment  {
                 e.apply();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
-                AlertDialogBoxes.finnishactivity(getActivity());
+
             }
         });
 
@@ -165,11 +167,17 @@ public class FragmentProfile extends Fragment  {
                         e.apply();
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
+                        AlertDialogBoxes.finnishactivity(getActivity());
                     }
 
                 }
             });
         }
     }
-
+    @Override
+    public void onResume(){
+        super.onResume();
+        System.out.println("Home on Profile");
+        new SetupList().execute();
+    }
 }

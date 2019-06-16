@@ -26,7 +26,8 @@ import dmax.dialog.SpotsDialog;
 public class FragmentListFavorites extends Fragment {
 
     String type;
-    ListView listView;
+    public ListView listView;
+    public TextView t;
 
     @Nullable
     @Override
@@ -39,22 +40,27 @@ public class FragmentListFavorites extends Fragment {
 
         return inflater.inflate(R.layout.fragment_list, container, false);
 
-
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
         listView = view.findViewById(R.id.listView);
+        ItemAdapter itemAdapter = new ItemAdapter(getActivity(), HomeActivity.favorites);
+        listView.setAdapter(itemAdapter);
 
-        TextView t = view.findViewById(R.id.titleTextView);
-        t.setText(type);
-
-        new setupList().execute();
+        //t = view.findViewById(R.id.titleTextView);
+        //t.setText(type);
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        ItemAdapter itemAdapter = new ItemAdapter(getActivity(), HomeActivity.favorites);
+        listView.setAdapter(itemAdapter);
+    }
 
+/*
     private class setupList extends AsyncTask<Void, Void, Void> {
 
         JSONArray jsons;
@@ -87,7 +93,7 @@ public class FragmentListFavorites extends Fragment {
             ItemAdapter itemAdapter = new ItemAdapter(getActivity(), jsons);
             listView.setAdapter(itemAdapter);
         }
-    }
+    }*/
 
 }
 

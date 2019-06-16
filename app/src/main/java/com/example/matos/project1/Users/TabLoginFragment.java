@@ -54,19 +54,18 @@ public class TabLoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login,container,false);
         // Initializing activity Widgets
         bindWidget(view);
-        //saveLoginCheckBox.setChecked(false);
-
 
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-/*
-
-*/
-        // Check if the user have checked 'saveLoginCheckBox' from earlier
-        automaticLogin(getActivity());
+        try{
+            mPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            prefsEditor = mPrefs.edit();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
         // If the user have forgotten his/hers password and want to reset password
         forgotPass.setOnClickListener(new View.OnClickListener() {
@@ -186,37 +185,6 @@ public class TabLoginFragment extends Fragment {
         unknown = false;
     }
 
-    // Check if the user have checked 'saveLoginCheckBox' from earlier
-    private void automaticLogin(Activity activity) {
-        try{
-            mPrefs = this.getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            prefsEditor = mPrefs.edit();
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
-
-
-        if (mPrefs.getBoolean("CheckBox",true)){
-            saveLoginCheckBox.setChecked(true);
-
-            String shared_email = mPrefs.getString("Email","");
-            email.setText(shared_email);
-
-            String shared_password = mPrefs.getString("Password","");
-            password.setText(shared_password);
-            prefsEditor.apply();
-
-            attempt_login(shared_email,shared_password, false,activity);
-
-        } else {
-            email.setText(mPrefs.getString("Email",""));
-
-            if(email.getText().toString().length() > 0){
-                password.requestFocus();
-            }
-
-        }
-    }
 
     // Initializing activity Widgets
     private void bindWidget(View view) {

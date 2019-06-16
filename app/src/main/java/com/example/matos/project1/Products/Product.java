@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.matos.project1.AsyncTask.SetupList;
 import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
@@ -106,6 +107,13 @@ public class Product extends AppCompatActivity {
 
 
         new getProduct().execute();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        new SetupList().execute();
 
     }
 

@@ -19,6 +19,7 @@ import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.content.SharedPreferences;
+import android.widget.TextView;
 
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
@@ -38,6 +39,7 @@ public class FragmentProfile extends Fragment  {
     Context context;
 
     GridLayout gridLayout;
+    TextView ratingCount, favoritesCount, totalScans, usernameTextView;
 
     int[] icons = {R.drawable.ic_account1, R.drawable.ic_account2,R.drawable.ic_account3, R.drawable.ic_account4,R.drawable.ic_account5,R.drawable.ic_account6,R.drawable.ic_account7,
             R.drawable.ic_account8, R.drawable.ic_account9};
@@ -58,6 +60,11 @@ public class FragmentProfile extends Fragment  {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        usernameTextView = view.findViewById(R.id.usernameTextView);
+        ratingCount = view.findViewById(R.id.avg_rate);
+        favoritesCount = view.findViewById(R.id.total_favorites);
+        totalScans = view.findViewById(R.id.total_scan);
 
         ImageView changepicture = view.findViewById(R.id.changePicture);
         final ImageView profile_image = view.findViewById(R.id.profile_picture);
@@ -142,13 +149,7 @@ public class FragmentProfile extends Fragment  {
             }
         });
 
-
-
-
-
-
-
-
+        new getStats().execute();
 
     }
 
@@ -186,9 +187,7 @@ public class FragmentProfile extends Fragment  {
         protected JSONObject doInBackground(Void... voids) {
 
             String username = SavedValues.getInstance().getEmail();
-            String data = Services.callAPI("products.php?email=" + username);
-            System.out.println("data is");
-            System.out.println(data);
+            String data = Services.callAPI("scans.php?email=" + username);
 
             JSONObject json = new JSONObject();
             try {
@@ -206,7 +205,10 @@ public class FragmentProfile extends Fragment  {
         protected void onPostExecute(JSONObject json) {
             try {
 
-
+                usernameTextView.setText(json.getString("username"));
+                ratingCount.setText(json.getString("ratingCount"));
+                favoritesCount.setText(json.getString("favoritesCount"));
+                totalScans.setText(json.getString("scans"));
 
             } catch (Exception e) {
                 e.printStackTrace();

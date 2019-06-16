@@ -130,8 +130,6 @@ public class Product extends AppCompatActivity {
 
             String username = SavedValues.getInstance().getEmail();
             String data = Services.callAPI("products.php?barcode=" + barcode + "&username=" + username);
-            System.out.println("data is");
-            System.out.println(data);
             JSONArray jsons = null;
             try {
                 jsons = new JSONArray(data);

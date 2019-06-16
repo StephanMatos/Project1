@@ -100,7 +100,7 @@ public class ItemAdapter extends BaseAdapter {
 
 
             double rating = json.getDouble("avgrating");
-            productRating.setText(String.format("%.2f", rating));
+            productRating.setText(String.format("%.1f", rating));
             productRatingBar.setProgress((int) (rating*20));
 
             if(json.getInt("inFavorites") == 1){

@@ -49,16 +49,16 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/productName"
-            android:layout_gravity="center_horizontal"
+            android:id="@+id/usernameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
             android:text="Stephan Matos"
-            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
@@ -163,7 +163,7 @@
                         android:id="@+id/text_avg_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Avg. rate"
+                        android:text="Total ratings"
                         android:textSize="15sp" />
 
                     <TextView
@@ -187,7 +187,6 @@
         android:id="@+id/mainGrid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="48dp"
         android:layout_weight="8"
         android:alignmentMode="alignMargins"
         android:columnCount="2"

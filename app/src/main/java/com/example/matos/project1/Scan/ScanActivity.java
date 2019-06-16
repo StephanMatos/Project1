@@ -1,5 +1,6 @@
 package com.example.matos.project1.Scan;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -69,6 +70,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         //mScannerView.resumeCameraPreview(this);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class CheckBarcode extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -82,6 +84,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
             String username = SavedValues.getInstance().getEmail();
             String data = Services.callAPI("products.php?barcode=" + barcode + "&username=" + username);
+            Services.postAPI("scans.php?email=" + username);
 
             return data;
         }
@@ -94,7 +97,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
                 JSONObject json = jsons.getJSONObject(0);
 
 
-            if(json.getString("barcode") != "null") {
+            if(!json.getString("barcode").equals("null")) {
                 Intent intent = new Intent(ScanActivity.this, Product.class);
                 intent.putExtra("barcode", barcode);
                 startActivity(intent);

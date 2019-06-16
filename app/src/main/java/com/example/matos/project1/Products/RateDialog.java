@@ -34,7 +34,7 @@ public class RateDialog extends Dialog {
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                System.out.println("rating is set to " + ((double) ratingBar.getProgress())/2.0 );
+                System.out.println("rating is set to " + ratingBar.getProgress() );
                 new RateAsync().execute();
                 cancel();
             }
@@ -49,7 +49,7 @@ public class RateDialog extends Dialog {
         @Override
         protected Void doInBackground(Void... voids) {
             String username = SavedValues.getInstance().getEmail();
-            String address = "rating.php?username=" + username + "&productID=" + productID+ "&rating=" + ((double) ratingBar.getProgress())/2.0;
+            String address = "rating.php?username=" + username + "&productID=" + productID+ "&rating=" + ratingBar.getProgress();
             Services.postAPI(address);
             return null;
         }

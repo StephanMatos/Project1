@@ -21,8 +21,10 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        android:layout_height="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@+id/navigationView"
+        app:layout_constraintTop_toTopOf="@+id/viewpager">
 
     </FrameLayout>
 
@@ -44,11 +46,14 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_above="@+id/navigationView"
         android:layout_alignParentTop="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:ignore="UnknownId" />
+        app:layout_constraintBottom_toTopOf="@+id/navigationView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnknownId"
+        tools:layout_editor_absoluteX="16dp" />
 
 
 

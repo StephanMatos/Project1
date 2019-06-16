@@ -1,5 +1,6 @@
 package com.example.matos.project1.Menu;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -181,6 +182,7 @@ public class FragmentProfile extends Fragment  {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class getStats extends AsyncTask<Void, Void, JSONObject> {
 
         @Override
@@ -206,9 +208,9 @@ public class FragmentProfile extends Fragment  {
             try {
 
                 usernameTextView.setText(json.getString("username"));
+                totalScans.setText(json.getString("scans"));
                 ratingCount.setText(json.getString("ratingCount"));
                 favoritesCount.setText(json.getString("favoritesCount"));
-                totalScans.setText(json.getString("scans"));
 
             } catch (Exception e) {
                 e.printStackTrace();

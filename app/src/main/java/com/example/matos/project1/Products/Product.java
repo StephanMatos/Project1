@@ -1,18 +1,17 @@
 package com.example.matos.project1.Products;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.Services;
@@ -21,8 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class Product extends AppCompatActivity {
 
@@ -61,7 +59,7 @@ public class Product extends AppCompatActivity {
         productPrice = findViewById(R.id.productPrice);
         heartImageView =  findViewById(R.id.heart);
         
-        barcode = getIntent().getExtras().getString("barcode");
+        barcode = Objects.requireNonNull(getIntent().getExtras()).getString("barcode");
 
         heartImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +88,7 @@ public class Product extends AppCompatActivity {
                 try {
 
                     RateDialog dialog = new RateDialog(Product.this, json.getInt("productID"));
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     dialog.show();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -106,6 +104,7 @@ public class Product extends AppCompatActivity {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class addToRecents extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -121,6 +120,7 @@ public class Product extends AppCompatActivity {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class getProduct extends AsyncTask<Void, Void, Void> {
 
         Bitmap productMainImageBitmap;
@@ -144,6 +144,7 @@ public class Product extends AppCompatActivity {
             return null;
         }
 
+        @SuppressLint("DefaultLocale")
         @Override
         protected void onPostExecute(Void avoid) {
             try {
@@ -176,6 +177,7 @@ public class Product extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class sendPostAPI extends AsyncTask<String, Void, Void> {
 
         @Override

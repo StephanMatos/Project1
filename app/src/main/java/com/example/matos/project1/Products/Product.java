@@ -29,7 +29,7 @@ public class Product extends AppCompatActivity {
 
     TextView rateBtn;
     RatingBar ratingBar;
-    TextView productRating, productName, productState, descriptionText;
+    TextView productRating, productName, productState, descriptionText, productPrice;
     ImageView productImage, heartImageView, ovenImageView, microwaveImageView, stoveImageView, hotwaterImageView;
     String barcode;
     JSONObject json;
@@ -58,6 +58,7 @@ public class Product extends AppCompatActivity {
         productName = findViewById(R.id.productName);
         descriptionText =  findViewById(R.id.descriptionText);
         productState = findViewById(R.id.productState);
+        productPrice = findViewById(R.id.productPrice);
         heartImageView =  findViewById(R.id.heart);
         
         barcode = getIntent().getExtras().getString("barcode");
@@ -86,14 +87,9 @@ public class Product extends AppCompatActivity {
         rateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<String> list = new ArrayList<>();
                 try {
-                    if(json.getString("grill").equals("1")) list.add("Grill");
-                    if(json.getString("ovn").equals("1")) list.add("Ovn");
-                    if(json.getString("komfur").equals("1")) list.add("Komfur");
-                    if(json.getString("mikroovn").equals("1")) list.add("Mikroovn");
 
-                    SelectStateDialog dialog = new SelectStateDialog(Product.this, list, json.getInt("productID"));
+                    RateDialog dialog = new RateDialog(Product.this, json.getInt("productID"));
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     dialog.show();
                 } catch (JSONException e) {
@@ -106,26 +102,34 @@ public class Product extends AppCompatActivity {
 
 
         new getProduct().execute();
+        new addToRecents().execute();
 
     }
 
+    private class addToRecents extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            String username = SavedValues.getInstance().getEmail();
+
+            Services.postAPI("recents.php?username=" + username + "&barcode=" + barcode + "&delete=1");
+            Services.postAPI("recents.php?username=" + username + "&barcode=" + barcode);
+
+            return null;
+        }
+
+    }
 
     private class getProduct extends AsyncTask<Void, Void, Void> {
 
         Bitmap productMainImageBitmap;
 
         @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
         protected Void doInBackground(Void... voids) {
 
             String username = SavedValues.getInstance().getEmail();
             String data = Services.callAPI("products.php?barcode=" + barcode + "&username=" + username);
-            System.out.println("data is");
-            System.out.println(data);
             JSONArray jsons = null;
             try {
                 jsons = new JSONArray(data);
@@ -146,11 +150,11 @@ public class Product extends AppCompatActivity {
                 productImage.setImageBitmap(productMainImageBitmap);
                 productName.setText(json.getString("productname"));
                 productRating.setText(String.format("%.2f", json.getDouble("avgrating")));
+                productPrice.setText(String.format("%.2f", json.getDouble("price")));
                 descriptionText.setText(json.getString("description"));
                 productState.setText(json.getString("state"));
-                ratingBar.setProgress((int) (json.getDouble("avgrating")));
-
-                System.out.println("state of p is: " + json.getString("state"));
+                //ratingBar.setProgress((int) json.getDouble("avgrating") * 10);
+                ratingBar.setRating((float) json.getDouble("avgrating"));
 
                 if(json.getInt("ovn") == 1) {ovenImageView.setBackgroundResource(R.drawable.custom_round);}
                 if(json.getInt("grill") == 1) {hotwaterImageView.setBackgroundResource(R.drawable.custom_round);}

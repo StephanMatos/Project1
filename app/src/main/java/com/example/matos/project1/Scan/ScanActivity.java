@@ -74,6 +74,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
             String username = SavedValues.getInstance().getEmail();
             String data = Services.callAPI("products.php?barcode=" + barcode + "&username=" + username);
+            Services.postAPI("scans.php?email=" + username);
 
             return data;
         }

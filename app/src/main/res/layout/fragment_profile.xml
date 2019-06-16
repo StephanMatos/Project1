@@ -163,7 +163,7 @@
                         android:id="@+id/text_avg_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Avg. rate"
+                        android:text="Total ratings"
                         android:textSize="15sp" />
 
                     <TextView
@@ -187,7 +187,6 @@
         android:id="@+id/mainGrid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="48dp"
         android:layout_weight="8"
         android:alignmentMode="alignMargins"
         android:columnCount="2"

@@ -32,7 +32,7 @@ public class TabLoginFragment extends Fragment {
     private TextView forgotPass;
 
     // save login credentials
-    private CheckBox saveLoginCheckBox;
+    public static CheckBox saveLoginCheckBox;
     public static SharedPreferences mPrefs;
     public SharedPreferences.Editor prefsEditor;
     public static final String PREFS_NAME = "CheckboxFile";

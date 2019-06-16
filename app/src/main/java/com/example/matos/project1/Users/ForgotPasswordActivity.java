@@ -24,7 +24,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private EditText email_EditText, editTextCode1, editTextCode2, editTextCode3, editTextCode4, editTextCode5;
     public TextView reopen_verificationDialog_TextView;
 
-    public String codeString, verificationCode, stringEmail;
+    public String codeString, verificationCode;
     // Buttons
     private Button send_Button, verifyCode_button;
 
@@ -62,7 +62,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         send_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //stringEmail = email_EditText.getText().toString();
                 resetPassword();
             }
         });
@@ -170,7 +169,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         if(success){
 
                             progressDialog.dismiss();
-                            AlertDialogBoxes.resetDialogOnUI(getContext(),"Reset Password",stringEmail);
+                            AlertDialogBoxes.resetDialogOnUI(getContext(),"Reset Password",email_EditText.getText().toString());
                             Thread.sleep(500);
                             resetDialog();
                             active = false;
@@ -380,9 +379,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         editTextCode3 = dialog.findViewById(R.id.editTextCode3);
         editTextCode4 = dialog.findViewById(R.id.editTextCode4);
         editTextCode5 = dialog.findViewById(R.id.editTextCode5);
-        //editTextEmail_dialog = dialog.findViewById(R.id.editTextEmail_dialog);
         verifyCode_button = dialog.findViewById(R.id.verifyCode_button);
-        //editTextEmail_dialog.setText(stringEmail);
+
 
     }
 

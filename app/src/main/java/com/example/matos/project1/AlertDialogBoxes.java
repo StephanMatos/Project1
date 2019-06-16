@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.matos.project1.Users.ForgotPasswordActivity;
 import com.example.matos.project1.Users.LoginActivity;
@@ -75,13 +76,17 @@ public class AlertDialogBoxes {
                 dialog = new Dialog(context);
                 dialog.setContentView(R.layout.dialogview_passreset);
                 dialog.setTitle(title);
+                TextView emailView = dialog.findViewById(R.id.textViewEmail);
+                emailView.setText(email);
                 dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
                 ForgotPasswordActivity.dialog = dialog;
+
+
                 dialog.show();
+
             }
         });
     }
-
 
     public static void passwordResetOnUI(final Context context,final String title,final String text){
 
@@ -131,4 +136,5 @@ public class AlertDialogBoxes {
             }
         });
     }
+
 }

@@ -34,31 +34,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:background="@drawable/edittext"
         android:id="@+id/productNameET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/edittext"
         android:ems="10"
         android:hint="Product name"
         android:inputType="textCapSentences"
+        android:transitionName="productNameTransition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productImageView" />
 
     <EditText
-        android:background="@drawable/edittext"
         android:id="@+id/productDescriptionET"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="@drawable/edittext"
         android:ems="10"
         android:hint="Product description"
         android:inputType="textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine"
         android:lines="3"
+        android:transitionName="productDescriptionTransition"
         app:layout_constraintEnd_toEndOf="@+id/productNameET"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/productNameET"
@@ -78,6 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/productDescriptionET" />
 
     <Spinner
+        android:background="@drawable/spinner"
         android:id="@+id/productStateSpinner"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -93,6 +96,7 @@
         android:layout_height="160dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:transitionName="pictureTransition"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Title"
         app:srcCompat="@android:drawable/ic_menu_report_image" />

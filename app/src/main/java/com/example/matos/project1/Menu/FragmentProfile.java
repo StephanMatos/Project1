@@ -3,7 +3,9 @@ package com.example.matos.project1.Menu;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,7 +21,13 @@ import android.widget.ImageView;
 import android.content.SharedPreferences;
 
 import com.example.matos.project1.R;
+import com.example.matos.project1.SavedValues;
+import com.example.matos.project1.Services;
 import com.example.matos.project1.Users.LoginActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -169,6 +177,43 @@ public class FragmentProfile extends Fragment  {
 
                 }
             });
+        }
+    }
+
+    private class getStats extends AsyncTask<Void, Void, JSONObject> {
+
+        @Override
+        protected JSONObject doInBackground(Void... voids) {
+
+            String username = SavedValues.getInstance().getEmail();
+            String data = Services.callAPI("products.php?email=" + username);
+            System.out.println("data is");
+            System.out.println(data);
+
+            JSONObject json = new JSONObject();
+            try {
+                JSONArray jsons = new JSONArray(data);
+                json = jsons.getJSONObject(0);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            try {
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            startPostponedEnterTransition();
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.matos.project1.Products;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -168,5 +172,23 @@ public class CreateProduct extends AppCompatActivity {
             Services.postAPI(address, bitmapProductImage);
             return null;
         }
+
+        @Override
+        protected void onPostExecute(Void avoid) {
+
+            onBackPressed();
+
+            Intent productIntent = new Intent(CreateProduct.this, Product.class);
+            productIntent.putExtra("barcode", barcode);
+
+            Pair p1 = Pair.create(productNameET, ViewCompat.getTransitionName(productNameET));
+            Pair p2 = Pair.create(productDescriptionET, ViewCompat.getTransitionName(productDescriptionET));
+            Pair p3 = Pair.create(productImageView, ViewCompat.getTransitionName(productImageView));
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(CreateProduct.this, p1, p2, p3);
+
+            startActivity(productIntent, options.toBundle());
+
+        }
+
     }
 }

@@ -26,8 +26,7 @@
             <Button
                 android:id="@+id/rateButton"
                 android:layout_width="100dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="8dp"
+                android:layout_height="0dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/roundbutton_primarycolor"
                 android:text="Rate"
@@ -36,7 +35,6 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
                 app:layout_constraintEnd_toStartOf="@+id/heart"
-                app:layout_constraintStart_toEndOf="@+id/ratingBar"
                 app:layout_constraintTop_toTopOf="@+id/ratingBar" />
 
             <ImageView
@@ -99,8 +97,11 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:lineSpacingExtra="2sp"
                 android:maxLength="150"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+                android:textSize="16sp"
+                android:transitionName="productDescriptionTransition"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
@@ -135,7 +136,7 @@
                 android:id="@+id/productState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="2dp"
                 android:text="State"
                 android:textSize="18sp"
@@ -148,10 +149,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:isIndicator="false"
+                android:isIndicator="true"
                 android:numStars="5"
-                android:rating="0.0"
-                android:stepSize="1"
+                android:rating="3.2"
+                android:stepSize="0.1"
                 app:layout_constraintBottom_toBottomOf="@+id/productRating"
                 app:layout_constraintStart_toEndOf="@+id/productRating"
                 app:layout_constraintTop_toTopOf="@+id/productRating" />
@@ -283,6 +284,17 @@
                 app:layout_constraintBottom_toBottomOf="@+id/hotwater"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/hotwater" />
+
+            <TextView
+                android:id="@+id/productPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:text="Price"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/productImage"
+                app:layout_constraintTop_toBottomOf="@+id/productState" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

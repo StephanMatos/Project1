@@ -23,6 +23,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.matos.project1.AsyncTask.SetupList;
+import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.Services;
@@ -127,6 +129,13 @@ public class Product extends AppCompatActivity {
 
         new getProduct().execute();
         new addToRecents().execute();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        new SetupList().execute();
 
     }
 

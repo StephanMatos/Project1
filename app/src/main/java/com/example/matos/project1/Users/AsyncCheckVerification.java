@@ -16,9 +16,9 @@ public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
         ForgotPasswordActivity.setBooleans();
         String email = Strings[0];
         String code = Strings[1];
-        //check
+
         try {
-            String resetUrl = "https://easyeats.dk/checkVerification.php?email="+email+"&verification="+code;
+            String resetUrl = "https://easyeats.dk/EasyEats/checkVerification.php?email="+email+"&verification="+code;
             System.out.println(resetUrl);
 
             URL url = new URL(resetUrl);

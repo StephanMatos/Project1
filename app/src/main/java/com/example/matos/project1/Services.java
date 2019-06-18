@@ -106,13 +106,12 @@ public class Services {
 
     public static String callAPI(String query) {
 
-        System.out.println("API query is: " + query);
+
         try {
 
             query = query.replaceAll(" ", "%20");
-            URL url = new URL("https://easyeats.dk/" + query);
-            System.out.println("Query is");
-            System.out.println("https://easyeats.dk/" + query);
+            URL url = new URL("https://easyeats.dk/EasyEats/" + query);
+
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -143,7 +142,7 @@ public class Services {
         try {
 
             address = address.replaceAll(" ", "%20");
-            URL url = new URL("https://easyeats.dk/" + address);
+            URL url = new URL("https://easyeats.dk/EasyEats/" + address);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             urlConnection.setRequestMethod("POST");
@@ -166,7 +165,7 @@ public class Services {
         try {
 
             address = address.replaceAll(" ", "%20");
-            URL url = new URL("https://easyeats.dk/" + address);
+            URL url = new URL("https://easyeats.dk/EasyEats/" + address);
             System.out.println("URL is: " + url);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 

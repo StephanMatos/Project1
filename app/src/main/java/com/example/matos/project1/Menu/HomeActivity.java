@@ -14,10 +14,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.matos.project1.AlertDialogBoxes;
+import com.example.matos.project1.AsyncTask.SetupList;
 import com.example.matos.project1.R;
 import com.example.matos.project1.Scan.ScanActivity;
+import com.example.matos.project1.Users.TabSignupFragment;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +36,17 @@ public class HomeActivity extends AppCompatActivity {
     private FragmentListRecent fragmentListRecent;
     private FragmentListFavorites fragmentListFavorites;
     private FragmentSearch fragmentSearch;
-    private  FragmentHome fragmentHome;
+    private FragmentHome fragmentHome;
+
+
+    public static JSONArray favorites;
+    public static JSONArray recents;
 
     private ViewPager viewPager;
     MenuItem prevMenuItem;
     BottomNavigationView bottomNavigationView;
 
     FloatingActionButton cameraBtn;
-
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -80,6 +89,9 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
                 return false;
+
+
+
             }
         });
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -167,9 +179,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        //fragmentHome = new FragmentHome();
-        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+        System.out.println("on resume");
     }
+
 
 
 }

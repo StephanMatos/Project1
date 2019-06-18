@@ -26,7 +26,8 @@ import dmax.dialog.SpotsDialog;
 public class FragmentListFavorites extends Fragment {
 
     String type;
-    ListView listView;
+    public ListView listView;
+    public TextView t;
 
     @Nullable
     @Override
@@ -39,55 +40,22 @@ public class FragmentListFavorites extends Fragment {
 
         return inflater.inflate(R.layout.fragment_list, container, false);
 
-
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
         listView = view.findViewById(R.id.listView);
-
-        TextView t = view.findViewById(R.id.titleTextView);
-        t.setText(type);
-
-        new setupList().execute();
+        ItemAdapter itemAdapter = new ItemAdapter(getActivity(), HomeActivity.favorites);
+        listView.setAdapter(itemAdapter);
 
     }
 
-
-    private class setupList extends AsyncTask<Void, Void, Void> {
-
-        JSONArray jsons;
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            String username = SavedValues.getInstance().getEmail();
-
-            String data;
-
-            data = Services.callAPI("products.php?username=" + username + "&favorites=1");
-
-            try {
-                jsons = new JSONArray(data);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void avoid) {
-
-            ItemAdapter itemAdapter = new ItemAdapter(getActivity(), jsons);
-            listView.setAdapter(itemAdapter);
-        }
+    @Override
+    public void onResume(){
+        super.onResume();
+        System.out.println("on resume favorites");
+        ItemAdapter itemAdapter = new ItemAdapter(getActivity(), HomeActivity.favorites);
+        listView.setAdapter(itemAdapter);
     }
-
 }
 

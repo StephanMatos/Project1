@@ -27,6 +27,7 @@ public class FragmentListRecent extends Fragment {
 
     String type;
     ListView listView;
+    public ItemAdapter itemAdapter;
 
     @Nullable
     @Override
@@ -46,48 +47,16 @@ public class FragmentListRecent extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         listView = view.findViewById(R.id.listView);
-
-        TextView t = view.findViewById(R.id.titleTextView);
-        t.setText(type);
-
-        new setupList().execute();
+        itemAdapter = new ItemAdapter(getActivity(), HomeActivity.recents);
+        listView.setAdapter(itemAdapter);
 
     }
 
-
-    private class setupList extends AsyncTask<Void, Void, Void> {
-
-        JSONArray jsons;
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            String username = SavedValues.getInstance().getEmail();
-
-            String data;
-
-            data = Services.callAPI("products.php?username=" + username + "&recents=1");
-
-
-            try {
-                jsons = new JSONArray(data);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void avoid) {
-
-            ItemAdapter itemAdapter = new ItemAdapter(getActivity(), jsons);
-            listView.setAdapter(itemAdapter);
-        }
+    @Override
+    public void onResume(){
+        super.onResume();
+        System.out.println("on resume recents");
+        itemAdapter = new ItemAdapter(getActivity(), HomeActivity.recents);
+        listView.setAdapter(itemAdapter);
     }
-
 }

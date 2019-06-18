@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+    <!-- Primary and secondary colors -->
     <color name="colorPrimary">#33691E  </color>
     <color name="colorPrimaryDark">#1B5E20</color>
-    <color name="colorAccent">#d81b60</color>
-    <color name="lightGray">#C0C0C0</color>
-    <color name="darkGray">#606060</color>
+
+    <!-- Surface, background, and error colors -->
+    <color name="surface">#ffffff</color>
     <color name="background">#F1F8E9</color>
-    <color name="widget">#F5F5F5</color>
+    <color name="error">#B00020</color>
 
+    <!-- Typography and iconography colors -->
+    <color name="onPrimary">#ffffff</color>
+    <color name="onSecondary">#000000</color>
+    <color name="onSurface">#000000</color>
+    <color name="onError">#ffffff</color>
 
-    <color name="enableColor">#3498db</color>
+    <!-- Extra colors -->
     <color name="transparentWhite">#80ffffff</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="lightGray">#C0C0C0</color>
+    <color name="darkGray">#606060</color>
+
+    <!-- need proper naming + used in app -->
+    <color name="widget">#F5F5F5</color>
+    <color name="enableColor">#3498db</color>
     <color name="unselect">#757575</color>
     <color name="titleColor">#ffffff</color>
+    <color name="colorAccent">#d81b60</color>
+
 </resources>

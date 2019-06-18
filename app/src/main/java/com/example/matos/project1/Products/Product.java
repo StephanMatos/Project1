@@ -5,12 +5,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -246,6 +254,9 @@ public class Product extends AppCompatActivity {
 
                     Bitmap bitmap = Services.StringToBitMap(imageString);
 
+
+
+
                     bitmaps.add(bitmap);
                 }
 
@@ -269,7 +280,14 @@ public class Product extends AppCompatActivity {
                     ImageView imageView = new ImageView(Product.this);
                     imageView.setId(id);
                     imageView.setPadding(8, 8, 8, 8);
-                    imageView.setImageBitmap(bitmap);
+
+                   // Gives the bitmap rounded corners
+                    RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+                    roundedBitmapDrawable.setCornerRadius(30);
+
+                    imageView.setImageDrawable(roundedBitmapDrawable);
+
+                   // imageView.setImageBitmap(bitmap);
 
                     ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     lp.width = 500;
@@ -366,6 +384,8 @@ public class Product extends AppCompatActivity {
         }
 
     }
+
+
 
 
 }

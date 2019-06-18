@@ -74,8 +74,6 @@ public class FragmentProfile extends Fragment  {
 
         gridLayout= view.findViewById(R.id.mainGrid);
 
-        System.out.println("------------PROFILE---------- ");
-
         setSingleEvent(gridLayout);
 /*
         LinearLayout favoriteLayout = view.findViewById(R.id.favoriteLayout);

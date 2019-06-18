@@ -20,14 +20,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimaryDark">
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorPrimaryDark"
                 android:paddingLeft="24dp"
                 android:paddingTop="36dp"
                 android:paddingBottom="28dp"
@@ -40,7 +40,7 @@
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorPrimaryDark"
                 app:srcCompat="@android:drawable/ic_menu_help"
                 android:paddingTop="16dp"/>
         </LinearLayout>
@@ -58,7 +58,7 @@
                 android:id="@+id/tabItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_login"/>
+                android:text="@string/tab_login" />
 
 
             <android.support.design.widget.TabItem

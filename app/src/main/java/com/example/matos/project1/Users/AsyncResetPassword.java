@@ -27,7 +27,7 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
             String resetUrl = "https://easyeats.dk/resetPassword.php?email="+email+"&password="+password;
             System.out.println(resetUrl);
             URL url = new URL(resetUrl);
-//check
+
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             InputStream inputStream = connection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

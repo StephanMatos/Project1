@@ -50,57 +50,13 @@ public class FragmentListRecent extends Fragment {
         itemAdapter = new ItemAdapter(getActivity(), HomeActivity.recents);
         listView.setAdapter(itemAdapter);
 
-        //TextView t = view.findViewById(R.id.titleTextView);
-        //t.setText(type);
-
-        //new setupList().execute();
-
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        System.out.println("recents on resume");
+        System.out.println("on resume recents");
         itemAdapter = new ItemAdapter(getActivity(), HomeActivity.recents);
         listView.setAdapter(itemAdapter);
     }
-
-    /*
-
-
-    private class setupList extends AsyncTask<Void, Void, Void> {
-
-        JSONArray jsons;
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            String username = SavedValues.getInstance().getEmail();
-
-            String data;
-
-            data = Services.callAPI("products.php?username=" + username + "&recents=1");
-
-
-            try {
-                jsons = new JSONArray(data);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void avoid) {
-
-            ItemAdapter itemAdapter = new ItemAdapter(getActivity(), jsons);
-            listView.setAdapter(itemAdapter);
-        }
-    }*/
-
 }

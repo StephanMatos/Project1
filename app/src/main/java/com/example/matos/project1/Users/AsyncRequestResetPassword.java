@@ -19,7 +19,7 @@ public class AsyncRequestResetPassword extends AsyncTask<String,Void,Void> {
 
         try {
 
-            String resetUrl = "https://easyeats.dk/requestResetPassword.php?email="+Strings[0];
+            String resetUrl = "https://easyeats.dk/EasyEats/requestResetPassword.php?email="+Strings[0];
             System.out.println(resetUrl);
 
             URL url = new URL(resetUrl);

@@ -25,7 +25,7 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
 
         try {
 
-            String LoginUrl = "https://easyeats.dk/signup.php?email="+email+"&password="+password+"&username="+username;
+            String LoginUrl = "https://easyeats.dk/EasyEats/signup.php?email="+email+"&password="+password+"&username="+username;
             System.out.println(LoginUrl);
             URL url = new URL(LoginUrl);
 

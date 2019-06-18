@@ -1,16 +1,27 @@
 package com.example.matos.project1.Products;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
@@ -20,17 +31,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Product extends AppCompatActivity {
 
+    private int GALLERY = 1, CAMERA = 2;
 
     TextView rateBtn;
     RatingBar ratingBar;
     TextView productRating, productName, productState, descriptionText, productPrice;
     ImageView productImage, heartImageView, ovenImageView, microwaveImageView, stoveImageView, hotwaterImageView;
+    Button addImageBtn;
     String barcode;
+    int productID;
     JSONObject json;
+    LinearLayout linearImageLayout;
 
 
     @Override
@@ -40,6 +57,8 @@ public class Product extends AppCompatActivity {
         postponeEnterTransition();
 
         rateBtn = findViewById(R.id.rateButton);
+        linearImageLayout = findViewById(R.id.linear);
+        addImageBtn = findViewById(R.id.addImageBtn);
 
         productImage = findViewById(R.id.productImage);
         ovenImageView = findViewById(R.id.oven);
@@ -98,6 +117,13 @@ public class Product extends AppCompatActivity {
         });
 
 
+        addImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPictureDialog();
+            }
+        });
+
 
         new getProduct().execute();
         new addToRecents().execute();
@@ -148,13 +174,13 @@ public class Product extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void avoid) {
             try {
+                productID = json.getInt("productID");
                 productImage.setImageBitmap(productMainImageBitmap);
                 productName.setText(json.getString("productname"));
                 productRating.setText(String.format("%.1f", json.getDouble("avgrating")));
                 productPrice.setText(String.format("%.1f", json.getDouble("price")));
                 descriptionText.setText(json.getString("description"));
                 productState.setText(json.getString("state"));
-                //ratingBar.setProgress((int) json.getDouble("avgrating") * 10);
                 ratingBar.setRating((float) json.getDouble("avgrating"));
 
                 if(json.getInt("ovn") == 1) {ovenImageView.setBackgroundResource(R.drawable.custom_round);}
@@ -167,6 +193,8 @@ public class Product extends AppCompatActivity {
                 } else{
                     heartImageView.setImageResource(R.drawable.emptyheart);
                 }
+
+                new getImages().execute(productID);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -188,5 +216,147 @@ public class Product extends AppCompatActivity {
         }
 
     }
+
+    @SuppressLint("StaticFieldLeak")
+    private class getImages extends AsyncTask<Integer, Void, ArrayList<Bitmap>> {
+
+        @Override
+        protected ArrayList<Bitmap> doInBackground(Integer... ints) {
+
+            int productID = ints[0];
+            String data = Services.callAPI("pictures.php?productID=" + productID);
+
+            ArrayList<Bitmap> bitmaps = new ArrayList<>();
+
+            try {
+                JSONArray jsons = new JSONArray(data);
+
+                for(int i = 0; i < jsons.length(); i++){
+                    JSONObject json = jsons.getJSONObject(i);
+                    String imageString = json.getString("picture");
+
+                    Bitmap bitmap = Services.StringToBitMap(imageString);
+
+                    bitmaps.add(bitmap);
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+            return bitmaps;
+        }
+
+        @SuppressLint("DefaultLocale")
+        @Override
+        protected void onPostExecute(ArrayList<Bitmap> bitmaps) {
+            try {
+                int id = 0;
+                for(Bitmap bitmap : bitmaps){
+                    id++;
+                    ImageView imageView = new ImageView(Product.this);
+                    imageView.setId(id);
+                    imageView.setPadding(8, 8, 8, 8);
+                    imageView.setImageBitmap(bitmap);
+
+                    ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    lp.width = 500;
+                    lp.height = 500;
+
+                    imageView.setLayoutParams(lp);
+
+                    linearImageLayout.addView(imageView);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            startPostponedEnterTransition();
+        }
+    }
+
+
+    private void showPictureDialog(){
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+        pictureDialog.setTitle("Select Action");
+        String[] pictureDialogItems = {
+                "Select photo from gallery",
+                "Capture photo from camera" };
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                choosePhotoFromGallary();
+                                break;
+                            case 1:
+                                takePhotoFromCamera();
+                                break;
+                        }
+                    }
+                });
+        pictureDialog.show();
+    }
+
+    public void choosePhotoFromGallary() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(galleryIntent, GALLERY);
+    }
+
+    private void takePhotoFromCamera() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAMERA);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == this.RESULT_CANCELED) {
+            return;
+        }
+        if (requestCode == GALLERY) {
+            if (data != null) {
+                Uri contentURI = data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                    new uploadImage().execute(bitmap);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(Product.this, "Failed!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        } else if (requestCode == CAMERA) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            new uploadImage().execute(thumbnail);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class uploadImage extends AsyncTask<Bitmap, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Bitmap... bitmaps) {
+
+            Bitmap bitmap = bitmaps[0];
+
+            Services.postAPI("pictures.php?productID=" + productID, bitmap);
+
+            return null;
+
+        }
+
+    }
+
 
 }

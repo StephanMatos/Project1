@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="Autofill" >
 
     <ImageView
         android:id="@+id/email_imageView"
@@ -14,7 +15,8 @@
         android:src="@drawable/ic_email"
         app:layout_constraintBottom_toBottomOf="@+id/email_EditText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/email_EditText" />
+        app:layout_constraintTop_toTopOf="@+id/email_EditText"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/email_EditText"
@@ -31,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/email_imageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/pass_TextView"
@@ -57,7 +59,8 @@
         android:src="@drawable/ic_lock"
         app:layout_constraintBottom_toBottomOf="@+id/pass_TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pass_TextView" />
+        app:layout_constraintTop_toTopOf="@+id/pass_TextView"
+        tools:ignore="ContentDescription" />
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -65,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Remember me?"
+        android:text="@string/remember_me"
         android:textColor="@color/onBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pass_TextView" />
@@ -78,7 +81,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/roundbutton_primarydark"
-        android:text="Login"
+        android:text="@string/login"
         android:textColor="@color/onPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,9 +93,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:text="Forgot password?"
+        android:text="@string/forgot_password"
         android:textColor="@color/onBackground"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/savePass_Button"
         app:layout_constraintTop_toBottomOf="@+id/savePass_Button" />

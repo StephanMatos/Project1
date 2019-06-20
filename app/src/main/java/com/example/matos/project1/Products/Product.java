@@ -4,14 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -27,12 +20,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.matos.project1.AsyncTask.SetupList;
-import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.Services;
@@ -71,6 +62,7 @@ public class Product extends AppCompatActivity {
         addImageBtn = findViewById(R.id.addImageBtn);
 
         productImage = findViewById(R.id.productImage);
+
         ovenImageView = findViewById(R.id.oven);
         microwaveImageView = findViewById(R.id.microwave);
         stoveImageView = findViewById(R.id.stove);
@@ -173,7 +165,7 @@ public class Product extends AppCompatActivity {
 
             String username = SavedValues.getInstance().getEmail();
             String data = Services.callAPI("products.php?barcode=" + barcode + "&username=" + username);
-            JSONArray jsons = null;
+            JSONArray jsons;
             try {
                 jsons = new JSONArray(data);
                 json = jsons.getJSONObject(0);
@@ -347,7 +339,7 @@ public class Product extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == this.RESULT_CANCELED) {
+        if (resultCode == RESULT_CANCELED) {
             return;
         }
         if (requestCode == GALLERY) {
@@ -364,7 +356,7 @@ public class Product extends AppCompatActivity {
             }
 
         } else if (requestCode == CAMERA) {
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            Bitmap thumbnail = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
             new uploadImage().execute(thumbnail);
         }
     }

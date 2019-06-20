@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/custom_card">
+    android:background="@drawable/custom_card"
+    tools:ignore="ContentDescription" >
 
     <TextView
         android:id="@+id/productName"
@@ -16,7 +17,7 @@
         android:layout_toEndOf="@+id/productImageView"
         android:ellipsize="end"
         android:lines="2"
-        android:text="Product Name"
+        android:text="@string/product_name"
         android:textSize="18sp"
         android:textStyle="bold"
         android:transitionName="productNameTransition"
@@ -37,7 +38,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@mipmap/ic_launcher"/>
 
     <ImageView
         android:id="@+id/hotwater"
@@ -127,7 +128,7 @@
         android:layout_alignBottom="@+id/productImageView"
         android:layout_marginEnd="4dp"
         android:layout_toStartOf="@+id/stoveImageView"
-        android:text="4.5"
+        android:text="@string/rating"
         android:textSize="18sp"
         android:transitionName="productRatingTransition"
         app:layout_constraintBottom_toBottomOf="@+id/stoveImageView"

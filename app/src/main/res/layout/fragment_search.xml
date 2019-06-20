@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -23,7 +24,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
-            android:text="Search"
+            android:text="@string/search"
             android:textColor="@color/onPrimary"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +48,6 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusedByDefault="false"
             android:background="@drawable/roundedcorner"
             android:iconifiedByDefault="false"
             android:queryHint="Type, barcode, cooking method"
@@ -63,8 +63,9 @@
             android:layout_weight="1"
             android:paddingTop="8dp"
             android:paddingEnd="30dp"
-            android:text="Advanced"
-            tools:layout_editor_absoluteX="360dp" />
+            android:text="@string/advanced"
+            tools:layout_editor_absoluteX="360dp"
+            tools:ignore="InefficientWeight,RtlSymmetry" />
 
 
     </LinearLayout>
@@ -101,8 +102,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="4"
-                    android:text="Cooking method"
-                    android:textSize="17dp" />
+                    android:text="@string/cooking_method"
+                    android:textSize="17sp" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -113,7 +114,7 @@
                     android:id="@+id/hotwater"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginRight="2dp"
+                    android:layout_marginEnd="2dp"
                     android:background="@drawable/custom_round"
                     android:padding="3dp"
                     app:srcCompat="@drawable/ic_oven" />
@@ -122,7 +123,7 @@
                     android:id="@+id/microwaveImageView"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginRight="2dp"
+                    android:layout_marginEnd="2dp"
                     android:background="@drawable/custom_round"
                     android:padding="3dp"
                     app:srcCompat="@drawable/ic_microwave" />
@@ -131,7 +132,7 @@
                     android:id="@+id/stoveImageView"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginRight="2dp"
+                    android:layout_marginEnd="2dp"
                     android:background="@drawable/custom_round"
                     android:padding="2dp"
                     app:srcCompat="@drawable/ic_stove" />
@@ -150,7 +151,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:orientation="horizontal"
-                android:paddingTop="8dp">
+                android:paddingTop="8dp"
+                tools:ignore="InefficientWeight">
 
                 <TextView
                     android:id="@+id/minratingTextView"
@@ -158,8 +160,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="4"
-                    android:text="Min. rating"
-                    android:textSize="17dp" />
+                    android:text="@string/min_rating"
+                    android:textSize="17sp"
+                    tools:ignore="NestedWeights" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -174,7 +177,8 @@
                     android:layout_weight="6"
                     android:paddingEnd="12dp"
                     android:progressTint="@color/enableColor"
-                    android:thumbTint="@color/enableColor" />
+                    android:thumbTint="@color/enableColor"
+                    tools:ignore="RtlSymmetry" />
 
                 <TextView
                     android:id="@+id/ratingNumberTextView"
@@ -182,7 +186,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="0"
-                    android:text="0" />
+                    android:text="@string/rating" />
 
             </LinearLayout>
 
@@ -199,8 +203,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:text="Sorting"
-                    android:textSize="17dp" />
+                    android:text="@string/sorting"
+                    android:textSize="17sp" />
 
                 <Space
                     android:layout_width="wrap_content"
@@ -216,7 +220,8 @@
                     android:paddingEnd="12dp"
                     android:progressBackgroundTint="@color/transparentWhite"
                     android:progressTint="@color/transparentWhite"
-                    android:thumbTint="@color/enableColor" />
+                    android:thumbTint="@color/enableColor"
+                    tools:ignore="RtlSymmetry" />
 
                 <Space
                     android:layout_width="20dp"
@@ -228,7 +233,7 @@
                     android:layout_width="56dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Random" />
+                    android:text="@string/random" />
 
             </LinearLayout>
 
@@ -241,7 +246,8 @@
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6" />
+                    android:layout_weight="6"
+                    tools:ignore="InefficientWeight" />
 
                 <SeekBar
                     android:id="@+id/minmaxseekBar"
@@ -261,7 +267,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:text="Min/max" />
+                    android:text="@string/min_max" />
             </LinearLayout>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

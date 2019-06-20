@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:ignore="Autofill,LabelFor" >
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -15,7 +16,7 @@
         android:layout_marginTop="32dp"
         android:alpha=".8"
         android:gravity="center"
-        android:text="Verification code"
+        android:text="@string/verification_code"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Widget.PopupMenu.Header"
         android:textColor="@color/white"
         android:textSize="34sp"
@@ -36,7 +37,7 @@
         android:gravity="center"
         android:lineSpacingExtra="4dp"
         android:textColor="@color/white"
-        android:text="Please enter the verification code sent to"
+        android:text="@string/please_enter_verification_code_sent_to"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
@@ -64,7 +65,7 @@
         android:id="@+id/editTextCode1"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
@@ -75,7 +76,7 @@
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/editTextCode2"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmail"/>
 
     <EditText
         android:id="@+id/editTextCode2"
@@ -130,7 +131,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginTop="16dp"
-        android:layout_marginRight="4dp"
+        android:layout_marginEnd="4dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:inputType="number"
@@ -149,7 +150,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/roundbutton_primarycolor"
-        android:text="Verify code"
+        android:text="@string/verify_code"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/editTextCode5"
         app:layout_constraintStart_toStartOf="@+id/editTextCode1"

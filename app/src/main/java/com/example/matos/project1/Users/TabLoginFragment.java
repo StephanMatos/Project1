@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,6 +33,10 @@ public class TabLoginFragment extends Fragment {
     private Button login;
     private TextView forgotPass;
 
+    // Drawables
+    GradientDrawable drawable_email;
+    GradientDrawable drawable_password;
+
     // save login credentials
     public static CheckBox saveLoginCheckBox;
     public static SharedPreferences mPrefs;
@@ -52,8 +58,15 @@ public class TabLoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_login,container,false);
+
         // Initializing activity Widgets
         bindWidget(view);
+
+        // Setting the stroke of the drawable to lightgray
+        drawable_email = (GradientDrawable)email.getBackground();
+        drawable_email.setStroke(2, Color.rgb(192,192,192));
+        drawable_password = (GradientDrawable)password.getBackground();
+        drawable_password.setStroke(2, Color.rgb(192,192,192));
 
         return view;
     }
@@ -193,6 +206,7 @@ public class TabLoginFragment extends Fragment {
         forgotPass = view.findViewById(R.id.forgotPassTextView);
         saveLoginCheckBox = view.findViewById(R.id.checkBox);
         login = view.findViewById(R.id.savePass_Button);
+
 
     }
 }

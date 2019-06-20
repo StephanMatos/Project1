@@ -13,7 +13,9 @@
 
     <!-- Typography and iconography colors -->
     <color name="onPrimary">#ffffff</color>
+    <color name="onPrimaryDark">#ffffff</color>
     <color name="onSecondary">#000000</color>
+    <color name="onBackground">#000000</color>
     <color name="onSurface">#000000</color>
     <color name="onError">#ffffff</color>
 

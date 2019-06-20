@@ -18,6 +18,7 @@
 
     <EditText
         android:id="@+id/email_EditText"
+        android:background="@drawable/login_signup_edittext"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -33,6 +34,7 @@
 
     <EditText
         android:id="@+id/pass_TextView"
+        android:background="@drawable/login_signup_edittext"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -62,7 +64,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Remember me?"
-        android:textColor="@color/white"
+        android:textColor="@color/onBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pass_TextView" />
 
@@ -75,7 +77,7 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/roundbutton_primarydark"
         android:text="Login"
-        android:textColor="@color/white"
+        android:textColor="@color/onPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
@@ -87,7 +89,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:text="Forgot password?"
-        android:textColor="#000000"
+        android:textColor="@color/onBackground"
         android:textSize="14dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/savePass_Button"

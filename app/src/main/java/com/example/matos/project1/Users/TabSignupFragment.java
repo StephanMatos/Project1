@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,6 +32,9 @@ public class TabSignupFragment extends Fragment {
     boolean validEmail = false;
     boolean validPassword = false;
     boolean validUsername = false;
+    GradientDrawable drawable_username;
+    GradientDrawable drawable_email;
+    GradientDrawable drawable_password;
 
     public static AlertDialog progressDialog;
     private TextView username,email,password;
@@ -61,6 +66,15 @@ public class TabSignupFragment extends Fragment {
         username = view.findViewById(R.id.usernameTextView);
         email = view.findViewById(R.id.email_EditText);
         password = view.findViewById(R.id.pass_TextView);
+
+        // Change Drawable strokecolor based on user inputs, stating of with lightgray
+        drawable_username = (GradientDrawable)username.getBackground();
+        drawable_email = (GradientDrawable)email.getBackground();
+        drawable_password = (GradientDrawable)password.getBackground();
+        drawable_username.setStroke(2, Color.rgb(192,192,192));
+        drawable_email.setStroke(2, Color.rgb(192,192,192));
+        drawable_password.setStroke(2, Color.rgb(192,192,192));
+
 
         // Buttons
         signUp = view.findViewById(R.id.savePass_Button);
@@ -94,9 +108,11 @@ public class TabSignupFragment extends Fragment {
                 validUsername = CheckValues.checkUsername(username.getText().toString());
                 if(validUsername){
 
-                    username.setTextColor(Color.GREEN);
+                    //username.setTextColor(Color.GREEN);
+                    drawable_username.setStroke(3, Color.GREEN);
                 }else{
-                    username.setTextColor(Color.RED);
+                    //username.setTextColor(Color.RED);
+                    drawable_username.setStroke(3, Color.RED);
 
                 }
 
@@ -119,9 +135,11 @@ public class TabSignupFragment extends Fragment {
 
                 if(validEmail){
 
-                    email.setTextColor(Color.GREEN);
+                    //email.setTextColor(Color.GREEN);
+                    drawable_email.setStroke(3, Color.GREEN);
                 }else{
-                    email.setTextColor(Color.RED);
+                    //email.setTextColor(Color.RED);
+                    drawable_email.setStroke(3, Color.RED);
 
                 }
             }
@@ -142,9 +160,11 @@ public class TabSignupFragment extends Fragment {
                 validPassword = CheckValues.checkPassword(password.getText().toString());
                 if(validPassword){
 
-                    password.setTextColor(Color.GREEN);
+                    //password.setTextColor(Color.GREEN);
+                    drawable_password.setStroke(3, Color.GREEN);
                 }else{
-                    password.setTextColor(Color.RED);
+                    //password.setTextColor(Color.RED);
+                    drawable_password.setStroke(3, Color.RED);
 
                 }
 

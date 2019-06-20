@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -47,6 +49,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     public static boolean verification = false;
     public static boolean verificationError = false;
 
+    // Drawables
+    GradientDrawable drawable_email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +61,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         // Initializing activity Widgets
         bindViews();
+
+
 
         context = this;
 
@@ -390,6 +397,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         send_Button = findViewById(R.id.savePass_Button);
         help_button = findViewById(R.id.help_button);
         reopen_verificationDialog_TextView = findViewById(R.id.reopen_verificationDialog_TextView);
+
+        drawable_email = (GradientDrawable)email_EditText.getBackground();
+        drawable_email.setStroke(2, Color.rgb(192,192,192));
     }
 
 }

@@ -1,36 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    // Green
 
-    <!-- Primary and secondary colors -->
-    <color name="colorPrimary">#33691E  </color>
+    <!-- Primary and secondary colors
+    <color name="colorPrimary">#33691E</color>
     <color name="colorPrimaryDark">#1B5E20</color>
 
-    <!-- Surface, background, and error colors -->
+     Surface, background, and error colors
     <color name="surface">#ffffff</color>
     <color name="background">#F1F8E9</color>
-    <color name="error">#B00020</color>
 
-    <!-- Typography and iconography colors -->
+
+   Typography and iconography colors
     <color name="onPrimary">#ffffff</color>
     <color name="onPrimaryDark">#ffffff</color>
     <color name="onSecondary">#000000</color>
     <color name="onBackground">#000000</color>
     <color name="onSurface">#000000</color>
-    <color name="onError">#ffffff</color>
 
-    <!-- Extra colors -->
-    <color name="transparentWhite">#80ffffff</color>
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
-    <color name="lightGray">#C0C0C0</color>
-    <color name="darkGray">#606060</color>
-
-    <!-- need proper naming + used in app -->
-    <color name="widget">#F5F5F5</color>
+    need proper naming + used in app
     <color name="enableColor">#3498db</color>
     <color name="unselect">#757575</color>
     <color name="titleColor">#ffffff</color>
     <color name="colorAccent">#d81b60</color>
+
+
+    -->
+
+
+    <color name="colorPrimary">#FF8F00</color>
+    <color name="colorPrimaryDark">#FF6F00</color>
+
+    <color name="surface">#ffffff</color>
+    <color name="background">#FFF8E1</color>
+    <color name="hint">#000000</color>
+    <color name="StrokeEdge">#C0C0C0</color>
+    <color name="helpDialog">#FFF8E1</color>
+
+    <color name="gradientStart">#FFF8E1</color>
+    <color name="gradientEnd">#FFF8E1</color>
+
+
+
+    <color name="onPrimary">#000000</color>
+    <color name="onPrimaryDark">#000000</color>
+    <color name="onSecondary">#000000</color>
+    <color name="onBackground">#000000</color>
+    <color name="onSurface">#000000</color>
+
+    <color name="enableColor">#FF8F00</color>
+    <color name="unselect">#757575</color>
+    <color name="titleColor">#ffffff</color>
+    <color name="colorAccent">#FF8F00</color>
+
+
+
+    <!-- Extra colors -->
+    <color name="white">#ffffff</color>
+    <color name="darkGray">#606060</color>
+    <color name="lightGray">#C0C0C0</color>
+    <color name="transparentWhite">#80ffffff</color>
+
+    <color name="black">#000000</color>
+
+
 
 </resources>

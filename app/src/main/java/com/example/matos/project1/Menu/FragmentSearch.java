@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.matos.project1.R;
 
 public class FragmentSearch extends Fragment {
+
+    SearchView searchViev;
 
 
 
@@ -32,6 +35,8 @@ public class FragmentSearch extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 
         final ConstraintLayout advancedLayoutView = view.findViewById(R.id.advancedSearchView);
+        searchViev = view.findViewById(R.id.searchView);
+        searchViev.setFocusable(false);
 
         final TextView advancedTextView = view.findViewById(R.id.advancedsearchTextView);
         final TextView ratingNumberTextView = view.findViewById(R.id.ratingNumberTextView);
@@ -154,6 +159,13 @@ public class FragmentSearch extends Fragment {
         });
 
 
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+        searchViev.setFocusable(false);
     }
 
 

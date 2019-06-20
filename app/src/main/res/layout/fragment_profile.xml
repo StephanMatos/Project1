@@ -130,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/onPrimary"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -160,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/onPrimary"
                         android:textSize="15sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -192,7 +192,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/onPrimary"
                         android:textSize="15sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -228,7 +228,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/colorPrimaryDark"
+            app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -250,7 +250,7 @@
                     android:layout_height="wrap_content"
                     android:text="Friends"
                     android:textAlignment="center"
-                    android:textColor="#000"
+                    android:textColor="@color/onPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -289,7 +289,7 @@
                     android:layout_height="wrap_content"
                     android:text="Statistics"
                     android:textAlignment="center"
-                    android:textColor="#000"
+                    android:textColor="@color/onPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -309,7 +309,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/enableColor"
+            app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -331,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:text="Settings"
                     android:textAlignment="center"
-                    android:textColor="#000"
+                    android:textColor="@color/onPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -371,7 +371,7 @@
                     android:layout_height="wrap_content"
                     android:text="Logout"
                     android:textAlignment="center"
-                    android:textColor="#000"
+                    android:textColor="@color/onPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 

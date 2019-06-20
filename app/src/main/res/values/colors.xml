@@ -1,36 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Green 50 -->
+    <color name="colorPrimary">#43a047</color>
+    <color name="colorPrimaryDark">#2e7d32</color>
 
-    <!-- Primary and secondary colors -->
-    <color name="colorPrimary">#33691E  </color>
-    <color name="colorPrimaryDark">#1B5E20</color>
+    <color name="background">#E8F5E9</color>
+    <color name="hint">#E8F5E9</color>
+    <color name="StrokeEdge">#C0C0C0</color>
+    <color name="helpDialog">#E8F5E9</color>
 
-    <!-- Surface, background, and error colors -->
-    <color name="surface">#ffffff</color>
-    <color name="background">#F1F8E9</color>
-    <color name="error">#B00020</color>
+    <color name="gradientStart">#E8F5E9</color>
+    <color name="gradientEnd">#E8F5E9</color>
 
-    <!-- Typography and iconography colors -->
+    <color name="onPrimary">#ffffff</color>
+    <color name="onPrimaryDark">#ffffff</color>
+    <color name="onSecondary">#ffffff</color>
+    <color name="onBackground">#000000</color>
+    <color name="onSurface">#000000</color>
+
+    <color name="enableColor">#2E7D32</color>
+    <color name="unselect">#757575</color>
+    <color name="titleColor">#ffffff</color>
+    <color name="colorAccent">#2E7D32</color>
+
+
+
+
+    <!--    Amber 50
+
+    <color name="colorPrimary">#FF8F00</color>
+    <color name="colorPrimaryDark">#FF6F00</color>
+
+
+    <color name="background">#FFF8E1</color>
+    <color name="hint">#000000</color>
+    <color name="StrokeEdge">#C0C0C0</color>
+    <color name="helpDialog">#FFF8E1</color>
+
+    <color name="gradientStart">#FFF8E1</color>
+    <color name="gradientEnd">#FFF8E1</color>
+
+    <color name="onPrimary">#000000</color>
+    <color name="onPrimaryDark">#000000</color>
+    <color name="onSecondary">#000000</color>
+    <color name="onBackground">#000000</color>
+    <color name="onSurface">#000000</color>
+
+    <color name="enableColor">#FF8F00</color>
+    <color name="unselect">#757575</color>
+    <color name="titleColor">#ffffff</color>
+    <color name="colorAccent">#FF8F00</color>
+    -->
+
+    <!-- Cyan
+
+    <color name="colorPrimary">#00838F</color>
+    <color name="colorPrimaryDark">#006064</color>
+
+    <color name="background">#E0F7FA</color>
+    <color name="hint">#E0F7FA</color>
+    <color name="StrokeEdge">#C0C0C0</color>
+    <color name="helpDialog">#E0F7FA</color>
+
+    <color name="gradientStart">#E0F7FA</color>
+    <color name="gradientEnd">#E0F7FA</color>
+
     <color name="onPrimary">#ffffff</color>
     <color name="onPrimaryDark">#ffffff</color>
     <color name="onSecondary">#000000</color>
     <color name="onBackground">#000000</color>
     <color name="onSurface">#000000</color>
-    <color name="onError">#ffffff</color>
 
-    <!-- Extra colors -->
-    <color name="transparentWhite">#80ffffff</color>
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
-    <color name="lightGray">#C0C0C0</color>
-    <color name="darkGray">#606060</color>
-
-    <!-- need proper naming + used in app -->
-    <color name="widget">#F5F5F5</color>
-    <color name="enableColor">#3498db</color>
+    <color name="enableColor">#006064</color>
     <color name="unselect">#757575</color>
     <color name="titleColor">#ffffff</color>
-    <color name="colorAccent">#d81b60</color>
+    <color name="colorAccent">#00838F</color>
+-->
+
+    <!-- Deep Orange 50
+    <color name="colorPrimary">#D84315</color>
+    <color name="colorPrimaryDark">#BF360C</color>
+
+    <color name="background">#FBE9E7</color>
+    <color name="hint">#FBE9E7</color>
+    <color name="StrokeEdge">#C0C0C0</color>
+    <color name="helpDialog">#FBE9E7</color>
+
+    <color name="gradientStart">#FBE9E7</color>
+    <color name="gradientEnd">#FBE9E7</color>
+
+    <color name="onPrimary">#ffffff</color>
+    <color name="onPrimaryDark">#ffffff</color>
+    <color name="onSecondary">#000000</color>
+    <color name="onBackground">#000000</color>
+    <color name="onSurface">#000000</color>
+
+    <color name="enableColor">#BF360C</color>
+    <color name="unselect">#757575</color>
+    <color name="titleColor">#ffffff</color>
+    <color name="colorAccent">#D84315</color>
+    -->
+
+    <!-- Orange 50
+        <color name="colorPrimary">#EF6C00</color>
+        <color name="colorPrimaryDark">#E65100</color>
+
+        <color name="background">#FFF3E0</color>
+        <color name="hint">#FFF3E0</color>
+        <color name="StrokeEdge">#C0C0C0</color>
+        <color name="helpDialog">#FFF3E0</color>
+
+        <color name="gradientStart">#FFF3E0</color>
+        <color name="gradientEnd">#FFF3E0</color>
+
+        <color name="onPrimary">#000000</color>
+        <color name="onPrimaryDark">#ffffff</color>
+        <color name="onSecondary">#000000</color>
+        <color name="onBackground">#000000</color>
+        <color name="onSurface">#000000</color>
+
+        <color name="enableColor">#E65100</color>
+        <color name="unselect">#757575</color>
+        <color name="titleColor">#ffffff</color>
+        <color name="colorAccent">#E65100</color>
+
+        -->
+
+    <!--  Yellow
+    <color name="colorPrimary">#F9A825</color>
+    <color name="colorPrimaryDark">#F57F17</color>
+
+    <color name="background">#FFFDE7</color>
+    <color name="hint">#FFFDE7</color>
+    <color name="StrokeEdge">#C0C0C0</color>
+    <color name="helpDialog">#FFFDE7</color>
+
+    <color name="gradientStart">#FFFDE7</color>
+    <color name="gradientEnd">#FFFDE7</color>
+
+    <color name="onPrimary">#000000</color>
+    <color name="onPrimaryDark">#000000</color>
+    <color name="onSecondary">#000000</color>
+    <color name="onBackground">#000000</color>
+    <color name="onSurface">#000000</color>
+
+    <color name="enableColor">#F57F17</color>
+    <color name="unselect">#757575</color>
+    <color name="titleColor">#ffffff</color>
+    <color name="colorAccent">#F57F17</color>
+    -->
+
+        <!-- Extra colors -->
+    <color name="white">#ffffff</color>
+    <color name="darkGray">#606060</color>
+    <color name="lightGray">#C0C0C0</color>
+    <color name="transparentWhite">#80ffffff</color>
+    <color name="black">#000000</color>
+    <color name="surface">#ffffff</color>
+
 
 </resources>

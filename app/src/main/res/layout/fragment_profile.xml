@@ -6,11 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="Profile"
+            android:textColor="@color/onPrimary"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@color/colorPrimaryDark"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <LinearLayout
             android:id="@+id/profile_frame"
@@ -106,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/onPrimary"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -136,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/onPrimary"
                         android:textSize="15sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -168,7 +192,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/onPrimary"
                         android:textSize="15sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -204,7 +228,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/colorPrimaryDark"
+            app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -226,7 +250,7 @@
                     android:layout_height="wrap_content"
                     android:text="Friends"
                     android:textAlignment="center"
-                    android:textColor="#000"
+                    android:textColor="@color/onPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -265,7 +289,7 @@
                     android:layout_height="wrap_content"
                     android:text="Statistics"
                     android:textAlignment="center"
-                    android:textColor="#000"
+                    android:textColor="@color/onPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -285,7 +309,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/enableColor"
+            app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -307,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:text="Settings"
                     android:textAlignment="center"
-                    android:textColor="#000"
+                    android:textColor="@color/onPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -347,7 +371,7 @@
                     android:layout_height="wrap_content"
                     android:text="Logout"
                     android:textAlignment="center"
-                    android:textColor="#000"
+                    android:textColor="@color/onPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 

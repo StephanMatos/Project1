@@ -28,6 +28,8 @@ import dmax.dialog.SpotsDialog;
 
 public class TabSignupFragment extends Fragment {
 
+    // WAS IS LIEBEEEEE
+
     // Validation of user input
     boolean validEmail = false;
     boolean validPassword = false;

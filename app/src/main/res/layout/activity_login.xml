@@ -28,12 +28,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
-                android:paddingLeft="24dp"
-                android:paddingTop="36dp"
-                android:paddingBottom="28dp"
+                android:paddingStart="24dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp"
                 android:text="@string/app_name"
                 android:textColor="@color/onPrimaryDark"
-                android:textSize="30dp" />
+                android:textSize="30sp"
+                tools:ignore="RtlSymmetry" />
 
             <ImageView
                 android:id="@+id/help_button"
@@ -42,7 +43,8 @@
                 android:layout_weight="1"
                 android:background="@color/colorPrimaryDark"
                 app:srcCompat="@android:drawable/ic_menu_help"
-                android:paddingTop="16dp"/>
+                android:paddingTop="16dp"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
 
         <android.support.design.widget.TabLayout

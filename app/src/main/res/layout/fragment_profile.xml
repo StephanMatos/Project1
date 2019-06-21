@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription" >
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -20,7 +21,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="4dp"
-            android:text="Profile"
+            android:text="@string/profile"
             android:textColor="@color/onPrimary"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,13 +50,14 @@
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="UselessParent">
 
                 <ImageView
                     android:id="@+id/profile_picture"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_account1" />
+                    android:background="@drawable/ic_account1"/>
 
                 <ImageView
                     android:id="@+id/changePicture"
@@ -109,7 +111,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="3"
+            tools:ignore="DisableBaselineAlignment">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -122,7 +125,7 @@
                     android:id="@+id/text_total_scan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total scans"
+                    android:text="@string/profile_fact_1"
                     android:textSize="15sp" />
 
                 <TextView
@@ -146,13 +149,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="NestedWeights,UselessParent">
 
                     <TextView
                         android:id="@+id/text_total_favorites"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Favorites"
+                        android:text="@string/profile_fact_2"
                         android:textSize="15sp" />
 
                     <TextView
@@ -178,13 +182,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="NestedWeights,UselessParent">
 
                     <TextView
                         android:id="@+id/text_avg_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total ratings"
+                        android:text="@string/profile_fact_3"
                         android:textSize="15sp" />
 
                     <TextView
@@ -225,8 +230,8 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="8dp"
@@ -237,7 +242,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="4dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -248,7 +254,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Friends"
+                    android:text="@string/friends"
                     android:textAlignment="center"
                     android:textColor="@color/onPrimary"
                     android:textSize="18sp"
@@ -264,8 +270,8 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="8dp"
@@ -276,7 +282,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="4dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -287,7 +294,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Statistics"
+                    android:text="@string/statistics"
                     android:textAlignment="center"
                     android:textColor="@color/onPrimary"
                     android:textSize="18sp"
@@ -306,8 +313,8 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="8dp"
@@ -318,7 +325,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="4dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -329,7 +337,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Settings"
+                    android:text="@string/settings"
                     android:textAlignment="center"
                     android:textColor="@color/onPrimary"
                     android:textSize="18sp"
@@ -346,8 +354,8 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="8dp"
@@ -358,7 +366,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="4dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -369,7 +378,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Logout"
+                    android:text="@string/logout"
                     android:textAlignment="center"
                     android:textColor="@color/onPrimary"
                     android:textSize="18sp"

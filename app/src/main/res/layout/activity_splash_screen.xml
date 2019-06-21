@@ -15,9 +15,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="160dp"
         android:layout_marginEnd="8dp"
-        android:text="EasyEats"
+        android:text="@string/app_name"
         android:textColor="@color/white"
-        android:textSize="60dp"
+        android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,9 +29,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:text="- For you"
+        android:text="@string/app_motto"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EasyEats" />

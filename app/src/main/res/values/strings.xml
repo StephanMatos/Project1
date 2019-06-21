@@ -1,5 +1,9 @@
 <resources>
+
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</string>
+
     <string name="app_name">EasyEats</string>
+    <string name="app_motto">- For you</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -16,12 +20,79 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="create_new_password">Create new password</string>
+    <string name="create_new_password_description">Create a new password, to be able to login again</string>
+    <string name="save_password">Save password</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="create_product">Create product</string>
+    <string name="product_name">Product name</string>
+    <string name="product_description">Product description</string>
+    <string name="product_price">Product price</string>
+
+    <string name="stove">Stove</string>
+    <string name="oven">Oven</string>
+    <string name="microwave">Microwave</string>
+    <string name="hot_water">Hot water</string>
+
+    <string name="forgot_password">Forgot password?</string>
+    <string name="need_email_for_password_reset">We just need your registered email address to send you a password reset</string>
+    <string name="send">Send</string>
+    <string name="verification_code">Verification code</string>
+
+    <string name="add_image">Add image</string>
+    <string name="rate">Rate</string>
+    <string name="product_state">State</string>
+    <string name="rating">0.0</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
+
+    <string name="how_do_you_rate">How do you rate this product?</string>
+
+    <string name="username">Username</string>
+    <string name="username_help_text">4–20 characters long, can be any combination of letters, numbers, or symbols</string>
+    <string name="password_help_1">letters (a-z, A-Z) </string>
+    <string name="password_help_2">numbers (0–9)</string>
+    <string name="email">Email</string>
+    <string name="entered_email_for_recovery">The entered email will be used for login and account recovery</string>
+    <string name="password">Password</string>
+    <string name="password_help_text">8–20 characters long, can be any combination of letters, numbers, or symbols</string>
+    <string name="ok">OK</string>
+
+    <string name="enter_email_password_reset">Enter the email used when you created your account</string>
+    <string name="digit_code">6-digit code</string>
+    <string name="enter_digit_code">Enter the 6-digit code retrieved</string>
+    <string name="new_password">New password</string>
+
+    <string name="please_enter_verification_code_sent_to">Please enter the verification code sent to</string>
+    <string name="verify_code">Verify code</string>
+
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="recent">Recent</string>
+    <string name="login">Login</string>
+    <string name="remember_me">Remember me?</string>
+
+    <string name="profile_fact_1">Total scans</string>
+    <string name="profile_fact_2">Favorites</string>
+    <string name="profile_fact_3">Total ratings</string>
+    <string name="friends">Friends</string>
+    <string name="statistics">Statistics</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
 
     <string name="action_settings">Settings</string>
     <string name="tab_login">Login</string>
     <string name="tab_signup">Signup</string>
+
+    <string name="search">Search</string>
+    <string name="advanced">Advanced</string>
+    <string name="cooking_method">Cooking method</string>
+    <string name="min_rating">Min. rating</string>
+    <string name="sorting">Sorting</string>
+    <string name="random">Random</string>
+    <string name="min_max">Min/max</string>
+
+    <string name="signup">Signup</string>
+
+
 </resources>

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription, Autofill" >
 
     <ImageView
         android:id="@+id/user_imageView"
@@ -14,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/usernameTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/usernameTextView"
-        app:srcCompat="@drawable/ic_username" />
+        app:srcCompat="@drawable/ic_username"/>
 
     <EditText
         android:id="@+id/usernameTextView"
@@ -94,7 +95,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/roundbutton_primarydark"
-        android:text="Signup"
+        android:text="@string/signup"
         android:textColor="@color/onPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

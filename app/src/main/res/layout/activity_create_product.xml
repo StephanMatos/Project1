@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/roundbutton_primarydark"
-        android:text="Create Product"
+        android:text="@string/create_product"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:text="Create Product"
+        android:text="@string/create_product"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,13 +42,14 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/edittext"
         android:ems="10"
-        android:hint="Product name"
+        android:hint="@string/product_name"
         android:inputType="textCapSentences"
         android:transitionName="productNameTransition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/productImageView"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/productDescriptionET"
@@ -57,14 +58,15 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/edittext"
         android:ems="10"
-        android:hint="Product description"
+        android:hint="@string/product_description"
         android:inputType="textCapSentences|textAutoCorrect|textAutoComplete|textMultiLine"
         android:lines="3"
         android:transitionName="productDescriptionTransition"
         app:layout_constraintEnd_toEndOf="@+id/productNameET"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/productNameET"
-        app:layout_constraintTop_toBottomOf="@+id/productNameET" />
+        app:layout_constraintTop_toBottomOf="@+id/productNameET"
+        tools:ignore="Autofill" />
 
     <EditText
         android:background="@drawable/edittext"
@@ -74,10 +76,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Product price"
+        android:hint="@string/product_price"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productDescriptionET" />
+        app:layout_constraintTop_toBottomOf="@+id/productDescriptionET"
+        tools:ignore="Autofill" />
 
     <Spinner
         android:background="@drawable/spinner"
@@ -99,7 +102,8 @@
         android:transitionName="pictureTransition"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Title"
-        app:srcCompat="@android:drawable/ic_menu_report_image" />
+        app:srcCompat="@android:drawable/ic_menu_report_image"
+        tools:ignore="ContentDescription" />
 
     <CheckBox
         android:id="@+id/ovenCheckBox"
@@ -107,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:text="Oven"
+        android:text="@string/oven"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productPriceET" />
 
@@ -116,7 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Stove"
+        android:text="@string/stove"
         app:layout_constraintStart_toEndOf="@+id/ovenCheckBox"
         app:layout_constraintTop_toTopOf="@+id/ovenCheckBox" />
 
@@ -125,7 +129,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Microwave"
+        android:text="@string/microwave"
         app:layout_constraintEnd_toStartOf="@+id/hotWaterCheckBox"
         app:layout_constraintTop_toTopOf="@+id/stoveCheckBox" />
 
@@ -134,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Hot Water"
+        android:text="@string/hot_water"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/microwaveCheckBox" />
 </android.support.constraint.ConstraintLayout>

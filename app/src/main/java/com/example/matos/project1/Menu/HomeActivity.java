@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        cameraBtn = findViewById(R.id.cameraBtn);
+        cameraBtn = findViewById(R.id.FAB);
 
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         bottomNavigationView = findViewById(R.id.navigationView);
         viewPager = findViewById(R.id.viewpager);

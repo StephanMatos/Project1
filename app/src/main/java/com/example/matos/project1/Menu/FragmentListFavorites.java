@@ -5,10 +5,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,6 +33,7 @@ public class FragmentListFavorites extends Fragment {
     String type;
     public ListView listView;
     public TextView t;
+    FloatingActionButton cameraBtn;
 
     @Nullable
     @Override
@@ -42,14 +46,40 @@ public class FragmentListFavorites extends Fragment {
 
         return inflater.inflate(R.layout.fragment_list, container, false);
 
+
+
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         listView = view.findViewById(R.id.listView);
+        cameraBtn = getActivity().findViewById(R.id.FAB);
         ItemAdapter itemAdapter = new ItemAdapter(getActivity(), HomeActivity.favorites);
         listView.setAdapter(itemAdapter);
 
+
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+                int lastItem = firstVisibleItem + visibleItemCount;
+
+                if (lastItem == totalItemCount) {
+                    cameraBtn.hide();
+                }else{
+                    cameraBtn.show();
+                }
+
+
+            }
+        });
 
 
     }

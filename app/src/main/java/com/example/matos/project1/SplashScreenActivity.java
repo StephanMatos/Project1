@@ -28,9 +28,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         mPrefs = this.getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         final SharedPreferences.Editor prefsEditor = mPrefs.edit();
 
-        Intent HomeIntent = new Intent(SplashScreenActivity.this, LoginActivity.class);
-        finish();
-        startActivity(HomeIntent);
  
         // Make the change from MenuActivity to HomeActivity after 1.5 sec (SPLASH_TIMEOUT)
         new Handler().postDelayed(new Runnable() {
@@ -56,11 +53,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                     startActivity(HomeIntent);
 
                 }
-
-
-
-
-
 
             }
         },SPLASH_TIMEOUT);

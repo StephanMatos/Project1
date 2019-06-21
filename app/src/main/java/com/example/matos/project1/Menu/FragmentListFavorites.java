@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.matos.project1.FAB_Float_on_Scroll;
 import com.example.matos.project1.Products.ItemAdapter;
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.Services;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +49,8 @@ public class FragmentListFavorites extends Fragment {
         listView = view.findViewById(R.id.listView);
         ItemAdapter itemAdapter = new ItemAdapter(getActivity(), HomeActivity.favorites);
         listView.setAdapter(itemAdapter);
+
+
 
     }
 

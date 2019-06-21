@@ -1,19 +1,24 @@
 package com.example.matos.project1.Menu;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -119,7 +124,6 @@ public class HomeActivity extends AppCompatActivity {
         setupViewPager(viewPager);
     }
 
-//Push me... and then...
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         fragmentHome = new FragmentHome();
@@ -181,7 +185,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onResume();
         System.out.println("on resume");
     }
-
 
 
 }

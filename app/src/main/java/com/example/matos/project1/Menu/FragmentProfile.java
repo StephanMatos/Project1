@@ -75,48 +75,7 @@ public class FragmentProfile extends Fragment  {
         gridLayout= view.findViewById(R.id.mainGrid);
 
         setSingleEvent(gridLayout);
-/*
-        LinearLayout favoriteLayout = view.findViewById(R.id.favoriteLayout);
-        LinearLayout recentLayout = view.findViewById(R.id.recentLayout);
-        LinearLayout logoutLayout = view.findViewById(R.id.logoutLayout);
-        ImageView changepicture = view.findViewById(R.id.changePicture);
-        final ImageView profile_image = view.findViewById(R.id.profile_picture);
 
-
-        favoriteLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProductList.class);
-                intent.putExtra("type", "Favorites");
-                startActivity(intent);
-            }
-        });
-
-        recentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProductList.class);
-                intent.putExtra("type", "Recents");
-                startActivity(intent);
-            }
-        });
-
-
-        logoutLayout.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("CommitPrefEdits")
-            @Override
-            public void onClick(View v) {
-                SharedPreferences sp = Objects.requireNonNull(getContext()).getSharedPreferences("CheckboxFile", MODE_PRIVATE);
-                SharedPreferences.Editor e = sp.edit();
-                e.putBoolean("CheckBox", false);
-                e.apply();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-*/
         changepicture.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -143,8 +102,6 @@ public class FragmentProfile extends Fragment  {
 
                     }
                 });
-
-
 
                 dialog.show();
             }

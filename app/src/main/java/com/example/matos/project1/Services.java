@@ -111,7 +111,7 @@ public class Services {
 
             query = query.replaceAll(" ", "%20");
             URL url = new URL("https://easyeats.dk/EasyEats/" + query);
-
+            System.out.println(url);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));

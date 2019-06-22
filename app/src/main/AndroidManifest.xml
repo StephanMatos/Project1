@@ -33,7 +33,8 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme" />
         <activity android:name=".Users.ForgotPasswordActivity" />
-        <activity android:name=".Users.ResetPassword"></activity>
+        <activity android:name=".Users.ResetPassword" />
+        <activity android:name=".SearchListActivity"></activity>
     </application>
 
 </manifest>

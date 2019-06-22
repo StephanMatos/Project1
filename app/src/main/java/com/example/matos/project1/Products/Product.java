@@ -187,7 +187,7 @@ public class Product extends AppCompatActivity {
                 productImage.setImageBitmap(productMainImageBitmap);
                 productName.setText(json.getString("productname"));
                 productRating.setText(String.format("%.1f", json.getDouble("avgrating")));
-                productPrice.setText(String.format("%.1f", json.getDouble("price")));
+                productPrice.setText(String.format("%.2f", json.getDouble("price")));
                 descriptionText.setText(json.getString("description"));
                 productState.setText(json.getString("state"));
                 ratingBar.setRating((float) json.getDouble("avgrating"));

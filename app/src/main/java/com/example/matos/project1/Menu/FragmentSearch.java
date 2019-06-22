@@ -1,5 +1,6 @@
 package com.example.matos.project1.Menu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,17 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.matos.project1.R;
+import com.example.matos.project1.SavedValues;
+import com.example.matos.project1.SearchListActivity;
 
 public class FragmentSearch extends Fragment {
 
-    SearchView searchViev;
-
-
+    SearchView searchView;
 
     @Nullable
     @Override
@@ -35,8 +37,8 @@ public class FragmentSearch extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 
         final ConstraintLayout advancedLayoutView = view.findViewById(R.id.advancedSearchView);
-        searchViev = view.findViewById(R.id.searchView);
-        searchViev.setFocusable(false);
+        searchView = view.findViewById(R.id.searchView);
+        searchView.setFocusable(false);
 
         final TextView advancedTextView = view.findViewById(R.id.advancedsearchTextView);
         final TextView ratingNumberTextView = view.findViewById(R.id.ratingNumberTextView);
@@ -47,6 +49,27 @@ public class FragmentSearch extends Fragment {
         final SeekBar sortingseekBar = view.findViewById(R.id.sortingseekBar);
         final SeekBar minmaxseekBar = view.findViewById(R.id.minmaxseekBar);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                String searchtext = searchView.getQuery().toString();
+                Intent intent = new Intent(getActivity(), SearchListActivity.class);
+
+                String username = SavedValues.getInstance().getEmail();
+                searchtext = searchtext.replace(" ", "%25");
+
+                String address = "products.php?username=" + username + "&searchtext=" + searchtext;
+
+                intent.putExtra("address", address);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
 
 
         // dummy method
@@ -165,7 +188,7 @@ public class FragmentSearch extends Fragment {
     public void onResume() {
 
         super.onResume();
-        searchViev.setFocusable(false);
+        searchView.setFocusable(false);
     }
 
 

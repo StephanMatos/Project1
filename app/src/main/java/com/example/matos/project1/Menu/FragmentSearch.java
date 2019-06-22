@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,11 @@ public class FragmentSearch extends Fragment {
         final SeekBar minRatingseekBar = view.findViewById(R.id.minRatingseekBar);
         final SeekBar sortingseekBar = view.findViewById(R.id.sortingseekBar);
         final SeekBar minmaxseekBar = view.findViewById(R.id.minmaxseekBar);
+
+        final CardView top_rated = view.findViewById(R.id.top_rated);
+        final CardView top_state = view.findViewById(R.id.top_state);
+        final CardView top_scanned = view.findViewById(R.id.top_scanned);
+        final CardView top_favorized = view.findViewById(R.id.top_favorized);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -180,6 +186,39 @@ public class FragmentSearch extends Fragment {
 
             }
         });
+
+
+
+        top_rated.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        top_state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        top_scanned.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        top_favorized.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
 
 
     }

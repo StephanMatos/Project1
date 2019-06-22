@@ -95,4 +95,12 @@
     <string name="signup">Signup</string>
 
 
+    <string name="Top_search">Top products</string>
+    <string name="Top_rated">Rated</string>
+    <string name="Top_scanned">Scanned</string>
+    <string name="Top_favorized">Favorized</string>
+    <string name="Top_states">State</string>
+
+
+
 </resources>

@@ -49,6 +49,8 @@ public class FragmentListFavorites extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        TextView tv = view.findViewById(R.id.titleTextView);
+        tv.setText("Favorites");
         listView = view.findViewById(R.id.listView);
         cameraBtn = getActivity().findViewById(R.id.FAB);
         ItemAdapter itemAdapter = new ItemAdapter(getActivity(), HomeActivity.favorites);

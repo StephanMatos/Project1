@@ -1,12 +1,16 @@
 package com.example.matos.project1.Menu;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,15 +59,11 @@ public class FragmentSearch extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 String searchtext = searchView.getQuery().toString();
-                Intent intent = new Intent(getActivity(), SearchListActivity.class);
 
                 String username = SavedValues.getInstance().getEmail();
                 searchtext = searchtext.replace(" ", "%25");
-
                 String address = "products.php?username=" + username + "&searchtext=" + searchtext;
-
-                intent.putExtra("address", address);
-                startActivity(intent);
+                startSearchActivity(address);
                 return false;
             }
 
@@ -190,13 +190,9 @@ public class FragmentSearch extends Fragment {
         top_rated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SearchListActivity.class);
-
                 String username = SavedValues.getInstance().getEmail();
                 String address = "products.php?username=" + username + "&toprated=1";
-
-                intent.putExtra("address", address);
-                startActivity(intent);
+                startSearchActivity(address);
             }
         });
 
@@ -218,13 +214,26 @@ public class FragmentSearch extends Fragment {
         top_favorized.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String username = SavedValues.getInstance().getEmail();
+                String address = "products.php?username=" + username + "&topfavoritized=1";
+                startSearchActivity(address);
             }
         });
 
 
 
 
+    }
+
+    private void startSearchActivity(String address){
+        Intent intent = new Intent(getActivity(), SearchListActivity.class);
+        intent.putExtra("address", address);
+        intent.putExtra("searchtext", searchView.getQuery().toString());
+
+        Pair p1 = Pair.create(searchView, ViewCompat.getTransitionName(searchView));
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1);
+
+        startActivity(intent, options.toBundle());
     }
 
     @Override

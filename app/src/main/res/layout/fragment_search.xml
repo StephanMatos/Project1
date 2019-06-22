@@ -46,14 +46,13 @@
 
         <SearchView
             android:id="@+id/searchView"
+            android:transitionName="searchViewTransition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/roundedcorner"
             android:iconifiedByDefault="false"
             android:queryHint="Type, barcode, cooking method"
-            app:queryBackground="@android:color/transparent">
-
-        </SearchView>
+            app:queryBackground="@android:color/transparent"/>
 
         <TextView
             android:id="@+id/advancedsearchTextView"

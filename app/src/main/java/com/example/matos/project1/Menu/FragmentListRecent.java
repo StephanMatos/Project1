@@ -69,7 +69,7 @@ public class FragmentListRecent extends Fragment {
 
                 int lastItem = firstVisibleItem + visibleItemCount;
 
-                if (lastItem == totalItemCount && totalItemCount > 8) {
+                if (lastItem == totalItemCount && firstVisibleItem > 0) {
                     cameraBtn.hide();
                 }else{
                     cameraBtn.show();

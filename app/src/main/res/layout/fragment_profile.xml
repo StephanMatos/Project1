@@ -31,6 +31,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@color/colorPrimaryDark"
@@ -39,6 +40,7 @@
 
         <LinearLayout
             android:id="@+id/profile_frame"
+            android:layout_marginTop="10dp"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
@@ -57,7 +59,9 @@
                     android:id="@+id/profile_picture"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/ic_account1"/>
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/ic_account1" />
 
                 <ImageView
                     android:id="@+id/changePicture"
@@ -91,8 +95,6 @@
     </LinearLayout>
 
 
-
-
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="300dp"
@@ -104,7 +106,7 @@
         app:cardBackgroundColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/linearLayout">
 
         <LinearLayout
             android:id="@+id/layoutStatistics"

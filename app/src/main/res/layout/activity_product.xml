@@ -56,8 +56,8 @@
 
             <ImageView
                 android:id="@+id/oven"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/stove"
@@ -81,8 +81,8 @@
 
             <ImageView
                 android:id="@+id/stove"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/microwave"
                 app:layout_constraintTop_toTopOf="@+id/oven"
@@ -91,8 +91,8 @@
 
             <ImageView
                 android:id="@+id/microwave"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/hotwater"
                 app:layout_constraintTop_toTopOf="@+id/stove"
@@ -101,8 +101,8 @@
 
             <ImageView
                 android:id="@+id/hotwater"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/microwave"

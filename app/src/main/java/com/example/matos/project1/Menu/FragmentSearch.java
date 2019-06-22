@@ -1,5 +1,6 @@
 package com.example.matos.project1.Menu;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,9 +11,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -29,13 +27,11 @@ public class FragmentSearch extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
     @Override
-    public void onViewCreated(final View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, Bundle savedInstanceState) {
 
         final ConstraintLayout advancedLayoutView = view.findViewById(R.id.advancedSearchView);
         searchView = view.findViewById(R.id.searchView);
@@ -125,6 +121,7 @@ public class FragmentSearch extends Fragment {
         sortingseekBar.setMax(2);
 
         sortingseekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
@@ -162,6 +159,7 @@ public class FragmentSearch extends Fragment {
 
         minmaxseekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
@@ -192,7 +190,13 @@ public class FragmentSearch extends Fragment {
         top_rated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchListActivity.class);
 
+                String username = SavedValues.getInstance().getEmail();
+                String address = "products.php?username=" + username + "&toprated=1";
+
+                intent.putExtra("address", address);
+                startActivity(intent);
             }
         });
 

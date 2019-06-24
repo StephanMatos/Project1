@@ -125,6 +125,7 @@ public class Services {
             bufferedReader.close();
             urlConnection.disconnect();
 
+            //System.out.println("data:" + stringBuilder.toString());
             return stringBuilder.toString();
 
         } catch (MalformedURLException e) {
@@ -216,8 +217,8 @@ public class Services {
     }
 
     public static Bitmap StringToBitMap(String encodedString){
-        encodedString = encodedString.replace("\\/", "/");
-        encodedString = encodedString.replace(" ", "+");
+        //encodedString = encodedString.replace("\\/", "/");
+        //encodedString = encodedString.replace(" ", "+");
         try{
             byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
             Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);

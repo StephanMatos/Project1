@@ -128,6 +128,7 @@ public class Product extends AppCompatActivity {
 
 
         new getProduct().execute();
+        new getImages().execute();
         new addToRecents().execute();
 
     }
@@ -203,14 +204,14 @@ public class Product extends AppCompatActivity {
                     heartImageView.setImageResource(R.drawable.emptyheart);
                 }
 
-                new getImages().execute(productID);
+                //new getImages().execute();
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
 
-            startPostponedEnterTransition();
+            //startPostponedEnterTransition();
         }
     }
 
@@ -227,31 +228,24 @@ public class Product extends AppCompatActivity {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class getImages extends AsyncTask<Integer, Void, ArrayList<Bitmap>> {
+    private class getImages extends AsyncTask<Void, Void, ArrayList<Bitmap>> {
 
         @Override
-        protected ArrayList<Bitmap> doInBackground(Integer... ints) {
+        protected ArrayList<Bitmap> doInBackground(Void... voids) {
 
-            int productID = ints[0];
-            String data = Services.callAPI("pictures.php?productID=" + productID);
+            String data = Services.callAPI("uploadJPG.php?barcode=" + barcode);
 
             ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
             try {
                 JSONArray jsons = new JSONArray(data);
+                JSONObject json = jsons.getJSONObject(0);
 
-                for(int i = 0; i < jsons.length(); i++){
-                    JSONObject json = jsons.getJSONObject(i);
-                    String imageString = json.getString("picture");
-
-                    Bitmap bitmap = Services.StringToBitMap(imageString);
-
-
-
-
-                    bitmaps.add(bitmap);
+                int i = 0;
+                while(json.has(""+i)){
+                    bitmaps.add(Services.StringToBitMap(json.getString(""+i)));
+                    i++;
                 }
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -268,6 +262,9 @@ public class Product extends AppCompatActivity {
             try {
                 int id = 0;
                 for(Bitmap bitmap : bitmaps){
+
+                    if(id == 0){productImage.setImageBitmap(bitmap);}
+
                     id++;
                     ImageView imageView = new ImageView(Product.this);
                     imageView.setId(id);
@@ -275,7 +272,7 @@ public class Product extends AppCompatActivity {
 
                    // Gives the bitmap rounded corners
                     RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-                    roundedBitmapDrawable.setCornerRadius(30);
+                    roundedBitmapDrawable.setCornerRadius(10);
 
                     imageView.setImageDrawable(roundedBitmapDrawable);
 

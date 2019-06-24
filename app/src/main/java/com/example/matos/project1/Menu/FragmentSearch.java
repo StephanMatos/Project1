@@ -55,6 +55,7 @@ public class FragmentSearch extends Fragment {
         final CardView top_scanned = view.findViewById(R.id.top_scanned);
         final CardView top_favorized = view.findViewById(R.id.top_favorized);
 
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -219,8 +220,6 @@ public class FragmentSearch extends Fragment {
                 startSearchActivity(address);
             }
         });
-
-
 
 
     }

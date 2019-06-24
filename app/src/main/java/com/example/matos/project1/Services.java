@@ -1,8 +1,12 @@
 package com.example.matos.project1;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Base64;
 
 import org.json.JSONException;
@@ -273,5 +277,6 @@ public class Services {
         }
         return null;
     }
+
 
 }

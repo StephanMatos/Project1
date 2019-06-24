@@ -1,10 +1,15 @@
 package com.example.matos.project1.Products;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
@@ -81,11 +86,10 @@ public class ItemAdapter extends BaseAdapter {
             e.printStackTrace();
         }
 
-        View v = mInflater.inflate(R.layout.product_list_view, null);
+        @SuppressLint("ViewHolder") View v = mInflater.inflate(R.layout.product_list_view, null);
 
         final TextView productNameTextView = v.findViewById(R.id.productName);
         final TextView productRating = v.findViewById(R.id.productRating);
-        final ImageView heartImage = v.findViewById(R.id.heartImageView);
         final ImageView productImage = v.findViewById(R.id.productImageView);
         ProgressBar productRatingBar = v.findViewById(R.id.productRatingBar);
         final ImageView heartImageView = v.findViewById(R.id.heartImageView);
@@ -96,9 +100,8 @@ public class ItemAdapter extends BaseAdapter {
 
         try {
             productNameTextView.setText(json.getString("productname"));
+
             productImage.setImageBitmap(Services.StringToBitMap(json.getString("productmainimage")));
-
-
             double rating = json.getDouble("avgrating");
             productRating.setText(String.format("%.1f", rating));
             productRatingBar.setProgress((int) (rating*20));
@@ -174,7 +177,7 @@ public class ItemAdapter extends BaseAdapter {
 
                 Pair p1 = Pair.create(productNameTextView, ViewCompat.getTransitionName(productNameTextView));
                 Pair p2 = Pair.create(productRating, ViewCompat.getTransitionName(productRating));
-                Pair p3 = Pair.create(heartImage, ViewCompat.getTransitionName(heartImage));
+                Pair p3 = Pair.create(heartImageView, ViewCompat.getTransitionName(heartImageView));
                 Pair p4 = Pair.create(productImage, ViewCompat.getTransitionName(productImage));
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) c, p1, p2, p3, p4);
 
@@ -195,5 +198,6 @@ public class ItemAdapter extends BaseAdapter {
         }
 
     }
+
 
 }

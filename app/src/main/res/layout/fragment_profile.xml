@@ -11,7 +11,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/textView3"
@@ -235,7 +235,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/colorAccent"
+            app:cardBackgroundColor="@color/lightGray"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -275,7 +275,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/colorAccent"
+            app:cardBackgroundColor="@color/lightGray"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -318,7 +318,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
-            app:cardBackgroundColor="@color/colorAccent"
+            app:cardBackgroundColor="@color/lightGray"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 

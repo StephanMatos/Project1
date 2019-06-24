@@ -98,6 +98,9 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
 
             if(!json.getString("barcode").equals("null")) {
+
+                new addToScans().execute();
+
                 Intent intent = new Intent(ScanActivity.this, Product.class);
                 intent.putExtra("barcode", barcode);
                 startActivity(intent);
@@ -134,5 +137,17 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         }
     }
 
+    private class addToScans extends AsyncTask<Void, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            String email = SavedValues.getInstance().getEmail();
+            Services.postAPI("scans.php?email=" + email + "&barcode=" + barcode);
+
+            return null;
+        }
+    }
 
 }

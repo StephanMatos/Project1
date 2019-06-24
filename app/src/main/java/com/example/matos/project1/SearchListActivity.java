@@ -55,7 +55,7 @@ public class SearchListActivity extends AppCompatActivity {
         });
 
         String address = getIntent().getExtras().getString("address");
-        new getList().execute(address);
+        new getList().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, address);
 
     }
 

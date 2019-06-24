@@ -149,7 +149,7 @@ public class Services {
             address = address.replaceAll(" ", "%20");
             URL url = new URL("https://easyeats.dk/EasyEats/" + address);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
+            System.out.println(url);
             urlConnection.setRequestMethod("POST");
             urlConnection.setRequestProperty("Accept-Charset", "UTF-8");
             urlConnection.setDoOutput(true);

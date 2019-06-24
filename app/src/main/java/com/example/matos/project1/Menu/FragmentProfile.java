@@ -107,7 +107,7 @@ public class FragmentProfile extends Fragment  {
             }
         });
 
-        new getStats().execute();
+        new getStats().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
 
@@ -183,6 +183,6 @@ public class FragmentProfile extends Fragment  {
     public void onResume(){
         super.onResume();
         System.out.println("Home on Profile");
-        new SetupList().execute();
+        new SetupList().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 }

@@ -128,8 +128,8 @@ public class Product extends AppCompatActivity {
         });
 
 
-        new getProduct().execute();
-        new getImages().execute();
+        new getProduct().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new getImages().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         new addToRecents().execute();
 
     }
@@ -211,7 +211,7 @@ public class Product extends AppCompatActivity {
             }
 
 
-            //startPostponedEnterTransition();
+            startPostponedEnterTransition();
         }
     }
 
@@ -293,7 +293,7 @@ public class Product extends AppCompatActivity {
             }
 
 
-            startPostponedEnterTransition();
+            //startPostponedEnterTransition();
         }
     }
 

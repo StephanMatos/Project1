@@ -148,7 +148,6 @@ public class Product extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
             String username = SavedValues.getInstance().getEmail();
-
             Services.postAPI("recents.php?username=" + username + "&barcode=" + barcode + "&delete=1");
             Services.postAPI("recents.php?username=" + username + "&barcode=" + barcode);
 

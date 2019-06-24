@@ -18,7 +18,6 @@
         android:focusable="true"
         fab:backgroundTint="@color/colorPrimaryDark"
         fab:fabSize="normal"
-        fab:layout_behavior="com.example.matos.project1.FAB_Float_on_Scroll"
         fab:layout_constraintBottom_toTopOf="@id/navigationView"
         fab:layout_constraintEnd_toEndOf="parent"
         fab:srcCompat="@drawable/ic_camera" />

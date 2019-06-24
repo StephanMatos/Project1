@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -185,7 +186,7 @@ public class Product extends AppCompatActivity {
         protected void onPostExecute(Void avoid) {
             try {
                 productID = json.getInt("productID");
-                productImage.setImageBitmap(productMainImageBitmap);
+                productImage.setImageDrawable(RoundedImageCorners(productMainImageBitmap));
                 productName.setText(json.getString("productname"));
                 productRating.setText(String.format("%.1f", json.getDouble("avgrating")));
                 productPrice.setText(String.format("%.2f", json.getDouble("price")));
@@ -247,6 +248,7 @@ public class Product extends AppCompatActivity {
                     i++;
                 }
 
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -274,7 +276,7 @@ public class Product extends AppCompatActivity {
                     RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
                     roundedBitmapDrawable.setCornerRadius(10);
 
-                    imageView.setImageDrawable(roundedBitmapDrawable);
+                    imageView.setImageDrawable(RoundedImageCorners(bitmap));
 
                    // imageView.setImageBitmap(bitmap);
 
@@ -374,7 +376,12 @@ public class Product extends AppCompatActivity {
 
     }
 
+    public Drawable RoundedImageCorners(Bitmap bitmap) {
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+        roundedBitmapDrawable.setCornerRadius(30);
 
+        return roundedBitmapDrawable;
 
+    }
 
 }

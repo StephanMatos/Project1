@@ -129,7 +129,7 @@ public class Services {
             bufferedReader.close();
             urlConnection.disconnect();
 
-            //System.out.println("data:" + stringBuilder.toString());
+            System.out.println("data:" + stringBuilder.toString());
             return stringBuilder.toString();
 
         } catch (MalformedURLException e) {

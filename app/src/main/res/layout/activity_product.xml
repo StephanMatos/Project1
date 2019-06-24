@@ -117,7 +117,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:lineSpacingExtra="2sp"
-                android:maxLength="150"
+                android:maxLength="500"
                 android:text="@string/lorem_ipsum"
                 android:textSize="16sp"
                 android:transitionName="productDescriptionTransition"

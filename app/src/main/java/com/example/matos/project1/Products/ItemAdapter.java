@@ -101,7 +101,12 @@ public class ItemAdapter extends BaseAdapter {
         try {
             productNameTextView.setText(json.getString("productname"));
 
-            productImage.setImageBitmap(Services.StringToBitMap(json.getString("productmainimage")));
+
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(v.getResources(), Services.StringToBitMap(json.getString("productmainimage")));
+            roundedBitmapDrawable.setCornerRadius(30);
+            productImage.setImageDrawable(roundedBitmapDrawable);
+
+            //productImage.setImageBitmap(Services.StringToBitMap(json.getString("productmainimage")));
             double rating = json.getDouble("avgrating");
             productRating.setText(String.format("%.1f", rating));
             productRatingBar.setProgress((int) (rating*20));
@@ -198,6 +203,5 @@ public class ItemAdapter extends BaseAdapter {
         }
 
     }
-
 
 }

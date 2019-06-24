@@ -264,7 +264,7 @@ public class Product extends AppCompatActivity {
                 int id = 0;
                 for(Bitmap bitmap : bitmaps){
 
-                    if(id == 0){productImage.setImageBitmap(bitmap);}
+                    if(id == 0){productImage.setImageDrawable(RoundedImageCorners(bitmap));}
 
                     id++;
                     ImageView imageView = new ImageView(Product.this);

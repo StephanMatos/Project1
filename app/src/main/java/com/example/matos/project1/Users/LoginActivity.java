@@ -25,7 +25,7 @@ import static java.lang.Thread.sleep;
 
 public class LoginActivity extends AppCompatActivity {
 
-
+    public static int theme = 1;
 
 
     // The SectionsPagerAdapte that provide

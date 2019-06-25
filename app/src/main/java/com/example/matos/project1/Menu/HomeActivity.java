@@ -44,8 +44,8 @@ public class HomeActivity extends AppCompatActivity {
     private FragmentHome fragmentHome;
 
 
-    public static JSONArray favorites;
-    public static JSONArray recents;
+    public static JSONArray favorites = new JSONArray();
+    public static JSONArray recents = new JSONArray();
 
     private ViewPager viewPager;
     MenuItem prevMenuItem;

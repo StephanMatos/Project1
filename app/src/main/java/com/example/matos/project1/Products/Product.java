@@ -15,6 +15,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -52,6 +53,7 @@ public class Product extends AppCompatActivity {
     LinearLayout linearImageLayout;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,14 +110,12 @@ public class Product extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-
                     RateDialog dialog = new RateDialog(Product.this, json.getInt("productID"));
                     Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     dialog.show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         });
 
@@ -127,6 +127,21 @@ public class Product extends AppCompatActivity {
             }
         });
 
+        ratingBar.setOnTouchListener(new View.OnTouchListener()  {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    try {
+                        RateDialog dialog = new RateDialog(Product.this, json.getInt("productID"));
+                        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return true;
+            }
+        });
 
         new getProduct().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         new getImages().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -188,7 +203,7 @@ public class Product extends AppCompatActivity {
                 productImage.setImageDrawable(RoundedImageCorners(productMainImageBitmap));
                 productName.setText(json.getString("productname"));
                 productRating.setText(String.format("%.1f", json.getDouble("avgrating")));
-                productPrice.setText(String.format("%.2f", json.getDouble("price")));
+                productPrice.setText("Kr. " + String.format("%.2f", json.getDouble("price")));
                 descriptionText.setText(json.getString("description"));
                 productState.setText(json.getString("state"));
                 ratingBar.setRating((float) json.getDouble("avgrating"));
@@ -367,7 +382,7 @@ public class Product extends AppCompatActivity {
 
             Bitmap bitmap = bitmaps[0];
 
-            Services.postAPI("pictures.php?productID=" + productID, bitmap);
+            Services.postAPI("pictures.php?barcode=" + barcode, bitmap);
 
             return null;
 

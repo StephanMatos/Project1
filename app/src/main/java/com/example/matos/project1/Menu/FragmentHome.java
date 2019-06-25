@@ -2,6 +2,7 @@ package com.example.matos.project1.Menu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -43,7 +44,7 @@ public class FragmentHome extends Fragment {
     public void onResume(){
         super.onResume();
         System.out.println("Home on resume");
-        new SetupList().execute();
+        new SetupList().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
 

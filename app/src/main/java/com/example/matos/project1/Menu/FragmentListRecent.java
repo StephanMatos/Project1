@@ -57,8 +57,6 @@ public class FragmentListRecent extends Fragment {
         cameraBtn = Objects.requireNonNull(getActivity()).findViewById(R.id.FAB);
 
 
-
-
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {

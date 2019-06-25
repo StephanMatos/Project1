@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="300dp"
     android:layout_gravity="center"
-    android:background="@color/colorPrimary"
+    android:background="@color/background"
     tools:ignore="RtlSymmetry">
 
 
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:text="@string/email"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/onBackground"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:text="@string/digit_code"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/onBackground"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:text="@string/new_password"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/onBackground"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:text="@string/new_password"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/onBackground"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -189,7 +189,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/roundbutton_primarydark"
         android:text="@string/ok"
-        android:textColor="@color/white"
+        android:textColor="@color/onPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -21,7 +21,7 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
     //hello
     @Override
     protected Void doInBackground(String... Strings) {
-        TabSignupFragment.setBooleans();
+        ResultThread.setBooleans();
         String data;
         String email = Strings[0];
         String password = Strings[1];
@@ -60,31 +60,29 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
             System.out.println("This is data : "+data);
 
             if(data == null || response == null) {
-                System.out.println("NullPointerException");
-                TabSignupFragment.network = true;
+                ResultThread.network = true;
             }else{
                 if(response.equals("OK")){
                     switch(data){
                         case "success":
-                            TabSignupFragment.success = true;
+                            ResultThread.successSignUp = true;
                             break;
                         case "User Already exist":
-                            TabSignupFragment.exist = true;
+                            ResultThread.exist = true;
                             break;
                             default:
-                                TabSignupFragment.failure = true;
+                                ResultThread.failureSignUp = true;
                                 break;
                     }
                 }else{
-                        TabSignupFragment.network = true;
+                        ResultThread.network = true;
                 }
             }
 
         }catch (IOException | NullPointerException | JSONException e){
-            TabSignupFragment.unknown = true;
+            ResultThread.unknown = true;
             e.printStackTrace();
         }
-
         return null;
     }
 }

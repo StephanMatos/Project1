@@ -19,9 +19,9 @@ public class AsyncRequestResetPassword extends AsyncTask<String,Void,Void> {
 
     @Override
     protected Void doInBackground(String... Strings) {
-        ForgotPasswordActivity.setBooleans();
         String data;
         String email = Strings[0];
+        ResultThread.setBooleans();
 
         try {
 
@@ -55,16 +55,16 @@ public class AsyncRequestResetPassword extends AsyncTask<String,Void,Void> {
 
             if(data == null || response == null) {
                 System.out.println("NullPointerException");
-                ResetPassword.network = true;
+                ResultThread.network = true;
             }else{
                 if(response.equals("OK")){
                     if(data.equals("success")){
-                        ForgotPasswordActivity.success = true;
+                        ResultThread.successReset = true;
                     }else{
-                        ForgotPasswordActivity.failure = true;
+                        ResultThread.failureReset = true;
                     }
                 }else{
-                    ForgotPasswordActivity.network = true;
+                    ResultThread.network = true;
                 }
             }
 

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -62,14 +63,31 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         // Initializing activity Widgets
         bindViews();
 
-
-
         context = this;
 
         send_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetPassword();
+
+                if (email_EditText.length() == 0) {
+                    AlertDialogBoxes.alertDialogOnUIContext("Fejl","Feltet 'Email' skal udfyldes",getContext());
+
+                } else {
+
+                    dialog = new Dialog(context);
+                    dialog.setContentView(R.layout.dialogview_passreset);
+                    dialog.setTitle("Gendan Password");
+                    TextView emailView = dialog.findViewById(R.id.textViewEmail);
+                    emailView.setText(email_EditText.getText().toString());
+                    dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                    dialog.show();
+
+                    resetDialog();
+
+                    new AsyncRequestResetPassword().execute(email_EditText.getText().toString());
+                    ResultThread.waitForResults(false, getParent(),getContext(),email_EditText.getText().toString(),"null",false);
+
+                }
             }
         });
 
@@ -106,7 +124,15 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     AlertDialogBoxes.alertDialogOnUIContext("Fejl","Feltet 'Email' skal udfyldes",getContext());
 
                 } else {
-                    AlertDialogBoxes.resetDialogOnUI(getContext(),"Reset Password", email_EditText.getText().toString());
+
+                    dialog = new Dialog(context);
+                    dialog.setContentView(R.layout.dialogview_passreset);
+                    dialog.setTitle("Gendan Password");
+                    TextView emailView = dialog.findViewById(R.id.textViewEmail);
+                    emailView.setText(email_EditText.getText().toString());
+                    dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                    dialog.show();
+                    resetDialog();
                 }
 
 
@@ -129,18 +155,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
 
-    void resetPassword(){
-        progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(this).build();
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
-
-        new AsyncRequestResetPassword().execute(email_EditText.getText().toString());
-        waitForResults();
-    }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
     }
 
     void resetDialog(){
@@ -152,6 +171,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         verifyCode_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("click");
                 progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(dialog.getContext()).build();
                 progressDialog.setMessage("Verifying code...");
                 progressDialog.show();
@@ -159,72 +179,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         editTextCode4.getText().toString() + editTextCode5.getText().toString();
 
                 new AsyncCheckVerification().execute(email_EditText.getText().toString(),verificationCode);
-                waitForResults();
+                ResultThread.waitForResults(false,getParent(),getContext(),email_EditText.getText().toString(),"null",false);
 
             }
         });
 
-    }
-
-    void waitForResults(){
-        active = true;
-        new Thread(new Runnable() {
-            public void run() {
-                while(active){
-                    active = true;
-                    try {
-                        if(success){
-
-                            progressDialog.dismiss();
-                            AlertDialogBoxes.resetDialogOnUI(getContext(),"Reset Password",email_EditText.getText().toString());
-                            Thread.sleep(500);
-                            resetDialog();
-                            active = false;
-                            success = false;
-
-                        }else if(failure){
-
-                            progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email",getContext());
-                            active = false;
-                            failure = false;
-
-                        }else if(network){
-                            progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Kontroller at telefonen har forbindelse til internettet",getContext());
-                            active = false;
-                            network = false;
-
-                        }else if(verification){
-                            verification = false;
-                            active = false;
-                            progressDialog.dismiss();
-                            dialog.dismiss();
-                            Intent New_password = new Intent(ForgotPasswordActivity.this, ResetPassword.class);
-                            New_password.putExtra("email",email_EditText.getText().toString());
-                            startActivity(New_password);
-
-
-                        }else if(verificationError){
-                            progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Den indstastede kode stemmer ikke over ens, prøv igen",getContext());
-                            active = false;
-                            verificationError = false;
-
-                        }else if(unknown){
-                        AlertDialogBoxes.alertDialogOnUIContext("Ukendt fejl","Prøv igen eller kontakt support",getApplicationContext());
-                        progressDialog.dismiss();
-                        active = false;
-                    }
-
-                        Thread.sleep(200);
-                    } catch (InterruptedException e){
-                        Thread.currentThread().interrupt();
-                    }
-                }
-
-            }
-        }).start();
     }
 
     // Moving between the "boxes" based on the users input

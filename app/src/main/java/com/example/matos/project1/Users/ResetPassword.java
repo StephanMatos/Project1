@@ -21,7 +21,7 @@ public class ResetPassword extends AppCompatActivity {
     private EditText newPassword_EditText, verifyPassword_EditText;
     private Button savePass_Button;
     private String email;
-    public AlertDialog progressDialog;
+    public static AlertDialog progressDialog;
     public static boolean success = false;
     public static boolean failure = false;
     public static boolean network = false;

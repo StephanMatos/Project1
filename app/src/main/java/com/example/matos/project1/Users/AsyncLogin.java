@@ -23,14 +23,13 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
 
     @Override
     protected Void doInBackground(String... Strings) {
-        TabLoginFragment.setBooleans();
-        SplashScreenActivity.setBooleans();
-
+        ResultThread.setBooleans();
 
         String data;
         email = Strings[0];
         password = Strings[1];
-
+        System.out.println("Email is : " + email);
+        System.out.println("password is : " + password);
         try {
             String LoginUrl = "https://easyeats.dk/EasyEats/login.php?";
             System.out.println(LoginUrl);
@@ -64,32 +63,24 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
 
             if(data == null || response == null){
                 System.out.println("NullPointerException");
-                TabLoginFragment.network = true;
-                SplashScreenActivity.network = true;
+                ResultThread.network = true;
             }else{
                 if(response.equals("OK")){
                     if(data.equals("success")){
-                        TabLoginFragment.success = true;
-                        SplashScreenActivity.success = true;
+                        ResultThread.successLogin = true;
                         savedValues.saveEmail(email);
                         savedValues.savePassword(password);
                     }else{
-                        TabLoginFragment.failure = true;
-                        SplashScreenActivity.failure = true;
+                        ResultThread.failureLogin = true;
                     }
                 }else{
-                    TabLoginFragment.network = true;
-                    SplashScreenActivity.network = true;
+                    ResultThread.network = true;
                 }
             }
-
-
         }catch (IOException | NullPointerException | JSONException e){
-            TabLoginFragment.unknown = true;
-
+            ResultThread.unknown = true;
             e.printStackTrace();
         }
-
         return null;
     }
 }

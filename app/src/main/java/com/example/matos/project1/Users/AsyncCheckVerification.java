@@ -18,7 +18,7 @@ public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
     // hello
     @Override
     protected Void doInBackground(String... Strings) {
-        ForgotPasswordActivity.setBooleans();
+        ResultThread.setBooleans();
         String email = Strings[0];
         String code = Strings[1];
         String data;
@@ -56,16 +56,16 @@ public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
 
             if(data == null || response == null){
                 System.out.println("NULL");
-                ForgotPasswordActivity.network = true;
+                ResultThread.network = true;
             }else{
                 if(response.equals("OK")){
                     if(data.equals("success")){
-                        ForgotPasswordActivity.verification = true;
+                        ResultThread.successVerification = true;
                     }else{
-                        ForgotPasswordActivity.verificationError = true;
+                        ResultThread.failureVerification = true;
                     }
                 }else{
-                    ForgotPasswordActivity.network = true;
+                    ResultThread.network = true;
                 }
             }
 

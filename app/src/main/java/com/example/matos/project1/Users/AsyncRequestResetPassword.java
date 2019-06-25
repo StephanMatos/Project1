@@ -59,9 +59,9 @@ public class AsyncRequestResetPassword extends AsyncTask<String,Void,Void> {
             }else{
                 if(response.equals("OK")){
                     if(data.equals("success")){
-                        ResultThread.successReset = true;
+                        ResultThread.successRequest = true;
                     }else{
-                        ResultThread.failureReset = true;
+                        ResultThread.failureRequest = true;
                     }
                 }else{
                     ResultThread.network = true;

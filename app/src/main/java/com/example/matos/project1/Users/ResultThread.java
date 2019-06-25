@@ -8,8 +8,7 @@ import com.example.matos.project1.Menu.HomeActivity;
 
 public class ResultThread {
 
-    public static boolean successLogin, failureLogin,failureSignUp, successSignUp,successReset,failureReset, successVerification, failureVerification, network, unknown, exist;
-
+    public static boolean successLogin, failureLogin,failureSignUp, successRequest, failureRequest, successSignUp,successReset,failureReset, successVerification, failureVerification, network, unknown, exist;
 
     public static void setBooleans(){
         // Login
@@ -21,12 +20,16 @@ public class ResultThread {
         successSignUp = false;
 
         //Request Reset
-        successReset = false;
-        failureReset = false;
+        successRequest = false;
+        failureRequest = false;
 
         //Verification
         successVerification = false;
         failureVerification = false;
+
+        // Password Reset
+        successReset = false;
+        failureReset = false;
 
         // Common
         network = false;
@@ -84,11 +87,11 @@ public class ResultThread {
                         } else if (failureSignUp) {
                             TabSignupFragment.progressDialog.dismiss();
                             active = false;
-                        }else if(successReset) {
+                        }else if(successRequest) {
 
                             active = false;
 
-                        }else if(failureReset) {
+                        }else if(failureRequest) {
 
                             AlertDialogBoxes.alertDialogOnUIContext("Fejl", "Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email", context);
                             active = false;
@@ -99,11 +102,19 @@ public class ResultThread {
                             New_password.putExtra("email",email);
                             context.startActivity(New_password);
                             active = false;
-                        }else if(failureVerification){
+                        }else if(failureVerification) {
                             ForgotPasswordActivity.progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Den indstastede kode stemmer ikke over ens, prøv igen",context);
+                            AlertDialogBoxes.alertDialogOnUIContext("Fejl", "Den indstastede kode stemmer ikke over ens, prøv igen", context);
                             active = false;
 
+                        }else if(successReset){
+                            AlertDialogBoxes.passwordResetOnUI(context,"Success","Du kan nu logge ind med dit nye kodeord");
+                            ResetPassword.progressDialog.dismiss();
+                            active = false;
+                        }else if(failureReset){
+                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Du kan nu logge ind med dit nye kodeord",context);
+                            ResetPassword.progressDialog.dismiss();
+                            active = false;
                         }else if(network){
                             TabLoginFragment.progressDialog.dismiss();
                             AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",activity);

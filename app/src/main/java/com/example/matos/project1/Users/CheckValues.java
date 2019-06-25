@@ -4,10 +4,7 @@ import android.util.Patterns;
 
 class CheckValues {
 
-    private static boolean checkUsername = false;
     private static boolean checkEmail = false;
-    private static boolean checkPassword = false;
-    //static String[] suffix = {".com",".org",".net",".int",".edu",".gov",".AD",".AE",".AF",".AG",".AI",".AL",".AM",".AN",".AO",".AQ",".AR",".AS",".AT",".AU",".AW",".AZ",".BA",".BB",".BD",".BE",".BF",".BG",".BH",".BI",".BJ",".BM",".BN",".BO",".BR",".BS",".BT",".BV",".BW",".BT",".TP",".TR",".TT",".TV",".TW",".TZ",".UA",".UG",".UK",".UM",".US",".UY",".UZ",".VA",".VC",".VE",".VG",".VI",".VN",".VU","WF",".WS",".YE",".YT",".YU",".ZA",".ZM",".ZR",".ZW"};
 
     static boolean checkUsername(String username){
 

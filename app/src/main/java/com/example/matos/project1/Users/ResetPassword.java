@@ -90,45 +90,9 @@ public class ResetPassword extends AppCompatActivity {
             progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
             progressDialog.setMessage("Loading...");
             progressDialog.show();
-            waitForResults();
+            ResultThread.waitForResults(false,getParent(),context,email,password1,false);
 
         }
     }
 
-    void waitForResults(){
-
-        new Thread(new Runnable() {
-            public void run() {
-                active = true;
-                while(active){
-                    try {
-                        if(success){
-                            AlertDialogBoxes.passwordResetOnUI(getContext(),"Success","Du kan nu logge ind med dit nye kodeord");
-                            progressDialog.dismiss();
-                            active = false;
-                        }else if(failure){
-                            AlertDialogBoxes.alertDialogOnUIContext("Fejl","Du kan nu logge ind med dit nye kodeord",getContext());
-                            progressDialog.dismiss();
-                            active = false;
-                        }else if(network){
-
-                            AlertDialogBoxes.alertDialogOnUIContext("Netværksfejl","Kontroller at telefonen er forbundet til internettet",getContext());
-                            progressDialog.dismiss();
-                            active = false;
-                        }else if(unknown){
-
-                            AlertDialogBoxes.alertDialogOnUIContext("Ukendt fejl","Prøv igen eller kontakt support",getContext());
-                            progressDialog.dismiss();
-                            active = false;
-                        }
-                        Thread.sleep(200);
-                    } catch (InterruptedException e){
-                        Thread.currentThread().interrupt();
-                    }
-                }
-//check
-            }
-        }).start();
-
-    }
 }

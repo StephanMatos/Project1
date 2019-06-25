@@ -1,7 +1,12 @@
 package com.example.matos.project1.Users;
 
 import android.os.AsyncTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,21 +21,38 @@ public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
         ForgotPasswordActivity.setBooleans();
         String email = Strings[0];
         String code = Strings[1];
+        String data;
 
         try {
-            String resetUrl = "https://easyeats.dk/EasyEats/checkVerification.php?email="+email+"&verification="+code;
+            String resetUrl = "https://easyeats.dk/EasyEats/checkVerification.php?";
             System.out.println(resetUrl);
-
             URL url = new URL(resetUrl);
+
+
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+            connection.setRequestProperty("Accept","application/json");
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+
+            JSONObject jsonLogin = new JSONObject();
+            jsonLogin.put("email",email);
+            jsonLogin.put("code",code);
+            DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
+            outputStream.writeBytes(jsonLogin.toString());
+            outputStream.flush();
+            outputStream.close();
+
+
             InputStream inputStream = connection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String data = bufferedReader.readLine();
+            data = bufferedReader.readLine();
             String response = connection.getResponseMessage();
             connection.disconnect();
 
             System.out.println("This is Response : "+response);
-            System.out.println("This is data : "+data);
+            System.out.println("This is data : "+ data);
 
             if(data == null || response == null){
                 System.out.println("NULL");
@@ -50,7 +72,7 @@ public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
 
 
 
-        }catch (IOException | NullPointerException e){
+        }catch (IOException | NullPointerException | JSONException e){
             e.printStackTrace();
 
         }

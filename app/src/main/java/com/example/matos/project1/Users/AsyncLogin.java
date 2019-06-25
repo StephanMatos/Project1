@@ -3,7 +3,6 @@ package com.example.matos.project1.Users;
 import android.os.AsyncTask;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.SplashScreenActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-
 import javax.net.ssl.HttpsURLConnection;
 
 
@@ -38,8 +36,6 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
             System.out.println(LoginUrl);
 
             URL url = new URL(LoginUrl);
-
-
 
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
@@ -69,6 +65,7 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
             if(data == null || response == null){
                 System.out.println("NullPointerException");
                 TabLoginFragment.network = true;
+                SplashScreenActivity.network = true;
             }else{
                 if(response.equals("OK")){
                     if(data.equals("success")){
@@ -77,12 +74,12 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
                         savedValues.saveEmail(email);
                         savedValues.savePassword(password);
                     }else{
-                        System.out.println("inside failure");
                         TabLoginFragment.failure = true;
                         SplashScreenActivity.failure = true;
                     }
                 }else{
                     TabLoginFragment.network = true;
+                    SplashScreenActivity.network = true;
                 }
             }
 

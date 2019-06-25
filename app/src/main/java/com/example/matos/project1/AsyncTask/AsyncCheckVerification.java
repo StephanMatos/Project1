@@ -1,10 +1,12 @@
-package com.example.matos.project1.Users;
+package com.example.matos.project1.AsyncTask;
 
 import android.os.AsyncTask;
-import com.example.matos.project1.SavedValues;
-import com.example.matos.project1.SplashScreenActivity;
+
+import com.example.matos.project1.Users.ResultThread;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,27 +16,20 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class AsyncLogin extends AsyncTask<String,Void,Void> {
-
-
-    private String email,password;
-    private SavedValues savedValues = SavedValues.getInstance();
-
+public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
 
     @Override
     protected Void doInBackground(String... Strings) {
         ResultThread.setBooleans();
-
+        String email = Strings[0];
+        String code = Strings[1];
         String data;
-        email = Strings[0];
-        password = Strings[1];
-        System.out.println("Email is : " + email);
-        System.out.println("password is : " + password);
-        try {
-            String LoginUrl = "https://easyeats.dk/EasyEats/login.php?";
-            System.out.println(LoginUrl);
 
-            URL url = new URL(LoginUrl);
+        try {
+            String resetUrl = "https://easyeats.dk/EasyEats/checkVerification.php?";
+            System.out.println(resetUrl);
+            URL url = new URL(resetUrl);
+
 
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
@@ -45,7 +40,7 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
 
             JSONObject jsonLogin = new JSONObject();
             jsonLogin.put("email",email);
-            jsonLogin.put("password",password);
+            jsonLogin.put("code",code);
             DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
             outputStream.writeBytes(jsonLogin.toString());
             outputStream.flush();
@@ -59,28 +54,34 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
             connection.disconnect();
 
             System.out.println("This is Response : "+response);
-            System.out.println("This is data : "+data);
+            System.out.println("This is data : "+ data);
 
             if(data == null || response == null){
-                System.out.println("NullPointerException");
+                System.out.println("NULL");
                 ResultThread.network = true;
             }else{
                 if(response.equals("OK")){
                     if(data.equals("success")){
-                        ResultThread.successLogin = true;
-                        savedValues.saveEmail(email);
-                        savedValues.savePassword(password);
+                        ResultThread.successVerification = true;
                     }else{
-                        ResultThread.failureLogin = true;
+                        ResultThread.failureVerification = true;
                     }
                 }else{
                     ResultThread.network = true;
                 }
             }
+
+
+
+
         }catch (IOException | NullPointerException | JSONException e){
-            ResultThread.unknown = true;
             e.printStackTrace();
+
         }
+
         return null;
     }
+
+
+
 }

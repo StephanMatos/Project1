@@ -1,7 +1,10 @@
-package com.example.matos.project1.Users;
+package com.example.matos.project1.AsyncTask;
 
 import android.app.AlertDialog;
 import android.os.AsyncTask;
+
+import com.example.matos.project1.Users.ForgotPasswordActivity;
+import com.example.matos.project1.Users.ResultThread;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,20 +18,20 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
+public class AsyncRequestResetPassword extends AsyncTask<String,Void,Void> {
 
     @Override
     protected Void doInBackground(String... Strings) {
-        ResultThread.setBooleans();
-        String email = Strings[0];
-        String password = Strings[1];
         String data;
+        String email = Strings[0];
+        ResultThread.setBooleans();
+
         try {
 
-            String resetUrl = "https://easyeats.dk/EasyEats/resetPassword.php?";
+            String resetUrl = "https://easyeats.dk/EasyEats/requestResetPassword.php?";
             System.out.println(resetUrl);
-            URL url = new URL(resetUrl);
 
+            URL url = new URL(resetUrl);
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
@@ -38,8 +41,6 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
 
             JSONObject jsonLogin = new JSONObject();
             jsonLogin.put("email",email);
-            jsonLogin.put("password",password);
-
             DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
             outputStream.writeBytes(jsonLogin.toString());
             outputStream.flush();
@@ -50,7 +51,7 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
             data = bufferedReader.readLine();
             String response = connection.getResponseMessage();
             connection.disconnect();
-            System.out.println("before data");
+
 
             System.out.println("This is Response : "+response);
             System.out.println("This is data : "+data);
@@ -61,16 +62,17 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
             }else{
                 if(response.equals("OK")){
                     if(data.equals("success")){
-                        ResultThread.successReset = true;
+                        ResultThread.successRequest = true;
                     }else{
-                        ResultThread.failureReset = true;
+                        ResultThread.failureRequest = true;
                     }
                 }else{
                     ResultThread.network = true;
                 }
             }
+
         }catch (IOException | NullPointerException | JSONException e){
-            ResultThread.unknown = true;
+            ForgotPasswordActivity.unknown = true;
             e.printStackTrace();
         }
 

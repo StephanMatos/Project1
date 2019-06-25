@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import com.example.matos.project1.Menu.HomeActivity;
-import com.example.matos.project1.Users.AsyncLogin;
+
+import com.example.matos.project1.AsyncTask.AsyncLogin;
 import com.example.matos.project1.Users.LoginActivity;
 import com.example.matos.project1.Users.ResultThread;
 

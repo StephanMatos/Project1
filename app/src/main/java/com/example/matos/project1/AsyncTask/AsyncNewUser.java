@@ -1,6 +1,9 @@
-package com.example.matos.project1.Users;
+package com.example.matos.project1.AsyncTask;
 
 import android.os.AsyncTask;
+import android.widget.Switch;
+
+import com.example.matos.project1.Users.ResultThread;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,20 +17,23 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
-    // hello
+public class AsyncNewUser extends AsyncTask<String,Void,Void> {
+
+
+    //hello
     @Override
     protected Void doInBackground(String... Strings) {
         ResultThread.setBooleans();
-        String email = Strings[0];
-        String code = Strings[1];
         String data;
+        String email = Strings[0];
+        String password = Strings[1];
+        String username = Strings[2];
 
         try {
-            String resetUrl = "https://easyeats.dk/EasyEats/checkVerification.php?";
-            System.out.println(resetUrl);
-            URL url = new URL(resetUrl);
 
+            String LoginUrl = "https://easyeats.dk/EasyEats/signup.php?";
+            System.out.println(LoginUrl);
+            URL url = new URL(LoginUrl);
 
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
@@ -38,7 +44,8 @@ public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
 
             JSONObject jsonLogin = new JSONObject();
             jsonLogin.put("email",email);
-            jsonLogin.put("code",code);
+            jsonLogin.put("password",password);
+            jsonLogin.put("username", username);
             DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
             outputStream.writeBytes(jsonLogin.toString());
             outputStream.flush();
@@ -52,34 +59,33 @@ public class AsyncCheckVerification extends AsyncTask<String,Void,Void> {
             connection.disconnect();
 
             System.out.println("This is Response : "+response);
-            System.out.println("This is data : "+ data);
+            System.out.println("This is data : "+data);
 
-            if(data == null || response == null){
-                System.out.println("NULL");
+            if(data == null || response == null) {
                 ResultThread.network = true;
             }else{
                 if(response.equals("OK")){
-                    if(data.equals("success")){
-                        ResultThread.successVerification = true;
-                    }else{
-                        ResultThread.failureVerification = true;
+                    switch(data){
+                        case "success":
+                            ResultThread.successSignUp = true;
+                            break;
+                        case "User Already exist":
+                            ResultThread.exist = true;
+                            break;
+                            default:
+                                ResultThread.failureSignUp = true;
+                                break;
                     }
                 }else{
-                    ResultThread.network = true;
+                        ResultThread.network = true;
                 }
             }
 
-
-
-
         }catch (IOException | NullPointerException | JSONException e){
+            ResultThread.unknown = true;
             e.printStackTrace();
-
         }
-
         return null;
     }
-
-
-
 }
+

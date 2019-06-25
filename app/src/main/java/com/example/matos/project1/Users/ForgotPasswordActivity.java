@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.matos.project1.AlertDialogBoxes;
+import com.example.matos.project1.AsyncTask.AsyncCheckVerification;
+import com.example.matos.project1.AsyncTask.AsyncRequestResetPassword;
 import com.example.matos.project1.R;
 import dmax.dialog.SpotsDialog;
 

@@ -4,9 +4,7 @@ package com.example.matos.project1.Users;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,10 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.matos.project1.AlertDialogBoxes;
-import com.example.matos.project1.Menu.HomeActivity;
+import com.example.matos.project1.AsyncTask.AsyncNewUser;
 import com.example.matos.project1.R;
 
 import dmax.dialog.SpotsDialog;

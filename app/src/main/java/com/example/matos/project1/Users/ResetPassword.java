@@ -8,10 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.matos.project1.AlertDialogBoxes;
-import com.example.matos.project1.Menu.HomeActivity;
+import com.example.matos.project1.AsyncTask.AsyncResetPassword;
 import com.example.matos.project1.R;
 
 import dmax.dialog.SpotsDialog;

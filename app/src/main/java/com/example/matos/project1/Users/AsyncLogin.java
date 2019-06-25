@@ -1,16 +1,11 @@
 package com.example.matos.project1.Users;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
-import com.example.matos.project1.Menu.HomeActivity;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.SplashScreenActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -27,7 +22,6 @@ public class AsyncLogin extends AsyncTask<String,Void,Void> {
     private String email,password;
     private SavedValues savedValues = SavedValues.getInstance();
 
-    //hello
 
     @Override
     protected Void doInBackground(String... Strings) {

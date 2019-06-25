@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Green 50-->
+    <!-- Green 50
     <color name="colorPrimary">#43a047</color>
     <color name="colorPrimaryDark">#2e7d32</color>
 
@@ -23,14 +23,14 @@
     <color name="unselect">#757575</color>
     <color name="titleColor">#ffffff</color>
     <color name="colorAccent">#2E7D32</color>
+-->
 
 
 
 
-    <color name="colorPrimaryAmber">#FF8F00</color>
-    <!--    Amber 50 1
+    <!-- Amber50 1
 
-
+    <color name="colorPrimary">#FF8F00</color>
     <color name="colorPrimaryDark">#FF6F00</color>
 
 
@@ -52,12 +52,12 @@
     <color name="unselect">#757575</color>
     <color name="titleColor">#ffffff</color>
     <color name="colorAccent">#FF8F00</color>
-    -->
+-->
 
-    <!--    Amber 50 2
+    <!--    Amber 502   -->
 
     <color name="colorPrimary">#FFC107</color>
-    <color name="colorPrimaryDark">#FFA000</color>
+    <color name="colorPrimaryDark">#FFC400</color>
 
 
     <color name="background">#FFF8E1</color>
@@ -77,8 +77,8 @@
     <color name="enableColor">#FFC107</color>
     <color name="unselect">#757575</color>
     <color name="titleColor">#ffffff</color>
-    <color name="colorAccent">#FFA000</color>
-    -->
+    <color name="colorAccent">#FFC400</color>
+
 
     <!-- Cyan
 
@@ -103,8 +103,8 @@
     <color name="unselect">#757575</color>
     <color name="titleColor">#ffffff</color>
     <color name="colorAccent">#00838F</color>
--->
 
+    -->
     <!-- Deep Orange 50
     <color name="colorPrimary">#D84315</color>
     <color name="colorPrimaryDark">#BF360C</color>
@@ -176,8 +176,8 @@
     <color name="unselect">#757575</color>
     <color name="titleColor">#ffffff</color>
     <color name="colorAccent">#F57F17</color>
-    -->
 
+-->
 
     <!-- purple
 
@@ -202,7 +202,7 @@
     <color name="unselect">#757575</color>
     <color name="titleColor">#ffffff</color>
     <color name="colorAccent">#7B1FA2</color>
-    -->
+-->
         <!-- Extra colors -->
     <color name="white">#ffffff</color>
     <color name="darkGray">#606060</color>

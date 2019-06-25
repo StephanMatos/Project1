@@ -80,16 +80,13 @@ public class ResetPassword extends AppCompatActivity {
         boolean pass2 = CheckValues.checkPassword(password2);
 
         if(!pass1 && !pass2){
-
             AlertDialogBoxes.alertDialogOnUIContext("Fejl","Det indtastede kodeord opfylder ikke kravene",getContext());
         }else if(!password1.equals(password2)){
-
             AlertDialogBoxes.alertDialogOnUIContext("Fejl","De indtastede kodeord stemmer ikke overens",getContext());
 
         } else {
 
             new AsyncResetPassword().execute(email,password1);
-
             progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
             progressDialog.setMessage("Loading...");
             progressDialog.show();
@@ -99,6 +96,7 @@ public class ResetPassword extends AppCompatActivity {
     }
 
     void waitForResults(){
+
         new Thread(new Runnable() {
             public void run() {
                 active = true;
@@ -113,11 +111,13 @@ public class ResetPassword extends AppCompatActivity {
                             progressDialog.dismiss();
                             active = false;
                         }else if(network){
-                            AlertDialogBoxes.alertDialogOnUIContext("Netværksfejl","Kontroller at telefonen er forbundet til internettet",getApplicationContext());
+
+                            AlertDialogBoxes.alertDialogOnUIContext("Netværksfejl","Kontroller at telefonen er forbundet til internettet",getContext());
                             progressDialog.dismiss();
                             active = false;
                         }else if(unknown){
-                            AlertDialogBoxes.alertDialogOnUIContext("Ukendt fejl","Prøv igen eller kontakt support",getApplicationContext());
+
+                            AlertDialogBoxes.alertDialogOnUIContext("Ukendt fejl","Prøv igen eller kontakt support",getContext());
                             progressDialog.dismiss();
                             active = false;
                         }

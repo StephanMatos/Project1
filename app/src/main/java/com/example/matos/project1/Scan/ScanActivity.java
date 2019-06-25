@@ -64,7 +64,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         System.out.println("Scanned text is : " + barcode);
         //Toast.makeText(ScanActivity.this, barcode,Toast.LENGTH_LONG).show();
 
-        new CheckBarcode().execute();
+        new CheckBarcode().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         // If you would like to resume scanning, call this method below:
         //mScannerView.resumeCameraPreview(this);
@@ -81,10 +81,8 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         @Override
         protected String doInBackground(Void... voids) {
 
-
-            String username = SavedValues.getInstance().getEmail();
-            String data = Services.callAPI("products.php?barcode=" + barcode + "&username=" + username);
-            Services.postAPI("scans.php?email=" + username);
+            String data = Services.callAPI("products.php?barcode=" + barcode);
+            //Services.postAPI("scans.php?email=" + username);
 
             return data;
         }
@@ -94,7 +92,11 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
             try {
                 JSONArray jsons = new JSONArray(data);
-                JSONObject json = jsons.getJSONObject(0);
+
+                JSONObject json = new JSONObject("{\"barcode\":\"null\"}");
+                if(jsons.length() > 0) {
+                    json = jsons.getJSONObject(0);
+                }
 
 
             if(!json.getString("barcode").equals("null")) {
@@ -137,6 +139,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class addToScans extends AsyncTask<Void, Void, Void> {
 
 

@@ -23,6 +23,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -182,7 +183,7 @@ public class Services {
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(os, "UTF-8"));
             //writer.write("image=" + getStringImage(image) + "&imagename=" + filename);
-            writer.write("image=" + getStringImage(image));
+            writer.write("image=" + URLEncoder.encode(getStringImage(image), "UTF-8"));
             //System.out.println(getStringImage(image));
 
             writer.flush();
@@ -217,6 +218,7 @@ public class Services {
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        System.out.println(encodedImage);
         return encodedImage;
     }
 

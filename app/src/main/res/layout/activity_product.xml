@@ -49,6 +49,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
                 app:layout_constraintEnd_toStartOf="@+id/heart"
                 app:layout_constraintStart_toEndOf="@+id/ratingBar"
@@ -125,16 +126,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
 
-            <ImageView
-                android:id="@+id/productImage"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:transitionName="pictureTransition"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="10dp"
+                card_view:cardUseCompatPadding="true">
+
+                <ImageView
+                    android:id="@+id/productImage"
+                    android:scaleType="centerCrop"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:transitionName="pictureTransition"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+            </android.support.v7.widget.CardView>
 
             <TextView
                 android:id="@+id/productName"
@@ -149,7 +159,7 @@
                 android:textSize="24sp"
                 android:transitionName="productNameTransition"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/productImage"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -160,23 +170,24 @@
                 android:layout_marginTop="2dp"
                 android:text="@string/product_state"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/productImage"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toBottomOf="@+id/productName" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
+                android:clickable="true"
                 style="@style/Widget.AppCompat.RatingBar.Indicator"
                 android:layout_width="wrap_content"
-                android:layout_height="27dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:progressDrawable="@drawable/pizza_rating_bar"
                 android:rating="3.2"
                 android:stepSize="0.1"
                 app:layout_constraintBottom_toBottomOf="@+id/productRating"
                 app:layout_constraintStart_toEndOf="@+id/productRating"
-                app:layout_constraintTop_toTopOf="@+id/productRating" />
+                app:layout_constraintTop_toTopOf="@+id/productRating"
+                android:focusable="true" />
 
             <TextView
                 android:id="@+id/productRating"
@@ -188,7 +199,7 @@
                 android:textSize="24sp"
                 android:transitionName="productRatingTransition"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productImage" />
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
             <TextView
                 android:id="@+id/description"
@@ -208,7 +219,7 @@
                 android:layout_marginTop="2dp"
                 android:text="@string/price"
                 android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/productImage"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toBottomOf="@+id/productState" />
 
             <HorizontalScrollView

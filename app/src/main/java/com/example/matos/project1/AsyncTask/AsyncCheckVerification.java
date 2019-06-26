@@ -2,7 +2,7 @@ package com.example.matos.project1.AsyncTask;
 
 import android.os.AsyncTask;
 
-import com.example.matos.project1.Users.ResultThread;
+import com.example.matos.project1.ResultThread;
 
 import org.json.JSONException;
 import org.json.JSONObject;

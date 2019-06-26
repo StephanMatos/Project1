@@ -23,6 +23,7 @@ import dmax.dialog.SpotsDialog;
 import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.AsyncTask.AsyncLogin;
 import com.example.matos.project1.R;
+import com.example.matos.project1.ResultThread;
 
 import static java.lang.Thread.sleep;
 

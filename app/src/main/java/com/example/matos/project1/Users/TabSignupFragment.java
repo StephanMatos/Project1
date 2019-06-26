@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.AsyncTask.AsyncNewUser;
 import com.example.matos.project1.R;
+import com.example.matos.project1.ResultThread;
 
 import dmax.dialog.SpotsDialog;
 

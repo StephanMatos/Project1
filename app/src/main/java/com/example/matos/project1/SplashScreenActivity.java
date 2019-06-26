@@ -9,7 +9,6 @@ import android.os.Bundle;
 
 import com.example.matos.project1.AsyncTask.AsyncLogin;
 import com.example.matos.project1.Users.LoginActivity;
-import com.example.matos.project1.Users.ResultThread;
 
 import static com.example.matos.project1.Users.TabLoginFragment.PREFS_NAME;
 import static com.example.matos.project1.Users.TabLoginFragment.mPrefs;

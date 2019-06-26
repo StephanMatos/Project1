@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.AsyncTask.AsyncResetPassword;
 import com.example.matos.project1.R;
+import com.example.matos.project1.ResultThread;
 
 import dmax.dialog.SpotsDialog;
 

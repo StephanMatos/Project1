@@ -21,6 +21,8 @@ import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.AsyncTask.AsyncCheckVerification;
 import com.example.matos.project1.AsyncTask.AsyncRequestResetPassword;
 import com.example.matos.project1.R;
+import com.example.matos.project1.ResultThread;
+
 import dmax.dialog.SpotsDialog;
 
 public class ForgotPasswordActivity extends AppCompatActivity {

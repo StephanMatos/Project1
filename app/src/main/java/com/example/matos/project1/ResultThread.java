@@ -1,10 +1,15 @@
-package com.example.matos.project1.Users;
+package com.example.matos.project1;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import com.example.matos.project1.AlertDialogBoxes;
 import com.example.matos.project1.Menu.HomeActivity;
+import com.example.matos.project1.Users.ForgotPasswordActivity;
+import com.example.matos.project1.Users.LoginActivity;
+import com.example.matos.project1.Users.ResetPassword;
+import com.example.matos.project1.Users.TabLoginFragment;
+import com.example.matos.project1.Users.TabSignupFragment;
 
 public class ResultThread {
 
@@ -48,7 +53,6 @@ public class ResultThread {
                 boolean active = true;
 
                 while(active){
-                    System.out.println("running in results");
                     try {
                         if(successLogin){
                             if(signup){
@@ -126,7 +130,7 @@ public class ResultThread {
                             AlertDialogBoxes.alertDialogOnUI("Ukendt fejl","Prøv igen eller kontakt support",activity);
                             active = false;
                         }
-                        Thread.sleep(200);
+                        Thread.sleep(500);
                     } catch (InterruptedException e){
                         Thread.currentThread().interrupt();
                     }

@@ -34,7 +34,7 @@
     <string name="microwave">Microwave</string>
     <string name="hot_water">Hot water</string>
 
-    <string name="forgot_password">Forgot password?</string>
+    <string name="forgot_password">Glemt Adgangskode?</string>
     <string name="need_email_for_password_reset">We just need your registered email address to send you a password reset</string>
     <string name="send">Nulstil Adgangskode</string>
     <string name="verification_code">Indtast verifikationskode</string>
@@ -64,13 +64,13 @@
     <string name="new_password">New password</string>
 
     <string name="please_enter_verification_code_sent_to">Indtast venligst verifikationskoden sendt til</string>
-    <string name="verify_code">Verify code</string>
+    <string name="verify_code">Verificer Kode</string>
 
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="recent">Recent</string>
     <string name="login">Login</string>
-    <string name="remember_me">Remember me?</string>
+    <string name="remember_me">Husk Mig?</string>
 
     <string name="profile_fact_1">Total scans</string>
     <string name="profile_fact_2">Favorites</string>

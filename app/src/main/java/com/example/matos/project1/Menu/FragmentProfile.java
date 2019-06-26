@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ import android.content.SharedPreferences;
 import android.widget.TextView;
 
 import com.example.matos.project1.AlertDialogBoxes;
-import com.example.matos.project1.AsyncTask.SetupList;
+import com.example.matos.project1.AsyncTask.AsyncSetupList;
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.Services;
@@ -183,6 +182,6 @@ public class FragmentProfile extends Fragment  {
     public void onResume(){
         super.onResume();
         System.out.println("Home on Profile");
-        new SetupList().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new AsyncSetupList().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 }

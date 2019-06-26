@@ -4,9 +4,7 @@ package com.example.matos.project1.Users;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,11 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.matos.project1.AlertDialogBoxes;
-import com.example.matos.project1.Menu.HomeActivity;
+import com.example.matos.project1.AsyncTask.AsyncNewUser;
 import com.example.matos.project1.R;
+import com.example.matos.project1.ResultThread;
 
 import dmax.dialog.SpotsDialog;
 
@@ -42,14 +40,6 @@ public class TabSignupFragment extends Fragment {
 
     //Instances
     TabLoginFragment tabLoginFragment;
-
-    // Async task booleans
-    boolean active = true;
-    public static boolean success = false;
-    public static boolean failure = false;
-    public static boolean exist = false;
-    public static boolean network = false;
-    public static boolean unknown = false;
 
     @Nullable
     @Override
@@ -107,11 +97,8 @@ public class TabSignupFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 validUsername = CheckValues.checkUsername(username.getText().toString());
                 if(validUsername){
-
-                    //username.setTextColor(Color.GREEN);
                     drawable_username.setStroke(3, Color.GREEN);
                 }else{
-                    //username.setTextColor(Color.RED);
                     drawable_username.setStroke(3, Color.RED);
 
                 }
@@ -134,13 +121,9 @@ public class TabSignupFragment extends Fragment {
                 validEmail = CheckValues.checkEmail(email.getText().toString());
 
                 if(validEmail){
-
-                    //email.setTextColor(Color.GREEN);
                     drawable_email.setStroke(3, Color.GREEN);
                 }else{
-                    //email.setTextColor(Color.RED);
                     drawable_email.setStroke(3, Color.RED);
-
                 }
             }
         });
@@ -173,10 +156,9 @@ public class TabSignupFragment extends Fragment {
 
     }
 
-
     private void create_user(Context context,Activity activity) {
 
-        progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(getContext()).build();
+        progressDialog = new SpotsDialog.Builder().setTheme(R.style.loading_dots_theme).setContext(context).build();
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
@@ -186,64 +168,11 @@ public class TabSignupFragment extends Fragment {
 
         if(validEmail && validPassword && validUsername){
             new AsyncNewUser().execute(email.getText().toString(),password.getText().toString(),username.getText().toString());
-            waitForResults(activity,context);
+            ResultThread.waitForResults(true,activity,context,email.getText().toString(),password.getText().toString(),false);
+
         } else{
             progressDialog.dismiss();
             AlertDialogBoxes.AlertDialog("Fejl","Teksten vil blive grøn når det intastede er gyldigt. Tryk på spørgsmålstegnet for mere info","Ok",getActivity());
         }
-    }
-
-    public void waitForResults(final Activity activity, final Context context) {
-        new Thread(new Runnable() {
-            public void run() {
-                while(active){
-                    try {
-                        if(success){
-                            System.out.println("in SIgnup");
-                            System.out.println(activity);
-                            System.out.println(context);
-                            tabLoginFragment.attempt_login(email.getText().toString(),password.getText().toString(),true,activity);
-                            active = false;
-                        }else if(failure){
-
-                            active = false;
-                            progressDialog.dismiss();
-
-                        }else if(exist){
-
-                            progressDialog.dismiss();
-                            active = false;
-
-                        }else if(network){
-
-                            progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
-                            active = false;
-
-                        }else if(unknown){
-
-                            progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl","Prøv igen eller kontakt support",getActivity());
-                            active = false;
-                        }
-                        Thread.sleep(200);
-                    } catch (InterruptedException e){
-                        Thread.currentThread().interrupt();
-                    }
-                }
-
-            }
-        }).start();
-
-    }
-
-
-
-    static void setBooleans(){
-        success = false;
-        failure = false;
-        exist = false;
-        network = false;
-        unknown = false;
     }
 }

@@ -8,7 +8,7 @@ import com.example.matos.project1.Services;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class SetupList extends AsyncTask<Void, Void, Void> {
+public class AsyncSetupList extends AsyncTask<Void, Void, Void> {
 
     JSONArray jsons;
 

@@ -21,8 +21,9 @@ import android.widget.TextView;
 import dmax.dialog.SpotsDialog;
 
 import com.example.matos.project1.AlertDialogBoxes;
-import com.example.matos.project1.Menu.HomeActivity;
+import com.example.matos.project1.AsyncTask.AsyncLogin;
 import com.example.matos.project1.R;
+import com.example.matos.project1.ResultThread;
 
 import static java.lang.Thread.sleep;
 
@@ -38,20 +39,14 @@ public class TabLoginFragment extends Fragment {
     GradientDrawable drawable_password;
 
     // save login credentials
-    public static CheckBox saveLoginCheckBox;
+    public CheckBox saveLoginCheckBox;
     public static SharedPreferences mPrefs;
     public SharedPreferences.Editor prefsEditor;
     public static final String PREFS_NAME = "CheckboxFile";
+    private Context context;
 
     //Progress dialog and context
     public static AlertDialog progressDialog;
-
-    // Async task booleans
-    public static boolean success = false;
-    public static boolean failure = false;
-    public static boolean network = false;
-    public static boolean unknown = false;
-    boolean active = true;
 
     @Nullable
     @Override
@@ -79,7 +74,7 @@ public class TabLoginFragment extends Fragment {
         }catch (NullPointerException e){
             e.printStackTrace();
         }
-
+        context = this.getContext();
         // If the user have forgotten his/hers password and want to reset password
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +88,25 @@ public class TabLoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 attempt_login(email.getText().toString(), password.getText().toString(), false,getActivity());
+            }
+        });
+
+        saveLoginCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (saveLoginCheckBox.isChecked()) {
+                    prefsEditor.putBoolean("CheckBox", true);
+                    prefsEditor.putString("Email", email.getText().toString());
+                    prefsEditor.putString("Password", password.getText().toString());
+                    prefsEditor.apply();
+
+                } else {
+                    prefsEditor.putBoolean("CheckBox", false);
+
+                    prefsEditor.apply();
+
+                }
             }
         });
 
@@ -111,93 +125,20 @@ public class TabLoginFragment extends Fragment {
         }
         if(!validEmail){
             progressDialog.dismiss();
-            AlertDialogBoxes.AlertDialog("Fejl","Den indstastede email er ikke gyldig. Login kan kun ske ved brug af email","Ok",getActivity());
+            AlertDialogBoxes.AlertDialog("Fejl","Den indstastede email er ikke gyldig. Login kan kun ske ved brug af email","Ok",activity);
         }else if(email.length() == 0 || password.length() == 0){
             progressDialog.dismiss();
 
-            AlertDialogBoxes.AlertDialog("Fejl","Email og/eller password kan ikke være tom","Ok",getActivity());
+            AlertDialogBoxes.AlertDialog("Fejl","Email og/eller password kan ikke være tom","Ok",activity);
             check = false;
         }
 
         if(check && validEmail){
             new AsyncLogin().execute(email,password);
-            waitForResults(signup,activity);
-
+            ResultThread.waitForResults(signup,activity,context,email,password,false);
         }
 
     }
-
-    public void waitForResults(final boolean signup, final Activity activity) {
-
-        new Thread(new Runnable() {
-            public void run() {
-
-                active = true;
-
-                while(active){
-                    try {
-                        if(success){
-                            if(signup){
-                                TabSignupFragment.progressDialog.dismiss();
-                                Intent intent = new Intent(activity,HomeActivity.class);
-                                activity.startActivity(intent);
-                                AlertDialogBoxes.finnishactivity(activity);
-
-
-                            }else{
-                                System.out.println(getContext());
-                                progressDialog.dismiss();
-                                if (saveLoginCheckBox.isChecked()) {
-                                    prefsEditor.putBoolean("CheckBox", true);
-                                    prefsEditor.putString("Email", email.getText().toString());
-                                    prefsEditor.putString("Password", password.getText().toString());
-                                    prefsEditor.apply();
-
-                                } else {
-                                    prefsEditor.putBoolean("CheckBox", false);
-                                    prefsEditor.apply();
-
-                                }
-                                AlertDialogBoxes.finnishactivity(getActivity());
-                                Intent intent = new Intent(getContext(), HomeActivity.class);
-                                startActivity(intent);
-
-                            }
-                            active = false;
-                        } else if (failure) {
-
-                            progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Fejl","Forkert email og/eller adgangskode. Prøv igen eller gå til reset password",getActivity());
-                            active = false;
-
-                        }else if(network){
-
-                            progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Fejl","Kontroller at telefonen har forbindelse til internettet",getActivity());
-                            active = false;
-                        }else if(unknown){
-
-                            progressDialog.dismiss();
-                            AlertDialogBoxes.alertDialogOnUI("Ukendt fejl","Prøv igen eller kontakt support",getActivity());
-                            active = false;
-                        }
-                        Thread.sleep(200);
-                    } catch (InterruptedException e){
-                        Thread.currentThread().interrupt();
-                    }
-                }
-
-            }
-        }).start();
-    }
-
-    static void setBooleans(){
-        success = false;
-        failure = false;
-        network = false;
-        unknown = false;
-    }
-
 
     // Initializing activity Widgets
     private void bindWidget(View view) {

@@ -1,7 +1,8 @@
-package com.example.matos.project1.Users;
+package com.example.matos.project1.AsyncTask;
 
-import android.app.AlertDialog;
 import android.os.AsyncTask;
+
+import com.example.matos.project1.ResultThread;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,9 +20,9 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
 
     @Override
     protected Void doInBackground(String... Strings) {
+        ResultThread.setBooleans();
         String email = Strings[0];
         String password = Strings[1];
-        ResetPassword.resetBooleans();
         String data;
         try {
 
@@ -57,23 +58,20 @@ public class AsyncResetPassword extends AsyncTask<String,Void,Void> {
 
             if(data == null || response == null) {
                 System.out.println("NullPointerException");
-                ResetPassword.network = true;
+                ResultThread.network = true;
             }else{
                 if(response.equals("OK")){
                     if(data.equals("success")){
-                        ResetPassword.success = true;
+                        ResultThread.successReset = true;
                     }else{
-                        ResetPassword.failure = true;
+                        ResultThread.failureReset = true;
                     }
                 }else{
-                    ResetPassword.network = true;
+                    ResultThread.network = true;
                 }
             }
-
-
-
         }catch (IOException | NullPointerException | JSONException e){
-            ResetPassword.unknown = true;
+            ResultThread.unknown = true;
             e.printStackTrace();
         }
 

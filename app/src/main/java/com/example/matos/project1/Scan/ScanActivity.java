@@ -8,7 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.matos.project1.AsyncTask.SetupList;
+import com.example.matos.project1.AsyncTask.AsyncSetupList;
 import com.example.matos.project1.Products.CreateProduct;
 import com.example.matos.project1.Products.Product;
 import com.example.matos.project1.SavedValues;
@@ -49,7 +49,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        new SetupList().execute();
+        new AsyncSetupList().execute();
     }
 
 

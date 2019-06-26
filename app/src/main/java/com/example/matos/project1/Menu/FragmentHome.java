@@ -1,7 +1,5 @@
 package com.example.matos.project1.Menu;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,13 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.example.matos.project1.AlertDialogBoxes;
-import com.example.matos.project1.AsyncTask.SetupList;
-import com.example.matos.project1.Products.ItemAdapter;
+import com.example.matos.project1.AsyncTask.AsyncSetupList;
 import com.example.matos.project1.R;
-import com.example.matos.project1.Users.TabSignupFragment;
 
 import org.json.JSONArray;
 
@@ -37,14 +31,14 @@ public class FragmentHome extends Fragment {
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        new SetupList().execute();
+        new AsyncSetupList().execute();
     }
 
     @Override
     public void onResume(){
         super.onResume();
         System.out.println("Home on resume");
-        new SetupList().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new AsyncSetupList().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
 

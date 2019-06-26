@@ -25,7 +25,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.matos.project1.AsyncTask.SetupList;
+import com.example.matos.project1.AsyncTask.AsyncSetupList;
 import com.example.matos.project1.R;
 import com.example.matos.project1.SavedValues;
 import com.example.matos.project1.Services;
@@ -152,7 +152,7 @@ public class Product extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        new SetupList().execute();
+        new AsyncSetupList().execute();
 
     }
 

@@ -1,11 +1,11 @@
-package com.example.matos.project1.Users;
+package com.example.matos.project1.AsyncTask;
 
 import android.os.AsyncTask;
-import android.widget.Switch;
+import com.example.matos.project1.SavedValues;
+import com.example.matos.project1.ResultThread;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -15,22 +15,26 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class AsyncNewUser extends AsyncTask<String,Void,Void> {
+public class AsyncLogin extends AsyncTask<String,Void,Void> {
 
 
-    //hello
+    private String email,password;
+    private SavedValues savedValues = SavedValues.getInstance();
+
+
     @Override
     protected Void doInBackground(String... Strings) {
-        TabSignupFragment.setBooleans();
+        ResultThread.setBooleans();
+
         String data;
-        String email = Strings[0];
-        String password = Strings[1];
-        String username = Strings[2];
-
+        email = Strings[0];
+        password = Strings[1];
+        System.out.println("Email is : " + email);
+        System.out.println("password is : " + password);
         try {
-
-            String LoginUrl = "https://easyeats.dk/EasyEats/signup.php?";
+            String LoginUrl = "https://easyeats.dk/EasyEats/login.php?";
             System.out.println(LoginUrl);
+
             URL url = new URL(LoginUrl);
 
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
@@ -43,7 +47,6 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
             JSONObject jsonLogin = new JSONObject();
             jsonLogin.put("email",email);
             jsonLogin.put("password",password);
-            jsonLogin.put("username", username);
             DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
             outputStream.writeBytes(jsonLogin.toString());
             outputStream.flush();
@@ -59,33 +62,26 @@ public class AsyncNewUser extends AsyncTask<String,Void,Void> {
             System.out.println("This is Response : "+response);
             System.out.println("This is data : "+data);
 
-            if(data == null || response == null) {
+            if(data == null || response == null){
                 System.out.println("NullPointerException");
-                TabSignupFragment.network = true;
+                ResultThread.network = true;
             }else{
                 if(response.equals("OK")){
-                    switch(data){
-                        case "success":
-                            TabSignupFragment.success = true;
-                            break;
-                        case "User Already exist":
-                            TabSignupFragment.exist = true;
-                            break;
-                            default:
-                                TabSignupFragment.failure = true;
-                                break;
+                    if(data.equals("success")){
+                        ResultThread.successLogin = true;
+                        savedValues.saveEmail(email);
+                        savedValues.savePassword(password);
+                    }else{
+                        ResultThread.failureLogin = true;
                     }
                 }else{
-                        TabSignupFragment.network = true;
+                    ResultThread.network = true;
                 }
             }
-
         }catch (IOException | NullPointerException | JSONException e){
-            TabSignupFragment.unknown = true;
+            ResultThread.unknown = true;
             e.printStackTrace();
         }
-
         return null;
     }
 }
-

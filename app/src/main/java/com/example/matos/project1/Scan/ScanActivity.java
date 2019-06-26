@@ -127,8 +127,8 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ScanActivity.this);
-                builder.setMessage("This product is not created. Do you want to create it now?").setPositiveButton("Yes", dialogClickListener)
-                        .setNegativeButton("No", dialogClickListener).show();
+                builder.setMessage("Produktet er ikke opretter. Vil du oprette dette produkt?").setPositiveButton("Ja", dialogClickListener)
+                        .setNegativeButton("Nej", dialogClickListener).show();
 
             }
 

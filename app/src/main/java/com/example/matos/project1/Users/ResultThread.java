@@ -94,6 +94,7 @@ public class ResultThread {
                         }else if(failureRequest) {
 
                             AlertDialogBoxes.alertDialogOnUIContext("Fejl", "Den indtastede email findes ikke i systemet. Tjek venligst den indstastede email", context);
+                            ForgotPasswordActivity.dialog.dismiss();
                             active = false;
 
                         }else if(successVerification) {

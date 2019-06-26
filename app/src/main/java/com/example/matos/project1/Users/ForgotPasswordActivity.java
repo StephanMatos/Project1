@@ -146,18 +146,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         return context;
     }
 
-
-    static void setBooleans(){
-        success = false;
-        failure = false;
-        network = false;
-        unknown = false;
-        verification = false;
-        verificationError = false;
-    }
-
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

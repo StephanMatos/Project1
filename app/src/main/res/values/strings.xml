@@ -1,12 +1,12 @@
 <resources>
 
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</string>
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</string>
 
-    <string name="app_name">EasyEats</string>
-    <string name="app_motto">- For you</string>
+    <string name="app_name" translatable="false">EasyEats</string>
+    <string name="app_motto" translatable="false">- For you</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email" translatable="false">Email</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_new_password">New password</string>
     <string name="prompt_verify_password">Verify password</string>
@@ -17,7 +17,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
+    <string name="permission_rationale" translatable="false">Contacts permissions are needed for providing email
         completions."
     </string>
     <string name="create_new_password">Create new password</string>
@@ -34,10 +34,10 @@
     <string name="microwave">Microwave</string>
     <string name="hot_water">Hot water</string>
 
-    <string name="forgot_password">Forgot password?</string>
+    <string name="forgot_password">Glemt Adgangskode?</string>
     <string name="need_email_for_password_reset">We just need your registered email address to send you a password reset</string>
-    <string name="send">Send</string>
-    <string name="verification_code">Verification code</string>
+    <string name="send">Nulstil Adgangskode</string>
+    <string name="verification_code">Indtast verifikationskode</string>
 
     <string name="add_image">Add image</string>
     <string name="rate">Rate</string>
@@ -52,25 +52,25 @@
     <string name="username_help_text">4–20 characters long, can be any combination of letters, numbers, or symbols</string>
     <string name="password_help_1">letters (a-z, A-Z) </string>
     <string name="password_help_2">numbers (0–9)</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
     <string name="entered_email_for_recovery">The entered email will be used for login and account recovery</string>
     <string name="password">Password</string>
     <string name="password_help_text">8–20 characters long, can be any combination of letters, numbers, or symbols</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
 
     <string name="enter_email_password_reset">Enter the email used when you created your account</string>
     <string name="digit_code">6-digit code</string>
     <string name="enter_digit_code">Enter the 6-digit code retrieved</string>
     <string name="new_password">New password</string>
 
-    <string name="please_enter_verification_code_sent_to">Please enter the verification code sent to</string>
-    <string name="verify_code">Verify code</string>
+    <string name="please_enter_verification_code_sent_to">Indtast venligst verifikationskoden sendt til</string>
+    <string name="verify_code">Verificer Kode</string>
 
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="recent">Recent</string>
     <string name="login">Login</string>
-    <string name="remember_me">Remember me?</string>
+    <string name="remember_me">Husk Mig?</string>
 
     <string name="profile_fact_1">Total scans</string>
     <string name="profile_fact_2">Favorites</string>
@@ -90,15 +90,15 @@
     <string name="min_rating">Min. rating</string>
     <string name="sorting">Sorting</string>
     <string name="random">Random</string>
-    <string name="min_max">Min/max</string>
+    <string name="min_max" translatable="false">Min/max</string>
 
     <string name="signup">Signup</string>
 
 
     <string name="Top_search">Top products</string>
-    <string name="Top_rated">Rated</string>
-    <string name="Top_scanned">Scanned</string>
-    <string name="Top_favorized">Favorized</string>
+    <string name="Top_rated">Top rated</string>
+    <string name="Top_scanned">Most scanned</string>
+    <string name="Top_favorized">Most favorized</string>
     <string name="Top_states">State</string>
 
 

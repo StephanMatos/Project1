@@ -156,7 +156,7 @@ public class Product extends AppCompatActivity {
 
     }
 
-    @SuppressLint("StaticFieldLeak")
+
     private class addToRecents extends AsyncTask<Void, Void, Void> {
 
         @Override

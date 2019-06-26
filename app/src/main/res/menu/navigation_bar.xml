@@ -5,23 +5,23 @@
 
     <item
         android:id="@+id/nav_home"
-        android:title="Home"
+        android:title="@string/home"
         android:icon="@drawable/ic_home"/>
     <item
         android:id="@+id/nav_search"
         android:icon="@drawable/ic_search"
-        android:title="Search"
+        android:title="@string/search"
         app:actionViewClass="android.widget.SearchView" />
     <item
         android:id="@+id/nav_favorites"
         android:icon="@drawable/filledheart"
-        android:title="Favorites" />
+        android:title="@string/profile_fact_2" />
     <item
         android:id="@+id/nav_recents"
         android:icon="@drawable/ic_recent"
-        android:title="recents" />
+        android:title="@string/recent" />
     <item
         android:id="@+id/nav_profile"
-        android:title="Profile"
+        android:title="@string/profile"
         android:icon="@drawable/ic_profile"/>
 </menu>

@@ -57,7 +57,7 @@
     <!--    Amber 502   -->
 
     <color name="colorPrimary">#FFC107</color>
-    <color name="colorPrimaryDark">#FFC400</color>
+    <color name="colorPrimaryDark">#ffc400</color>
 
 
     <color name="background">#FFF8E1</color>

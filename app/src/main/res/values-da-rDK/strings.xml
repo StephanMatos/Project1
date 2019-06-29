@@ -51,9 +51,9 @@
     <string name="recent">Seneste</string>
     <string name="login">Log ind</string>
     <string name="remember_me">Husk mig?</string>
-    <string name="profile_fact_1">Total skanninger</string>
+    <string name="profile_fact_1">Skanninger</string>
     <string name="profile_fact_2">Favoritter</string>
-    <string name="profile_fact_3">Total bedømmelser</string>
+    <string name="profile_fact_3">Bedømmelser</string>
     <string name="friends">Venner</string>
     <string name="statistics">Statistikker</string>
     <string name="settings">Indstillinger</string>

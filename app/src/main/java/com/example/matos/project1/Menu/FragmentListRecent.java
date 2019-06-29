@@ -49,7 +49,7 @@ public class FragmentListRecent extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
         listView = view.findViewById(R.id.listView);
         itemAdapter = new ItemAdapter(getActivity(), HomeActivity.recents);

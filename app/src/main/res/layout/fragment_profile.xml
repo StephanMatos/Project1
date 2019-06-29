@@ -128,6 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/profile_fact_1"
+                    android:textAlignment="center"
                     android:textSize="15sp" />
 
                 <TextView
@@ -159,6 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/profile_fact_2"
+                        android:textAlignment="center"
                         android:textSize="15sp" />
 
                     <TextView
@@ -192,6 +194,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/profile_fact_3"
+                        android:textAlignment="center"
                         android:textSize="15sp" />
 
                     <TextView

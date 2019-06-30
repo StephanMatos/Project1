@@ -24,8 +24,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -265,21 +267,30 @@ public class Services {
 
     }
 
-    public static JSONObject testProductJSON(String barcode){
-
-        ArrayList<JSONObject> jsons = testJSONS();
-
-        for(JSONObject json : jsons){
-            try {
-                if(json.getString("barcode").equals(barcode)){
-                    return json;
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+    public static String md5(final String toEncrypt) {
+        try {
+            final MessageDigest digest = MessageDigest.getInstance("md5");
+            digest.update(toEncrypt.getBytes());
+            final byte[] bytes = digest.digest();
+            final StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(String.format("%02X", bytes[i]));
             }
+            return sb.toString().toLowerCase();
+        } catch (Exception exc) {
+            return "";
         }
-        return null;
     }
 
+    public static String randomSalt() {
+        Random generator = new Random();
+        StringBuilder randomStringBuilder = new StringBuilder();
+        char tempChar;
+        for (int i = 0; i < 64; i++){
+            tempChar = (char) (generator.nextInt(26) + 65);
+            randomStringBuilder.append(tempChar);
+        }
+        return randomStringBuilder.toString();
+    }
 
 }
